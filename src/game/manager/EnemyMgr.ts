@@ -31,7 +31,7 @@ class EnemyMgr {
 
     update(PHero, PElapsed):void {
         // Create an obstacle after hero travels some distance (obstacleGap).
-        if (this.m_obstacleGapCount < Const.ENEMY_GAP) {
+        if (this.m_obstacleGapCount < Global.Const.ENEMY_GAP) {
             this.m_obstacleGapCount += GameData.user.heroSpeed * PElapsed;
         }
         else if (this.m_obstacleGapCount != 0) {
@@ -50,23 +50,23 @@ class EnemyMgr {
         var y = 0;
         var position = null;
         // For only one of the obstacles, make it appear in either the top or bottom of the screen.
-        if (PType <= Const.ENEMY_TYPE_3) {
+        if (PType <= Global.Const.ENEMY_TYPE_3) {
             if (Math.random() > 0.5) {
-                y = winHeight - Const.GAME_AREA_TOP_BOTTOM;
+                y = winHeight - Global.Const.GAME_AREA_TOP_BOTTOM;
                 position = "top";
             }
             else {
-                y = Const.GAME_AREA_TOP_BOTTOM;
+                y = Global.Const.GAME_AREA_TOP_BOTTOM;
                 position = "bottom";
             }
         }
         else {
-            y = Math.floor(Math.random() * (winHeight - 2 * Const.GAME_AREA_TOP_BOTTOM)) + Const.GAME_AREA_TOP_BOTTOM;
+            y = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
             position = "middle";
         }
 
         var obstacle:Enemy = Laya.Pool.getItemByClass("Enemy", Enemy);
-        obstacle.reuse(PType, true, position, Const.ENEMY_SPEED, PDistance)
+        obstacle.reuse(PType, true, position, Global.Const.ENEMY_SPEED, PDistance)
         obstacle.x = x + obstacle.width/2;
         obstacle.y = y;
         this.m_obstaclesToAnimate.push(obstacle);
@@ -93,7 +93,7 @@ class EnemyMgr {
             }
 
             // If the obstacle passes beyond the screen, remove it.
-            if (obstacle.x < -obstacle.width || GameData.gameState == Const.GAME_STATE_OVER) {
+            if (obstacle.x < -obstacle.width || GameData.gameState == Global.Const.GAME_STATE_OVER) {
                 this.m_obstaclesToAnimate.splice(i, 1);
                 obstacle.unuse();
                 continue;

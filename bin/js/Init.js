@@ -17,5 +17,4 @@ var Keyboard = Laya.Keyboard;
 var loader = Laya.loader;
 var Pool = Laya.Pool;
 var Sound = Laya.SoundManager;
-// import Const = require ("./global/Const");
 //# sourceMappingURL=Init.js.map

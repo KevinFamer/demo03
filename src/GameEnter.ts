@@ -11,7 +11,7 @@ function onCompleteHandler():void
     let bmpFont:BitmapFont;
     function onLoadFont() {
         bmpFont.setSpaceWidth(10);
-        LayaText.registerBitmapFont(Const.BMP_FONT_NAME, bmpFont);
+        LayaText.registerBitmapFont(Global.Const.BMP_FONT_NAME, bmpFont);
     }
 
     // 加载完成
@@ -32,7 +32,7 @@ function onCompleteHandler():void
 
     // 资源预加载开始
     bmpFont = new BitmapFont();
-	bmpFont.loadFont(Const.BMP_FONT_PATH, new Handler(null, onLoadFont));
+	bmpFont.loadFont(Global.Const.BMP_FONT_PATH, new Handler(null, onLoadFont));
 
     let loadPath:Array<any> = [];
     loadPath.push({ url:"res/graphics/texture.plist", type:Loader.ATLAS });

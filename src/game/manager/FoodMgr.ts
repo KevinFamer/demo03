@@ -33,7 +33,7 @@ class FoodMgr {
     init():void {
         this.removeAll();
         this.m_pattern = 1;
-        this.m_patternPosY = Laya.Browser.height - Const.GAME_AREA_TOP_BOTTOM;
+        this.m_patternPosY = Laya.Browser.height - Global.Const.GAME_AREA_TOP_BOTTOM;
         this.m_patternStep = 15;
         this.m_patternChangeDistance = 1;
         this.m_patternGap = 20;
@@ -125,7 +125,7 @@ class FoodMgr {
                     // Horizontal, creates a single food item, and changes the position of the pattern randomly.
                     if (Math.random() > 0.9) {
                         // Set a new random position for the item, making sure it's not too close to the edges of the screen.
-                        this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Const.GAME_AREA_TOP_BOTTOM)) + Const.GAME_AREA_TOP_BOTTOM;
+                        this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
                     }
 
                     // Checkout item from pool and set the type of item.
@@ -145,7 +145,7 @@ class FoodMgr {
                     // Vertical, creates a line of food items that could be the height of the entire screen or just a small part of it.
                     if (this.m_patternOnce == true) {
                         this.m_patternOnce = false;
-                        this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Const.GAME_AREA_TOP_BOTTOM)) + Const.GAME_AREA_TOP_BOTTOM;
+                        this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
                         // Set a random length not shorter than 0.4 of the screen, and not longer than 0.8 of the screen.
                         this.m_patternLength = (Math.random() * 0.4 + 0.4) * winHeight;
                     }
@@ -174,14 +174,14 @@ class FoodMgr {
                     // until it hits the upper edge.
 
                     // Switch the direction of the food items pattern if we hit the edge.
-                    if (this.m_patternDirection == 1 && this.m_patternPosY < Const.GAME_AREA_TOP_BOTTOM) {
+                    if (this.m_patternDirection == 1 && this.m_patternPosY < Global.Const.GAME_AREA_TOP_BOTTOM) {
                         this.m_patternDirection = -1;
                     }
-                    else if (this.m_patternDirection == -1 && this.m_patternPosY > winHeight - Const.GAME_AREA_TOP_BOTTOM) {
+                    else if (this.m_patternDirection == -1 && this.m_patternPosY > winHeight - Global.Const.GAME_AREA_TOP_BOTTOM) {
                         this.m_patternDirection = 1;
                     }
 
-                    if (this.m_patternPosY <= winHeight - Const.GAME_AREA_TOP_BOTTOM && this.m_patternPosY >= Const.GAME_AREA_TOP_BOTTOM) {
+                    if (this.m_patternPosY <= winHeight - Global.Const.GAME_AREA_TOP_BOTTOM && this.m_patternPosY >= Global.Const.GAME_AREA_TOP_BOTTOM) {
                         item = Pool.getItemByClass("Item", Item);
                         item.reuse(Math.ceil(Math.random() * 5));
                         item.x = winWidth + item.width;
@@ -191,7 +191,7 @@ class FoodMgr {
                         this.m_patternPosY += this.m_patternStep * this.m_patternDirection;
                     }
                     else {
-                        this.m_patternPosY = winHeight - Const.GAME_AREA_TOP_BOTTOM;
+                        this.m_patternPosY = winHeight - Global.Const.GAME_AREA_TOP_BOTTOM;
                     }
 
                     break;
@@ -200,7 +200,7 @@ class FoodMgr {
                     // Random, creates a random number of items along the screen.
                     if (Math.random() > 0.5) {
                         // Choose a random starting position along the screen.
-                        this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Const.GAME_AREA_TOP_BOTTOM)) + Const.GAME_AREA_TOP_BOTTOM;
+                        this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
                         item = Pool.getItemByClass("Item", Item);
                         item.reuse(Math.ceil(Math.random() * 5));
                         item.x = winWidth + item.width;
@@ -214,9 +214,9 @@ class FoodMgr {
                     // Coffee, this item gives you extra speed for a while, and lets you break through obstacles.
 
                     // Set a new random position for the item, making sure it's not too close to the edges of the screen.
-                    this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Const.GAME_AREA_TOP_BOTTOM)) + Const.GAME_AREA_TOP_BOTTOM;
+                    this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
                     item = Pool.getItemByClass("Item", Item);
-                    item.reuse(Const.ITEM_TYPE_COFFEE);
+                    item.reuse(Global.Const.ITEM_TYPE_COFFEE);
                     item.x = winWidth + item.width;
                     item.y = this.m_patternPosY;
                     this.m_itemsToAnimate.push(item);
@@ -227,9 +227,9 @@ class FoodMgr {
                     // Mushroom, this item makes all the food items fly towards the hero for a while.
 
                     // Set a new random position for the food item, making sure it's not too close to the edges of the screen.
-                    this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Const.GAME_AREA_TOP_BOTTOM)) + Const.GAME_AREA_TOP_BOTTOM;
+                    this.m_patternPosY = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
                     item = Pool.getItemByClass("Item", Item);
-                    item.reuse(Const.ITEM_TYPE_MUSHROOM);
+                    item.reuse(Global.Const.ITEM_TYPE_MUSHROOM);
                     item.x = winWidth + item.width;
                     item.y = this.m_patternPosY;
                     this.m_itemsToAnimate.push(item);
@@ -246,7 +246,7 @@ class FoodMgr {
 
             if (item) {
                 // If hero has eaten a mushroom, make all the items move towards him.
-                if (GameData.user.mushroom > 0 && item.type <= Const.ITEM_TYPE_5) {
+                if (GameData.user.mushroom > 0 && item.type <= Global.Const.ITEM_TYPE_5) {
                     // Move the item towards the player.
                     item.x -= (item.x - PHero.x) * 0.2;
                     item.y -= (item.y - PHero.y) * 0.2;
@@ -259,7 +259,7 @@ class FoodMgr {
 
                 // If the item passes outside the screen on the left, remove it (check-in).
 
-                if (item.x < -80 || GameData.gameState == Const.GAME_STATE_OVER) {
+                if (item.x < -80 || GameData.gameState == Global.Const.GAME_STATE_OVER) {
                     this.m_itemsToAnimate.splice(i, 1);
                     item.unuse();
                     continue;
@@ -272,11 +272,11 @@ class FoodMgr {
 
                     if (heroItem_sqDist < 5000) {
                         // If hero eats an item, add up the score.
-                        if (item.type <= Const.ITEM_TYPE_5) {
+                        if (item.type <= Global.Const.ITEM_TYPE_5) {
                             GameData.user.score += item.type;
                             GameMgr.sound.playEat();
                         }
-                        else if (item.type == Const.ITEM_TYPE_COFFEE) {
+                        else if (item.type == Global.Const.ITEM_TYPE_COFFEE) {
                             // If hero drinks coffee, add up the score.
                             GameData.user.score += 1;
 
@@ -285,7 +285,7 @@ class FoodMgr {
                             this.m_gameScene.showCoffeeEffect();
                             GameMgr.sound.playCoffee();
                         }
-                        else if (item.type == Const.ITEM_TYPE_MUSHROOM) {
+                        else if (item.type == Global.Const.ITEM_TYPE_MUSHROOM) {
                             // If hero eats a mushroom, add up the score.
                             GameData.user.score += 1;
 

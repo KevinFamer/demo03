@@ -29,7 +29,7 @@ class Enemy extends Sprite {
     }
 
     reuse(PType, PShowLookOut, PPos, PSpeed, PDis):void {
-        if (PType == Const.ENEMY_TYPE_4) {
+        if (PType == Global.Const.ENEMY_TYPE_4) {
             this.f_showImage("obstacle4_0001.png")
 
             if (!this.m_animation) {

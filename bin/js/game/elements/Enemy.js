@@ -30,7 +30,7 @@ var Enemy = /** @class */ (function (_super) {
         }
     };
     Enemy.prototype.reuse = function (PType, PShowLookOut, PPos, PSpeed, PDis) {
-        if (PType == Const.ENEMY_TYPE_4) {
+        if (PType == Global.Const.ENEMY_TYPE_4) {
             this.f_showImage("obstacle4_0001.png");
             if (!this.m_animation) {
                 var ani = new Animation();

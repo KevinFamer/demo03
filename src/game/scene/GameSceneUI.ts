@@ -55,7 +55,7 @@ class GameSceneUI extends Sprite {
 
     f_createText(PStr, PX, PY):LayaText {
         var txt = new LayaText();
-        txt.font = Const.BMP_FONT_NAME;
+        txt.font = Global.Const.BMP_FONT_NAME;
         txt.fontSize = 20;
         txt.color = "#ff00ff";
         txt.text = PStr

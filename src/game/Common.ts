@@ -1,6 +1,6 @@
-class Game 
+module Game
 {
-    public static readonly Main:GameMain = new GameMain();  
+    export let Main:GameMain = new GameMain();  
 }
 
 enum SceneName {

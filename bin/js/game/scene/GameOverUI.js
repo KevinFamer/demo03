@@ -22,7 +22,7 @@ var GameOverUI = /** @class */ (function (_super) {
         _this.addChild(bg);
         var title = new LayaText();
         _this.addChild(title);
-        title.font = Const.BMP_FONT_NAME;
+        title.font = Global.Const.BMP_FONT_NAME;
         title.fontSize = 20;
         title.color = "#ff00ff";
         title.text = "HERO WAS KILLED!";
@@ -30,14 +30,14 @@ var GameOverUI = /** @class */ (function (_super) {
         title.y = winHeight - 120;
         _this.m_distanceText = new LayaText();
         _this.addChild(_this.m_distanceText);
-        _this.m_distanceText.font = Const.BMP_FONT_NAME;
+        _this.m_distanceText.font = Global.Const.BMP_FONT_NAME;
         _this.m_distanceText.fontSize = 20;
         _this.m_distanceText.text = "DISTANCE TRAVELLED: 0000000";
         _this.m_distanceText.x = winWidth / 2;
         _this.m_distanceText.y = winHeight - 220;
         _this.m_scoreText = new LayaText();
         _this.addChild(_this.m_scoreText);
-        _this.m_scoreText.font = Const.BMP_FONT_NAME;
+        _this.m_scoreText.font = Global.Const.BMP_FONT_NAME;
         _this.m_scoreText.fontSize = 20;
         _this.m_scoreText.text = "SCORE: 0000000";
         _this.m_scoreText.x = winWidth / 2;

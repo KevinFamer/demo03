@@ -1,5 +1,4 @@
 "use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var User = /** @class */ (function () {
     function User() {
         this.lives = 100; //Const.HERO_LIVES;
@@ -12,6 +11,5 @@ var User = /** @class */ (function () {
     }
     return User;
 }());
-exports.User = User;
-exports.default = User;
+module.exports = User;
 //# sourceMappingURL=UserData.js.map

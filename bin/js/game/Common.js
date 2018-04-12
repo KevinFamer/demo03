@@ -1,9 +1,7 @@
-var Game = /** @class */ (function () {
-    function Game() {
-    }
+var Game;
+(function (Game) {
     Game.Main = new GameMain();
-    return Game;
-}());
+})(Game || (Game = {}));
 var SceneName;
 (function (SceneName) {
     SceneName[SceneName["LoginScene"] = 1] = "LoginScene";

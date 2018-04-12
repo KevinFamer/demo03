@@ -20,7 +20,7 @@ class GameOverUI extends Sprite {
 
         var title = new LayaText();
         this.addChild(title);
-        title.font = Const.BMP_FONT_NAME;
+        title.font = Global.Const.BMP_FONT_NAME;
         title.fontSize = 20;
         title.color = "#ff00ff";
         title.text = "HERO WAS KILLED!"
@@ -29,7 +29,7 @@ class GameOverUI extends Sprite {
 
         this.m_distanceText = new LayaText();
         this.addChild(this.m_distanceText);
-        this.m_distanceText.font = Const.BMP_FONT_NAME;
+        this.m_distanceText.font = Global.Const.BMP_FONT_NAME;
         this.m_distanceText.fontSize = 20;
         this.m_distanceText.text = "DISTANCE TRAVELLED: 0000000";
         this.m_distanceText.x = winWidth/2;
@@ -37,7 +37,7 @@ class GameOverUI extends Sprite {
 
         this.m_scoreText = new LayaText();
         this.addChild(this.m_scoreText);
-        this.m_scoreText.font = Const.BMP_FONT_NAME;
+        this.m_scoreText.font = Global.Const.BMP_FONT_NAME;
         this.m_scoreText.fontSize = 20;
         this.m_scoreText.text = "SCORE: 0000000";
         this.m_scoreText.x = winWidth/2;

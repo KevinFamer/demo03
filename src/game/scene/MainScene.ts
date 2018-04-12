@@ -59,9 +59,9 @@ class MainScene extends Sprite {
         var winWidth = Browser.width;
         var winHeight = Browser.height;
         this.m_ui.setVisible(true);
-        GameData.user.lives = Const.HERO_LIVES;
+        GameData.user.lives = Global.Const.HERO_LIVES;
         GameData.user.score = GameData.user.distance = 0;
-        GameData.gameState = Const.GAME_STATE_IDLE;
+        GameData.gameState = Global.Const.GAME_STATE_IDLE;
         this.m_cameraShake = GameData.user.heroSpeed = this.m_background.speed = 0;
         this.m_touchY = winHeight/2;
 
@@ -78,12 +78,12 @@ class MainScene extends Sprite {
     }
 
     // _onTouchMoved(PTouches, PEvent):void {
-    //     if(GameData.gameState != Const.GAME_STATE_OVER)
+    //     if(GameData.gameState != Global.Const.GAME_STATE_OVER)
     //         this.m_touchY = touches[0].getLocation().y;
     // }
 
     _onMouseMove(PEvent:Laya.Event):void {
-        if(GameData.gameState != Const.GAME_STATE_OVER)
+        if(GameData.gameState != Global.Const.GAME_STATE_OVER)
             this.m_touchY = PEvent.stageY;
     }
 
@@ -221,7 +221,7 @@ class MainScene extends Sprite {
     endGame():void {
         this.x = 0;
         this.y = 0;
-        GameData.gameState = Const.GAME_STATE_OVER;
+        GameData.gameState = Global.Const.GAME_STATE_OVER;
     }
 
     _gameOver():void {
@@ -241,29 +241,29 @@ class MainScene extends Sprite {
         var winWidth = Browser.width;
         var winHeight = Browser.height;
         switch(GameData.gameState){
-            case Const.GAME_STATE_IDLE:
+            case Global.Const.GAME_STATE_IDLE:
                 // Take off.
                 if (this.m_hero.x < winWidth * 0.5 * 0.5)
                 {
                     this.m_hero.x += ((winWidth * 0.5 * 0.5 + 10) - this.m_hero.x) * 0.05;
                     this.m_hero.y -= (this.m_hero.y - this.m_touchY) * 0.1;
 
-                    GameData.user.heroSpeed += (Const.HERO_MIN_SPEED - GameData.user.heroSpeed) * 0.05;
+                    GameData.user.heroSpeed += (Global.Const.HERO_MIN_SPEED - GameData.user.heroSpeed) * 0.05;
                     this.m_background.speed = GameData.user.heroSpeed * elapsed;
                 }
                 else
                 {
-                    GameData.gameState = Const.GAME_STATE_FLYING;
-                    this.m_hero.state = Const.HERO_STATE_FLYING;
+                    GameData.gameState = Global.Const.GAME_STATE_FLYING;
+                    this.m_hero.state = Global.Const.HERO_STATE_FLYING;
                 }
                 this._handleHeroPose();
                 this.m_ui.update();
                 break;
 
-            case Const.GAME_STATE_FLYING:
+            case Global.Const.GAME_STATE_FLYING:
                 // If drank coffee, fly faster for a while.
                 if (GameData.user.coffee > 0)
-                    GameData.user.heroSpeed += (Const.HERO_MAX_SPEED - GameData.user.heroSpeed) * 0.2;
+                    GameData.user.heroSpeed += (Global.Const.HERO_MAX_SPEED - GameData.user.heroSpeed) * 0.2;
                 else
                     this.stopCoffeeEffect();
 
@@ -272,7 +272,7 @@ class MainScene extends Sprite {
                     this.m_hero.y -= (this.m_hero.y - this.m_touchY) * 0.1;
 
                     // If this.m_hero is flying extremely fast, create a wind effect and show force field around this.m_hero.
-                    if (GameData.user.heroSpeed > Const.HERO_MIN_SPEED + 100) {
+                    if (GameData.user.heroSpeed > Global.Const.HERO_MIN_SPEED + 100) {
                         this.showWindEffect();
                         // Animate this.m_hero faster.
                         this.m_hero.toggleSpeed(true);
@@ -289,8 +289,8 @@ class MainScene extends Sprite {
                     if (GameData.user.coffee <= 0)
                     {
                         // Play this.m_hero animation for obstacle hit.
-                        if (this.m_hero.state != Const.HERO_STATE_HIT){
-                            this.m_hero.state = Const.HERO_STATE_HIT;
+                        if (this.m_hero.state != Global.Const.HERO_STATE_HIT){
+                            this.m_hero.state = Global.Const.HERO_STATE_HIT;
                         }
 
                         // Move hero to center of the screen.
@@ -318,7 +318,7 @@ class MainScene extends Sprite {
                 // If we have a coffee, reduce the value of the power.
                 if (GameData.user.coffee > 0) GameData.user.coffee -= elapsed;
 
-                GameData.user.heroSpeed -= (GameData.user.heroSpeed - Const.HERO_MIN_SPEED) * 0.01;
+                GameData.user.heroSpeed -= (GameData.user.heroSpeed - Global.Const.HERO_MIN_SPEED) * 0.01;
 
                 // Create food items.
                 GameMgr.food.update(this.m_hero, elapsed);
@@ -343,7 +343,7 @@ class MainScene extends Sprite {
 
                 break;
 
-            case Const.GAME_STATE_OVER:
+            case Global.Const.GAME_STATE_OVER:
                 GameMgr.food.removeAll();
     // Dispose the eat particle temporarily.
     // Dispose the wind particle temporarily.
