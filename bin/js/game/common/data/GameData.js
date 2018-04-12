@@ -19,7 +19,7 @@ var GData;
 var GameData = /** @class */ (function () {
     function GameData() {
     }
-    GameData.user = new UserData();
+    GameData.user = new GData.User();
     return GameData;
 }());
 //# sourceMappingURL=GameData.js.map

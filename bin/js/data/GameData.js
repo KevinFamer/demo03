@@ -1,6 +1,6 @@
-/********************* ↓ 数据类定义 ↓ *********************/
-var GData;
-(function (GData) {
+var GameData;
+(function (GameData_1) {
+    /********************* ↓ 数据类定义 ↓ *********************/
     var User = /** @class */ (function () {
         function User() {
             this.lives = 100; //Const.HERO_LIVES;
@@ -13,13 +13,13 @@ var GData;
         }
         return User;
     }());
-    GData.User = User;
-})(GData || (GData = {}));
-/********************* ↑ 数据类定义 ↑ *********************/
-var GameData = /** @class */ (function () {
-    function GameData() {
-    }
-    GameData.user = new UserData();
-    return GameData;
-}());
+    /********************* ↑ 数据类定义 ↑ *********************/
+    GameData_1.user = new User();
+    var GameData = /** @class */ (function () {
+        function GameData() {
+        }
+        return GameData;
+    }());
+    GameData_1.GameData = GameData;
+})(GameData || (GameData = {}));
 //# sourceMappingURL=GameData.js.map

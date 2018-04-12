@@ -1,5 +1,4 @@
 
-
 //初始化微信小游戏
 Laya.MiniAdpter.init();
 //程序入口
@@ -12,7 +11,7 @@ function onCompleteHandler():void
     let bmpFont:BitmapFont;
     function onLoadFont() {
         bmpFont.setSpaceWidth(10);
-        LayaText.registerBitmapFont(Global.Const.BMP_FONT_NAME, bmpFont);
+        LayaText.registerBitmapFont(Const.BMP_FONT_NAME, bmpFont);
     }
 
     // 加载完成

@@ -17,9 +17,5 @@ var Keyboard = Laya.Keyboard;
 var loader = Laya.loader;
 var Pool = Laya.Pool;
 var Sound = Laya.SoundManager;
-/**
- * 自定义数据类导入
- */
-var Const = common.Const;
-var UserData = GData.User;
+// import Const = require ("./global/Const");
 //# sourceMappingURL=Init.js.map

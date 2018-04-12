@@ -1,5 +1,5 @@
-module Global {
-    export class Const {
+// module Global {
+    class Const {
         public static BMP_FONT_PATH:string = "res/fonts/font.fnt";
         public static BMP_FONT_NAME:string = "GameFont";
 
@@ -48,4 +48,5 @@ module Global {
         // 游戏实际的范围距离上下界面框的距离
         public static GAME_AREA_TOP_BOTTOM:number = 100;
     }
-}
+    export default Const;
+// }

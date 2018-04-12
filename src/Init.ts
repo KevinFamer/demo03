@@ -21,4 +21,15 @@ import Sound = Laya.SoundManager;
 /**
  * 自定义数据类导入
  */
-import UserData = GData.User;
+// import UserData = GData.User;
+// import Const = Global.Util;
+
+module Global {
+
+}
+
+module Game {
+
+}
+
+// import Const = require ("./global/Const");
