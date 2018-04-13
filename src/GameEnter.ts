@@ -19,7 +19,7 @@ function onCompleteHandler():void
         console.log("加载完成");
         Laya.loader.off(Laya.Event.ERROR, null, onLoadError, true);
         Laya.loader.maxLoader = 5;
-        Game.Main.run();
+        Game.main.run();
     }
     // 加载中回调
     function onLoading(Progress:number):void {

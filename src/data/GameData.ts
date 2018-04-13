@@ -1,6 +1,4 @@
-import {User} from "./UserData";
-
-namespace GameData {
+module Data {
     export let gameState:number;
-    export let user:User = new User();
+    export let user:UserData = new UserData();
 }

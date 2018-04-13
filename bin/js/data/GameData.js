@@ -1,8 +1,5 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
-var UserData = require("./UserData");
-var GameData;
-(function (GameData) {
-    GameData.user = new UserData();
-})(GameData || (GameData = {}));
+var Data;
+(function (Data) {
+    Data.user = new Data.UserData();
+})(Data || (Data = {}));
 //# sourceMappingURL=GameData.js.map
