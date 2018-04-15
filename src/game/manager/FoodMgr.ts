@@ -1,6 +1,8 @@
 module Game {
     import userData = Data.user;
-
+    import Browser = Laya.Browser;
+    import Pool = Laya.Pool;
+    
     export class FoodMgr {
         private m_container;
         private m_gameScene;

@@ -1,0 +1,10 @@
+<res>
+   <item name="fonts/arial16.fnt" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="fonts/arial16.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="fonts/font.fnt" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="fonts/font.png" type="Image" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="graphics/texture.plist" type="null" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="graphics/small_images" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="sounds" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
+   <item name="particles" type="" compress="0" pack="2" quality="80" props="" picType="0"/>
+</res>

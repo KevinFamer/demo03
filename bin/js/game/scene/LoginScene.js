@@ -10,6 +10,11 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Game;
 (function (Game) {
+    var Sprite = Laya.Sprite;
+    var Browser = Laya.Browser;
+    var Tween = Laya.Tween;
+    var Button = Laya.Button;
+    var CheckBox = Laya.CheckBox;
     var LoginScene = /** @class */ (function (_super) {
         __extends(LoginScene, _super);
         function LoginScene() {
@@ -19,7 +24,7 @@ var Game;
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var bgWelcome = new Sprite();
-            bgWelcome.loadImage("res/graphics/bgWelcome.jpg");
+            bgWelcome.loadImage(Global.Path.JPG_WELCOME_PATH);
             bgWelcome.x = winWidth / 2;
             bgWelcome.y = winHeight / 2;
             layer.addChild(bgWelcome);

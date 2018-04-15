@@ -10,13 +10,16 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Game;
 (function (Game) {
+    var Sprite = Laya.Sprite;
+    var Timer = Laya.timer;
+    var Browser = Laya.Browser;
     var Background = /** @class */ (function (_super) {
         __extends(Background, _super);
         function Background() {
             var _this = _super.call(this) || this;
             _this.m_speed = 5;
             //sky
-            _this.m_bg1 = _this.f_createBackground("res/graphics/bgLayer.jpg");
+            _this.m_bg1 = _this.f_createBackground(Global.Path.JPG_BGMAP_PATH);
             _this.addChild(_this.m_bg1);
             //hill
             _this.m_bg2 = _this.f_createBackground("bgLayer2.png");

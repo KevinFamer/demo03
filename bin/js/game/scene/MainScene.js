@@ -11,6 +11,13 @@ var __extends = (this && this.__extends) || (function () {
 var Game;
 (function (Game) {
     var userData = Data.user;
+    var Sprite = Laya.Sprite;
+    var Browser = Laya.Browser;
+    var Timer = Laya.timer;
+    var Handler = Laya.Handler;
+    var Loader = Laya.Loader;
+    var Particle2D = Laya.Particle2D;
+    var Keyboard = Laya.Keyboard;
     var MainScene = /** @class */ (function (_super) {
         __extends(MainScene, _super);
         function MainScene() {
@@ -22,7 +29,7 @@ var Game;
             _this.m_hero = new Game.Hero();
             _this.addChild(_this.m_hero);
             _this.m_itemBatchLayer = new Sprite();
-            _this.m_itemBatchLayer.loadImage("res/graphics/texture.png");
+            _this.m_itemBatchLayer.loadImage(Global.Path.PNG_TEXTURE_PATH);
             _this.addChild(_this.m_itemBatchLayer);
             _this.m_ui = new Game.GameSceneUI();
             _this.addChild(_this.m_ui);
@@ -108,7 +115,7 @@ var Game;
             if (this.m_windEffect)
                 return;
             if (!PPS) {
-                Laya.loader.load("res/particles/wind.plist", Handler.create(this, this.showWindEffect), null, Loader.JSON);
+                Laya.loader.load(Global.Path.PLIST_WIND_PATH, Handler.create(this, this.showWindEffect), null, Loader.JSON);
                 return;
             }
             this.m_windEffect = new Particle2D(PPS);
@@ -131,7 +138,7 @@ var Game;
             if (this.m_coffeeEffect)
                 return;
             if (!PPS) {
-                Laya.loader.load("res/particles/coffee.plist", Handler.create(this, this.showCoffeeEffect), null, Loader.JSON);
+                Laya.loader.load(Global.Path.PLIST_COFFEE_PATH, Handler.create(this, this.showCoffeeEffect), null, Loader.JSON);
                 return;
             }
             this.m_coffeeEffect = new Particle2D(PPS);
@@ -153,7 +160,7 @@ var Game;
             if (this.m_mushroomEffect)
                 return;
             if (!PPS) {
-                Laya.loader.load("res/particles/mushroom.plist", Handler.create(this, this.showMushroomEffect), null, Loader.JSON);
+                Laya.loader.load(Global.Path.PLIST_MUSHROOM_PATH, Handler.create(this, this.showMushroomEffect), null, Loader.JSON);
                 return;
             }
             this.m_mushroomEffect = new Particle2D(PPS);
@@ -171,7 +178,7 @@ var Game;
             }
         };
         MainScene.prototype.showEatEffect = function (itemX, itemY) {
-            Laya.loader.load("res/particles/eat.plist", Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
+            Laya.loader.load(Global.Path.PLIST_EAT_PATH, Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
         };
         MainScene.prototype.f_playEffect = function (PPS, PX, PY) {
             var effect = new Particle2D(PPS);

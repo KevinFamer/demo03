@@ -1,6 +1,6 @@
 module Global {
     export class Const {
-        public static BMP_FONT_PATH:string = "res/fonts/font.fnt";
+        // 位图字体标识
         public static BMP_FONT_NAME:string = "GameFont";
 
         // 玩家状态

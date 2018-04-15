@@ -1,25 +1,40 @@
+import BitmapFont = Laya.BitmapFont;
+import Handler = Laya.Handler;
+import Texture = Laya.Texture;
 
 //初始化微信小游戏
 Laya.MiniAdpter.init();
 //程序入口
 Laya.init(1024,768);
 //激活资源版本控制
-Laya.ResourceVersion.enable("version.json?"+Math.random(), Handler.create(null, onCompleteHandler), Laya.ResourceVersion.FILENAME_VERSION);
+Laya.ResourceVersion.enable("version.json?"+Math.random(), Handler.create(this, onCompleteHandler), Laya.ResourceVersion.FILENAME_VERSION);
 
 function onCompleteHandler():void 
 {
-    let bmpFont:BitmapFont;
-    function onLoadFont() {
-        bmpFont.setSpaceWidth(10);
-        LayaText.registerBitmapFont(Global.Const.BMP_FONT_NAME, bmpFont);
+    function onLoadFont(PBmpFont:BitmapFont) {
+        PBmpFont.setSpaceWidth(10);
+        Laya.Text.registerBitmapFont(Global.Const.BMP_FONT_NAME, PBmpFont);
+
+        var txt:Laya.Text = new Laya.Text();
+        txt.width = 250;
+        txt.wordWrap = true;
+        txt.text = "Do one thing at a time, and do well.";
+        txt.font = Global.Const.BMP_FONT_NAME;
+        txt.leading = 5;
+        txt.pos(Laya.stage.width - txt.width >> 1, Laya.stage.height - txt.height >> 1);
+        Laya.stage.addChild(txt);
     }
 
     // 加载完成
-    function onLoaded(PTexture):void {
-        console.log("加载完成");
-        Laya.loader.off(Laya.Event.ERROR, null, onLoadError, true);
+    function onLoaded(PTexture:Texture):void {
+        console.log("加载完成" + PTexture.source);
+        Laya.loader.off(Laya.Event.ERROR, this, onLoadError, true);
         Laya.loader.maxLoader = 5;
         Game.main.run();
+
+        // 资源预加载开始
+    let bmpFont:BitmapFont = new BitmapFont();
+	bmpFont.loadFont(Global.Path.FNT_BMPFONT_PATH, new Handler(this, onLoadFont, [bmpFont]));
     }
     // 加载中回调
     function onLoading(Progress:number):void {
@@ -31,16 +46,16 @@ function onCompleteHandler():void
     }
 
     // 资源预加载开始
-    bmpFont = new BitmapFont();
-	bmpFont.loadFont(Global.Const.BMP_FONT_PATH, new Handler(null, onLoadFont));
+    // let bmpFont:BitmapFont = new BitmapFont();
+	// bmpFont.loadFont(Global.Path.FNT_BMPFONT_PATH, new Handler(this, onLoadFont, [bmpFont]));
 
     let loadPath:Array<any> = [];
-    loadPath.push({ url:"res/graphics/texture.plist", type:Loader.ATLAS });
+    loadPath.push({ url:Global.Path.PLIST_TEXTURE_PATH, type:Laya.Loader.ATLAS });
 
     // 关闭并发加载，改成单一序列加载
-    // loader.maxLoader = 1;
+    Laya.loader.maxLoader = 1;
     // 无加载失败重试
-    // loader.retryNum = 0;
-    Laya.loader.load(loadPath, Handler.create(null, onLoaded), Handler.create(null, onLoading));
-    Laya.loader.once(Laya.Event.ERROR, null, onLoadError);
+    Laya.loader.retryNum = 0;
+    Laya.loader.load(loadPath, Handler.create(this, onLoaded), Handler.create(this, onLoading, null, false));
+    Laya.loader.once(Laya.Event.ERROR, this, onLoadError);
 }

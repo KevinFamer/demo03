@@ -1,6 +1,10 @@
 module Game {
     import userData = Data.user;
-
+    import Sprite = Laya.Sprite;
+    import Browser = Laya.Browser;
+    import LayaText = Laya.Text;
+    import Button = Laya.Button;
+    
     export class GameOverUI extends Sprite {
 
         private m_distanceText;

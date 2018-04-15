@@ -10,6 +10,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Game;
 (function (Game) {
+    var Animation = Laya.Animation;
+    var Sprite = Laya.Sprite;
     var Hero = /** @class */ (function (_super) {
         __extends(Hero, _super);
         function Hero() {
@@ -21,7 +23,7 @@ var Game;
             _this.m_animation = new Animation();
             var imgPaths = [];
             for (var i = 1; i < 20; i++) {
-                imgPaths.push("res/graphics/small_images/fly_00" + (i < 10 ? ('0' + i) : i) + ".png");
+                imgPaths.push(Global.Path.SML_IMG_PATH + "fly_00" + (i < 10 ? ('0' + i) : i) + ".png");
             }
             _this.m_animation.loadImages(imgPaths);
             _this.m_animation.interval = 50;

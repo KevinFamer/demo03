@@ -1,5 +1,9 @@
 module Game {
     import userData = Data.user;
+    import Sprite = Laya.Sprite;
+    import Browser = Laya.Browser;
+    import Button = Laya.Button;
+    import LayaText = Laya.Text;
 
     export class GameSceneUI extends Sprite {
 
@@ -10,7 +14,6 @@ module Game {
         constructor() {
             super();
 
-            var fnt = "res/fonts/font.fnt";
             var winWidth = Browser.width;
             var winHeight = Browser.height;
 

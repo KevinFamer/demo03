@@ -1,6 +1,8 @@
 var Game;
 (function (Game) {
     var userData = Data.user;
+    var Browser = Laya.Browser;
+    var Pool = Laya.Pool;
     var FoodMgr = /** @class */ (function () {
         function FoodMgr(PGameScene) {
             /** Current pattern of food items - 0 = horizontal, 1 = vertical, 2 = zigzag, 3 = random, 4 = special item. */

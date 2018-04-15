@@ -1,6 +1,7 @@
 var Game;
 (function (Game) {
     var userData = Data.user;
+    var Browser = Laya.Browser;
     var EnemyMgr = /** @class */ (function () {
         function EnemyMgr(PGameScene) {
             this.m_container = PGameScene.itemBatchLayer;

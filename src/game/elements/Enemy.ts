@@ -1,4 +1,9 @@
 module Game {
+    import Animation = Laya.Animation;
+    import Sprite = Laya.Sprite;
+    import Loader = Laya.Loader;
+    import Texture = Laya.Texture;
+    
     // Laya.Pool.getItemByClass("Enemy", Enemy);
     export class Enemy extends Sprite {
         private m_type:number = 0;

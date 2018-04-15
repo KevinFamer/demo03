@@ -1,4 +1,6 @@
 module Game {
+    import Sound = Laya.SoundManager;
+
     export class SoundMgr {
         private m_silence:boolean;
 
@@ -8,50 +10,50 @@ module Game {
 
         playMenuBgMusic():void {
             if (!this.m_silence) {
-                Sound.playMusic("res/sounds/bgWelcome.mp3", 0);
+                Sound.playMusic(Global.Path.MP3_WELCOME_PATH, 0);
             }
         }
 
         playGameBgMusic():void {
             if (!this.m_silence) {
-                Sound.playMusic("res/sounds/bgGame.mp3", 0);
+                Sound.playMusic(Global.Path.MP3_BG_PATH, 0);
             }
         }
 
         playEat():void {
             if (!this.m_silence) {
                 Sound.stopAllSound();
-                Sound.playSound("res/sounds/eat.mp3", 1);
+                Sound.playSound(Global.Path.MP3_EAT_PATH, 1);
             }
         }
 
         playCoffee():void {
             if (!this.m_silence) {
-                Sound.playSound("res/sounds/coffee.mp3", 1);
+                Sound.playSound(Global.Path.MP3_COFFEE_PATH, 1);
             }
         }
 
         playMushroom():void {
             if (!this.m_silence) {
-                Sound.playSound("res/sounds/mushroom.mp3", 1);
+                Sound.playSound(Global.Path.MP3_MUSHROOM_PATH, 1);
             }
         }
 
         playHit():void {
             if (!this.m_silence) {
-                Sound.playSound("res/sounds/hit.mp3", 1);
+                Sound.playSound(Global.Path.MP3_HIT_PATH, 1);
             }
         }
 
         playHurt():void {
             if (!this.m_silence) {
-                Sound.playSound("res/sounds/hurt.mp3", 1);
+                Sound.playSound(Global.Path.MP3_HURT_PATH, 1);
             }
         }
 
         playLose():void {
             if (!this.m_silence) {
-                Sound.playSound("res/sounds/lose.mp3", 1);
+                Sound.playSound(Global.Path.MP3_LOSE_PATH, 1);
             }
         }
 

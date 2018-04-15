@@ -11,11 +11,14 @@ var __extends = (this && this.__extends) || (function () {
 var Game;
 (function (Game) {
     var userData = Data.user;
+    var Sprite = Laya.Sprite;
+    var Browser = Laya.Browser;
+    var Button = Laya.Button;
+    var LayaText = Laya.Text;
     var GameSceneUI = /** @class */ (function (_super) {
         __extends(GameSceneUI, _super);
         function GameSceneUI() {
             var _this = _super.call(this) || this;
-            var fnt = "res/fonts/font.fnt";
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var lifeLabel = _this.f_createText("L I V E S", 360, winHeight - 25);

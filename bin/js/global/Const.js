@@ -3,7 +3,7 @@ var Global;
     var Const = /** @class */ (function () {
         function Const() {
         }
-        Const.BMP_FONT_PATH = "res/fonts/font.fnt";
+        // 位图字体标识
         Const.BMP_FONT_NAME = "GameFont";
         // 玩家状态
         Const.GAME_STATE_IDLE = 0;

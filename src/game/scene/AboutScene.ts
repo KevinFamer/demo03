@@ -1,4 +1,9 @@
 module Game {
+    import Sprite = Laya.Sprite;
+    import Browser = Laya.Browser;
+    import Label = Laya.Label;
+    import Button = Laya.Button;
+
     export class AboutScene extends Sprite {
         constructor() {
             super();
@@ -9,7 +14,7 @@ module Game {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var bgWelcome = new Sprite();
-            bgWelcome.loadImage("res/graphics/bgWelcome.jpg");
+            bgWelcome.loadImage(Global.Path.JPG_WELCOME_PATH);
             bgWelcome.x = winWidth/2;
             bgWelcome.y = winHeight/2;
             layer.addChild(bgWelcome);

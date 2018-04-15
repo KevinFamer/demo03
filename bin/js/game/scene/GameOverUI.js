@@ -11,6 +11,10 @@ var __extends = (this && this.__extends) || (function () {
 var Game;
 (function (Game) {
     var userData = Data.user;
+    var Sprite = Laya.Sprite;
+    var Browser = Laya.Browser;
+    var LayaText = Laya.Text;
+    var Button = Laya.Button;
     var GameOverUI = /** @class */ (function (_super) {
         __extends(GameOverUI, _super);
         function GameOverUI(PGameScene) {

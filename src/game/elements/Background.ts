@@ -1,4 +1,8 @@
 module Game {
+    import Sprite = Laya.Sprite;
+    import Timer = Laya.timer;
+    import Browser = Laya.Browser;
+
     export class Background extends Sprite {
         private m_bg1:Sprite;
         private m_bg2:Sprite;
@@ -11,7 +15,7 @@ module Game {
             super();
 
             //sky
-            this.m_bg1 = this.f_createBackground("res/graphics/bgLayer.jpg");
+            this.m_bg1 = this.f_createBackground(Global.Path.JPG_BGMAP_PATH);
             this.addChild(this.m_bg1);
 
             //hill

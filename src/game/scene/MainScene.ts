@@ -1,5 +1,13 @@
 module Game {
     import userData = Data.user;
+    import Sprite = Laya.Sprite;
+    import Browser = Laya.Browser;
+    import Timer = Laya.timer;
+    import Handler = Laya.Handler;
+    import Loader = Laya.Loader;
+    import Particle2D = Laya.Particle2D;
+    import ParticleSetting = Laya.ParticleSetting;
+    import Keyboard = Laya.Keyboard;
 
     export class MainScene extends Sprite {
 
@@ -31,7 +39,7 @@ module Game {
             this.addChild(this.m_hero);
 
             this.m_itemBatchLayer = new Sprite();
-            this.m_itemBatchLayer.loadImage("res/graphics/texture.png");
+            this.m_itemBatchLayer.loadImage(Global.Path.PNG_TEXTURE_PATH);
             this.addChild(this.m_itemBatchLayer);
 
             this.m_ui = new GameSceneUI();
@@ -134,7 +142,7 @@ module Game {
                 return;
 
             if (!PPS) {
-                Laya.loader.load("res/particles/wind.plist", Handler.create(this, this.showWindEffect), null, Loader.JSON);
+                Laya.loader.load(Global.Path.PLIST_WIND_PATH, Handler.create(this, this.showWindEffect), null, Loader.JSON);
                 return;
             }
 
@@ -160,7 +168,7 @@ module Game {
                 return;
 
             if (!PPS) {
-                Laya.loader.load("res/particles/coffee.plist", Handler.create(this, this.showCoffeeEffect), null, Loader.JSON);
+                Laya.loader.load(Global.Path.PLIST_COFFEE_PATH, Handler.create(this, this.showCoffeeEffect), null, Loader.JSON);
                 return;
             }
 
@@ -185,7 +193,7 @@ module Game {
                 return;
             
             if (!PPS) {
-                Laya.loader.load("res/particles/mushroom.plist", Handler.create(this, this.showMushroomEffect), null, Loader.JSON);
+                Laya.loader.load(Global.Path.PLIST_MUSHROOM_PATH, Handler.create(this, this.showMushroomEffect), null, Loader.JSON);
                 return;
             }
 
@@ -206,7 +214,7 @@ module Game {
         }
 
         showEatEffect(itemX, itemY):void {
-            Laya.loader.load("res/particles/eat.plist", Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
+            Laya.loader.load(Global.Path.PLIST_EAT_PATH, Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
         }
 
         f_playEffect(PPS:ParticleSetting, PX, PY):void {

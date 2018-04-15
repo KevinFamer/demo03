@@ -1,6 +1,7 @@
 module Game {
     import userData = Data.user;
-
+    import Browser = Laya.Browser;
+    
     export class EnemyMgr {
         private m_container;
 

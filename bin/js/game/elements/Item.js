@@ -10,6 +10,8 @@ var __extends = (this && this.__extends) || (function () {
 })();
 var Game;
 (function (Game) {
+    var Sprite = Laya.Sprite;
+    var Loader = Laya.Loader;
     // Laya.Pool.getItemByClass("Item", Item);
     var Item = /** @class */ (function (_super) {
         __extends(Item, _super);
