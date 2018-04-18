@@ -5,9 +5,6 @@ module Global {
         public static JPG_BGMAP_PATH:string = "graphics/bgLayer.jpg";
         public static JPG_WELCOME_PATH:string = "graphics/bgWelcome.jpg";
 
-        // 游戏资源小图路径
-        public static SML_IMG_PATH:string = "res/graphics/small_images/";
-
         /**
          * 音频路径
          */ 
@@ -30,7 +27,10 @@ module Global {
 
 
         // 游戏图集
-        public static PNG_TEXTURE_PATH:string = "graphics/texture.png";
-        public static PLIST_TEXTURE_PATH:string = "graphics/texture.plist";
+        public static PNG_TEXTURE_PATH:string = "graphics/small_images.png";
+        public static PLIST_TEXTURE_PATH:string = "graphics/small_images.plist";
+
+        // 游戏资源图路径
+        public static SML_IMG_PATH:string = "small_images/";
     }
 }
