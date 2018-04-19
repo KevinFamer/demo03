@@ -7,8 +7,6 @@ var Global;
         Path.FNT_BMPFONT_PATH = "fonts/arial16.fnt";
         Path.JPG_BGMAP_PATH = "graphics/bgLayer.jpg";
         Path.JPG_WELCOME_PATH = "graphics/bgWelcome.jpg";
-        // 游戏资源小图路径
-        Path.SML_IMG_PATH = "res/graphics/small_images/";
         /**
          * 音频路径
          */
@@ -28,8 +26,10 @@ var Global;
         Path.PLIST_MUSHROOM_PATH = "particles/mushroom.plist";
         Path.PLIST_EAT_PATH = "particles/eat.plist";
         // 游戏图集
-        Path.PNG_TEXTURE_PATH = "graphics/texture.png";
-        Path.PLIST_TEXTURE_PATH = "graphics/texture.plist";
+        Path.PNG_TEXTURE_PATH = "graphics/small_images.png";
+        Path.PLIST_TEXTURE_PATH = "graphics/small_images.plist";
+        // 游戏资源图路径
+        Path.SML_IMG_PATH = "small_images/";
         return Path;
     }());
     Global.Path = Path;

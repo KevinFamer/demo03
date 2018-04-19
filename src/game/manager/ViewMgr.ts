@@ -11,15 +11,25 @@ module Game {
 
     export class ViewMgr 
     {
-        private _bottomLayer:Node;
-        private _centerLayer:Node;
-        private _topLayer:Node;
+        private _layers:Array<number>;
+        private _nodes:Array<Node>;
 
         constructor()
         {
-            this.init();
+            this._layers = [UI_LAYER.BOTTOM, UI_LAYER.CENTER, UI_LAYER.TOP];
+            this.initLayerNode();
         }
 
+        /** 根据唯一界面ID，显示界面 */
+        showView(ViewId:number):void 
+        {
+            let viewNode:Node = this._nodes[UI_LAYER.CENTER];
+            if (viewNode != null) {
+                
+                viewNode.addChild();
+            }
+        }
+        
         showViewOnBottom():void 
         {
 
@@ -35,15 +45,14 @@ module Game {
             
         }
 
-        private init():void 
+        private initLayerNode():void 
         {
-            this._bottomLayer = new Node();
-            this._centerLayer = new Node();
-            this._topLayer = new Node();
-
-            Laya.stage.addChildAt(this._bottomLayer, UI_LAYER.BOTTOM);
-            Laya.stage.addChildAt(this._centerLayer, UI_LAYER.CENTER);
-            Laya.stage.addChildAt(this._topLayer, UI_LAYER.TOP);
+            let node:Node;
+            this._layers.forEach(element => {
+                node = new Node();
+                Laya.stage.addChildAt(node, element);
+                this._nodes[element] = node;
+            });
         }
     }
 }
