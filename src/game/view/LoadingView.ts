@@ -3,8 +3,8 @@
 */
 module Game {
 	import Node = Laya.Node;
-
-	export class LoadingView extends ui.ui_loadingUI 
+	
+	export class LoadingView extends ui.ui_loadingUI
 	{
 		// 加载资源路径
 		private _resUrl:Array<any>;

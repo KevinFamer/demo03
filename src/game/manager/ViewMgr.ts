@@ -14,7 +14,7 @@ module Game {
         }
 
         /** 根据界面唯一ID，显示ui界面 */
-        showView(ViewId:number, Param:any = null):View 
+        showView(ViewId:number, Param?:any):View 
         {
             let viewCls = this._viewCls[ViewId];
             if (viewCls == null) {

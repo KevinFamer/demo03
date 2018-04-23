@@ -1,6 +1,7 @@
 
 import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
+import BaseView=laya.ui.BaseView;
 module ui {
     export class ui_loadingUI extends View {
 		public imgBG:Laya.Image;

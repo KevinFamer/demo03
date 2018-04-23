@@ -24,22 +24,22 @@ module Game {
         }
 
         /** 把显示对象添加到场景层 */
-        addChildToScene(Child:Sprite, PosX:number = null, PosY:number = null):void 
+        addChildToScene(Child:Sprite, PosX?:number, PosY?:number):void 
         {
             this.addChildToLayer(UI_LAYER.Scene, Child, PosX, PosY);
         }
         /** 把显示对象添加到弹框层(UI) */
-        addChildToDialog(Child:Sprite, PosX:number = null, PosY:number = null):void 
+        addChildToDialog(Child:Sprite, PosX?:number, PosY?:number):void 
         {
             this.addChildToLayer(UI_LAYER.Dialog, Child, PosX, PosY);
         }
         /** 把显示对象添加到提示层 */
-        addChildToTip(Child:Sprite, PosX:number = null, PosY:number = null):void 
+        addChildToTip(Child:Sprite, PosX?:number, PosY?:number):void 
         {
             this.addChildToLayer(UI_LAYER.Tip, Child, PosX, PosY);
         }
         /** 把显示对象添加到引导层 */
-        addChildToGuide(Child:Sprite, PosX:number = null, PosY:number = null):void 
+        addChildToGuide(Child:Sprite, PosX?:number, PosY?:number):void 
         {
             this.addChildToLayer(UI_LAYER.Guide, Child, PosX, PosY);
         }
