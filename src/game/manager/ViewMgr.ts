@@ -1,58 +1,93 @@
 module Game {
-    import Node = Laya.Node;
-
-    /** 游戏层级 */
-    const enum UI_LAYER 
+    class ViewMgr 
     {
-        BOTTOM = 1,
-        CENTER = 2,
-        TOP = 3,
-    }
-
-    export class ViewMgr 
-    {
-        private _layers:Array<number>;
-        private _nodes:Array<Node>;
+        // 游戏界面类集
+        private _viewCls:Array<any>;
+        // 缓存游戏已打开的ui界面
+        private _uiViews:Array<View>;
 
         constructor()
         {
-            this._layers = [UI_LAYER.BOTTOM, UI_LAYER.CENTER, UI_LAYER.TOP];
-            this.initLayerNode();
+            this._viewCls = [];
+            this._uiViews = [];
+            this.initRegisterView();
         }
 
-        /** 根据唯一界面ID，显示界面 */
-        showView(ViewId:number):void 
+        /** 根据界面唯一ID，显示ui界面 */
+        showView(ViewId:number, Param:any = null):View 
         {
-            let viewNode:Node = this._nodes[UI_LAYER.CENTER];
-            if (viewNode != null) {
-                
-                viewNode.addChild();
+            let viewCls = this._viewCls[ViewId];
+            if (viewCls == null) {
+                console.log("[ViewMgr] showView : ViewCls(${ViewId}) is not register!!!");
+                return;
             }
+
+            let view = this._uiViews[ViewId];
+            if (view == null) {
+                view = new viewCls(Param);
+                this._uiViews[ViewId] = view;
+            }
+
+            layerMgr.addChildToDialog(view);
+            return view;
         }
         
-        showViewOnBottom():void 
+        /** 根据界面唯一ID，隐藏ui界面 */
+        hideView(ViewId:number):void 
         {
-
+            let view = this._uiViews[ViewId];
+            if (view != null) {
+                view.removeSelf();
+                this._uiViews[ViewId] = null;
+            }
         }
 
-        showViewOnCenter():void 
+        /** 隐藏所以ui界面 */
+        hideAllView():void 
         {
+            if (this._uiViews.length <= 0) {
+                return;
+            }
 
+            for (let viewId in this._uiViews) {
+                this.hideView(parseInt(viewId));
+            }
+            this._uiViews.length = 0;
         }
 
-        showViewOnTop():void 
+        /** 根据ID，获取已打开的界面 */
+        getView(ViewId:number):View
         {
-            
+            let view = this._uiViews[ViewId];
+            return view;
         }
 
-        private initLayerNode():void 
+        /** 检查ui界面是否已打开 */
+        checkViewIsOpen(ViewId:number):boolean 
         {
-            let node:Node;
-            this._layers.forEach(element => {
-                node = new Node();
-                Laya.stage.addChildAt(node, element);
-                this._nodes[element] = node;
-            });
+            let view = this._uiViews[ViewId];
+            return view != null;
+        }
+
+        /** 注册UI界面 */
+        registerView(ViewId:number, ViewCls:any):void 
+        {
+            if (!ViewId || !ViewCls) {
+                return;
+            }
+            if (this._viewCls[ViewId] != null) {
+                console.log("[ViewMgr] registerView : ViewCls(${ViewId}) is exist");
+                return;
+            }
+            this._viewCls[ViewId] = ViewCls;
+        }
+
+        /** UI界面统一注册 */
+        private initRegisterView():void 
+        {
+            this.registerView(Global.ViewId.LOADING_VIEW, LoadingView);
         }
     }
+
+    export let viewMgr:ViewMgr = new ViewMgr();
 }

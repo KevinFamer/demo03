@@ -19,7 +19,7 @@ module Game {
 			this.init();
 		}
 
-		load(ResUrl:Array<any>, LoadedFunc:Function, LoadingFunc:Function):void 
+		load(ResUrl:Array<any>, LoadedFunc:Function = null, LoadingFunc:Function = null):void 
 		{
 			this._resUrl = ResUrl;
 			this._onLoaded = LoadedFunc;
