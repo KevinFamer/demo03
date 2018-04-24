@@ -2,8 +2,6 @@
 * loading界面 
 */
 module Game {
-	import Node = Laya.Node;
-	
 	export class LoadingView extends ui.ui_loadingUI
 	{
 		// 加载资源路径
@@ -13,10 +11,29 @@ module Game {
 		// 加载过程中回调函数
 		private _onLoading:Function;
 		
-		constructor() 
+		onShow(Param?:any):void 
 		{
-			super();
-			this.init();
+			let url = Param.Url;
+			let loadedFunc = Param.LoadedFunc;
+			let loadingFunc = Param.LoadingFunc;
+			this.load(url, loadedFunc, loadingFunc);
+		}
+
+		onInit(Param?:any):void 
+		{
+			this._onLoaded = null;
+			this._onLoading = null;
+			this.txtProgress.text = "0%";
+		}
+
+		onHide():void 
+		{
+			Laya.loader.cancelLoadByUrls(this._resUrl);
+		}
+
+		onDestroy():void
+		{
+
 		}
 
 		load(ResUrl:Array<any>, LoadedFunc:Function = null, LoadingFunc:Function = null):void 
@@ -31,25 +48,6 @@ module Game {
 			Laya.loader.retryNum = 0;
 			Laya.loader.load(ResUrl, Handler.create(this, this.onLoaded), Handler.create(this, this.onLoading, null, false));
 			Laya.loader.once(Laya.Event.ERROR, this, this.onLoadError);
-		}
-		
-		show(Parent:Node):void 
-		{
-			this.removeSelf();
-			Parent.addChild(this);
-		}
-
-		hide():void 
-		{
-			Laya.loader.cancelLoadByUrls(this._resUrl);
-			this.removeSelf();
-		}
-
-		private init():void 
-		{
-			this._onLoaded = null;
-			this._onLoading = null;
-			this.txtProgress.text = "0%";
 		}
 
 		private onLoaded(Txture:Texture):void 

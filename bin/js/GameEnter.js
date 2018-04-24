@@ -7,7 +7,7 @@ Laya.MiniAdpter.init();
 Laya.init(1024, 768);
 //激活资源版本控制
 Laya.ResourceVersion.enable("version.json?" + Math.random(), Handler.create(this, onCompleteHandler), Laya.ResourceVersion.FILENAME_VERSION);
-function onCompleteHandler() {
+function onCompleteHandler1() {
     function onLoadFont(PBmpFont) {
         PBmpFont.setSpaceWidth(10);
         Laya.Text.registerBitmapFont(Global.Const.BMP_FONT_NAME, PBmpFont);
@@ -49,5 +49,16 @@ function onCompleteHandler() {
     Laya.loader.retryNum = 0;
     Laya.loader.load(loadPath, Handler.create(this, onLoaded), Handler.create(this, onLoading, null, false));
     Laya.loader.once(Laya.Event.ERROR, this, onLoadError);
+}
+function onCompleteHandler() {
+    var loadPath = [];
+    loadPath.push({ url: Global.Path.PLIST_TEXTURE_PATH, type: Laya.Loader.ATLAS });
+    function onLoaded(PTexture) {
+        console.log("加载完成" + PTexture.source);
+    }
+    function onLoading(PTexture) {
+        console.log("加载完成" + PTexture.source);
+    }
+    Game.viewMgr.showView(Global.ViewId.LOADING_VIEW, { Url: loadPath, LoadedFunc: onLoaded, LoadingFunc: onLoading });
 }
 //# sourceMappingURL=GameEnter.js.map

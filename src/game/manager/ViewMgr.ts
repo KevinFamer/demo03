@@ -4,7 +4,7 @@ module Game {
         // 游戏界面类集
         private _viewCls:Array<any>;
         // 缓存游戏已打开的ui界面
-        private _uiViews:Array<View>;
+        private _uiViews:Array<BaseView>;
 
         constructor()
         {
@@ -14,7 +14,7 @@ module Game {
         }
 
         /** 根据界面唯一ID，显示ui界面 */
-        showView(ViewId:number, Param?:any):View 
+        showView(ViewId:number, Param?:any):BaseView 
         {
             let viewCls = this._viewCls[ViewId];
             if (viewCls == null) {
@@ -24,10 +24,12 @@ module Game {
 
             let view = this._uiViews[ViewId];
             if (view == null) {
-                view = new viewCls(Param);
+                view = new viewCls();
+                view.onInit(Param);
                 this._uiViews[ViewId] = view;
             }
 
+            view.onShow(Param);
             layerMgr.addChildToDialog(view);
             return view;
         }
@@ -37,6 +39,8 @@ module Game {
         {
             let view = this._uiViews[ViewId];
             if (view != null) {
+                view.onHide();
+                view.onDestroy();
                 view.removeSelf();
                 this._uiViews[ViewId] = null;
             }
@@ -56,7 +60,7 @@ module Game {
         }
 
         /** 根据ID，获取已打开的界面 */
-        getView(ViewId:number):View
+        getView(ViewId:number):BaseView
         {
             let view = this._uiViews[ViewId];
             return view;
@@ -73,6 +77,7 @@ module Game {
         registerView(ViewId:number, ViewCls:any):void 
         {
             if (!ViewId || !ViewCls) {
+                console.log("[ViewMgr] registerView : ViewId or ViewCls is null");
                 return;
             }
             if (this._viewCls[ViewId] != null) {

@@ -1,40 +1,76 @@
 var Game;
 (function (Game) {
-    var Node = Laya.Node;
     var ViewMgr = /** @class */ (function () {
         function ViewMgr() {
-            this._layers = [1 /* BOTTOM */, 2 /* CENTER */, 3 /* TOP */];
-            this.initLayerNode();
+            this._viewCls = [];
+            this._uiViews = [];
+            this.initRegisterView();
         }
-        /** 根据唯一界面ID，显示界面 */
-        ViewMgr.prototype.showView = function (ViewId) {
-            var viewNode = this._nodes[2 /* CENTER */];
-            if (viewNode != null) {
-                viewNode.addChild();
+        /** 根据界面唯一ID，显示ui界面 */
+        ViewMgr.prototype.showView = function (ViewId, Param) {
+            var viewCls = this._viewCls[ViewId];
+            if (viewCls == null) {
+                console.log("[ViewMgr] showView : ViewCls(${ViewId}) is not register!!!");
+                return;
+            }
+            var view = this._uiViews[ViewId];
+            if (view == null) {
+                view = new viewCls();
+                view.onInit(Param);
+                this._uiViews[ViewId] = view;
+            }
+            view.onShow(Param);
+            Game.layerMgr.addChildToDialog(view);
+            return view;
+        };
+        /** 根据界面唯一ID，隐藏ui界面 */
+        ViewMgr.prototype.hideView = function (ViewId) {
+            var view = this._uiViews[ViewId];
+            if (view != null) {
+                view.onHide();
+                view.onDestroy();
+                view.removeSelf();
+                this._uiViews[ViewId] = null;
             }
         };
-        ViewMgr.prototype.showViewOnBottom = function () {
+        /** 隐藏所以ui界面 */
+        ViewMgr.prototype.hideAllView = function () {
+            if (this._uiViews.length <= 0) {
+                return;
+            }
+            for (var viewId in this._uiViews) {
+                this.hideView(parseInt(viewId));
+            }
+            this._uiViews.length = 0;
         };
-        ViewMgr.prototype.showViewOnCenter = function () {
+        /** 根据ID，获取已打开的界面 */
+        ViewMgr.prototype.getView = function (ViewId) {
+            var view = this._uiViews[ViewId];
+            return view;
         };
-        ViewMgr.prototype.showViewOnTop = function () {
+        /** 检查ui界面是否已打开 */
+        ViewMgr.prototype.checkViewIsOpen = function (ViewId) {
+            var view = this._uiViews[ViewId];
+            return view != null;
         };
+        /** 注册UI界面 */
         ViewMgr.prototype.registerView = function (ViewId, ViewCls) {
+            if (!ViewId || !ViewCls) {
+                console.log("[ViewMgr] registerView : ViewId or ViewCls is null");
+                return;
+            }
+            if (this._viewCls[ViewId] != null) {
+                console.log("[ViewMgr] registerView : ViewCls(${ViewId}) is exist");
+                return;
+            }
+            this._viewCls[ViewId] = ViewCls;
         };
-        ViewMgr.prototype.initLayerNode = function () {
-            var _this = this;
-            var node;
-            this._layers.forEach(function (element) {
-                node = new Node();
-                Laya.stage.addChildAt(node, element);
-                _this._nodes[element] = node;
-            });
-        };
+        /** UI界面统一注册 */
         ViewMgr.prototype.initRegisterView = function () {
             this.registerView(Global.ViewId.LOADING_VIEW, Game.LoadingView);
         };
         return ViewMgr;
     }());
-    Game.ViewMgr = ViewMgr;
+    Game.viewMgr = new ViewMgr();
 })(Game || (Game = {}));
 //# sourceMappingURL=ViewMgr.js.map

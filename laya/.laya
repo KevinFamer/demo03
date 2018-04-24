@@ -1,6 +1,6 @@
 <project version="0.9.8">
-   <asynRes>img,temp,sound   </asynRes>
-   <unDealRes>embed   </unDealRes>
+   <asynRes>img,temp,sound      </asynRes>
+   <unDealRes>embed      </unDealRes>
    <resTypes>png,jpg   </resTypes>
    <resExportPath>bin/res/atlas   </resExportPath>
    <asynResExportPath>bin   </asynResExportPath>
@@ -15,12 +15,13 @@ var Dialog=laya.ui.Dialog;]]>   </codeImportsJS>
    <shareResPath/>
    <codeType>1   </codeType>
    <resCanCompress/>
-   <resPublishQuality>80   </resPublishQuality>
+   <resPublishQuality>80      </resPublishQuality>
    <langPath/>
    <defaultFont/>
    <codeImportsTS><![CDATA[import View=laya.ui.View;
 import Dialog=laya.ui.Dialog;
-import BaseView=laya.ui.BaseView;]]>   </codeImportsTS>
+import BaseView=laya.ui.BaseView;
+]]>   </codeImportsTS>
    <textureWidth>2048   </textureWidth>
    <textureHeight>2048   </textureHeight>
    <picWidth>512   </picWidth>
@@ -32,4 +33,6 @@ import BaseView=laya.ui.BaseView;]]>   </codeImportsTS>
    <copyRes>true   </copyRes>
    <dataCompact>true   </dataCompact>
    <ver>0.9.9 beta   </ver>
+   <codeViewExportPath>src/view   </codeViewExportPath>
+   <atlasScale/>
 </project>

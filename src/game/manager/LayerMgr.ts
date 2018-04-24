@@ -49,7 +49,8 @@ module Game {
             let node:Node;
             this._layerIdx.forEach(element => {
                 node = new Node();
-                Laya.stage.addChildAt(node, element);
+                Laya.stage.addChild(node);
+                // Laya.stage.addChildAt(node, element);
                 this._layerNode[element] = node;
             });
         }

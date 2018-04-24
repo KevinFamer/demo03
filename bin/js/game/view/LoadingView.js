@@ -16,11 +16,27 @@ var Game;
     var LoadingView = /** @class */ (function (_super) {
         __extends(LoadingView, _super);
         function LoadingView() {
-            var _this = _super.call(this) || this;
-            _this.init();
-            return _this;
+            return _super !== null && _super.apply(this, arguments) || this;
         }
+        LoadingView.prototype.onShow = function (Param) {
+            var url = Param.Url;
+            var loadedFunc = Param.LoadedFunc;
+            var loadingFunc = Param.LoadingFunc;
+            this.load(url, loadedFunc, loadingFunc);
+        };
+        LoadingView.prototype.onInit = function (Param) {
+            this._onLoaded = null;
+            this._onLoading = null;
+            this.txtProgress.text = "0%";
+        };
+        LoadingView.prototype.onHide = function () {
+            Laya.loader.cancelLoadByUrls(this._resUrl);
+        };
+        LoadingView.prototype.onDestroy = function () {
+        };
         LoadingView.prototype.load = function (ResUrl, LoadedFunc, LoadingFunc) {
+            if (LoadedFunc === void 0) { LoadedFunc = null; }
+            if (LoadingFunc === void 0) { LoadingFunc = null; }
             this._resUrl = ResUrl;
             this._onLoaded = LoadedFunc;
             this._onLoading = LoadingFunc;
@@ -30,19 +46,6 @@ var Game;
             Laya.loader.retryNum = 0;
             Laya.loader.load(ResUrl, Handler.create(this, this.onLoaded), Handler.create(this, this.onLoading, null, false));
             Laya.loader.once(Laya.Event.ERROR, this, this.onLoadError);
-        };
-        LoadingView.prototype.show = function (Parent) {
-            this.removeSelf();
-            Parent.addChild(this);
-        };
-        LoadingView.prototype.hide = function () {
-            Laya.loader.cancelLoadByUrls(this._resUrl);
-            this.removeSelf();
-        };
-        LoadingView.prototype.init = function () {
-            this._onLoaded = null;
-            this._onLoading = null;
-            this.txtProgress.text = "0%";
         };
         LoadingView.prototype.onLoaded = function (Txture) {
             console.log("加载完成" + Txture.source);
