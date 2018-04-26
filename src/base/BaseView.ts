@@ -2,6 +2,8 @@ declare module laya.ui {
     import View = laya.ui.View;
 
     class BaseView extends View {
+        constructor();
+
         /** 每次显示界面时都会执行一次 */
         onShow(Param?:any):void;
         /** 每次隐藏界面时都会执行一次 */

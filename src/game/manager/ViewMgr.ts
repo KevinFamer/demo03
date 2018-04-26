@@ -1,4 +1,8 @@
+
+import LoadingView from "../view/LoadingView";
+
 module Game {
+    
     class ViewMgr 
     {
         // 游戏界面类集
@@ -30,6 +34,7 @@ module Game {
             }
 
             view.onShow(Param);
+            
             layerMgr.addChildToDialog(view);
             return view;
         }
@@ -77,7 +82,7 @@ module Game {
         registerView(ViewId:number, ViewCls:any):void 
         {
             if (!ViewId || !ViewCls) {
-                console.log("[ViewMgr] registerView : ViewId or ViewCls is null");
+                console.log("[ViewMgr] registerView : ViewId or ViewCls is null", ViewId, ViewCls);
                 return;
             }
             if (this._viewCls[ViewId] != null) {

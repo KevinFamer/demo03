@@ -63,15 +63,28 @@ function onCompleteHandler1():void
 function onCompleteHandler():void 
 {
     let loadPath:Array<any> = [];
-    loadPath.push({ url:Global.Path.PLIST_TEXTURE_PATH, type:Laya.Loader.ATLAS });
+    loadPath.push({ "url":Global.Path.PLIST_TEXTURE_PATH, "type":Laya.Loader.ATLAS });
+    loadPath.push({ "url":Global.Path.MP3_WELCOME_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_BG_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_EAT_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_COFFEE_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_MUSHROOM_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_HIT_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_HURT_PATH, "type":Laya.Loader.SOUND });
+    loadPath.push({ "url":Global.Path.MP3_LOSE_PATH, "type":Laya.Loader.SOUND });
 
     function onLoaded(PTexture:Texture):void {
-        console.log("加载完成" + PTexture.source);
+        //console.log("加载完成" + PTexture.source);
     }
 
-    function onLoading(PTexture:Texture):void {
-        console.log("加载完成" + PTexture.source);
+    function onLoading(Progress:number):void {
+        console.log("加载完成" + Progress);
     }
 
-    Game.viewMgr.showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
+    // let view = new LoadingView()
+    // view.onInit();
+    // view.onShow({Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
+    // Laya.stage.addChild(view);
+
+    // Game.viewMgr.showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
 }

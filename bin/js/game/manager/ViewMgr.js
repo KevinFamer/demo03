@@ -1,3 +1,6 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+var LoadingView_1 = require("../view/LoadingView");
 var Game;
 (function (Game) {
     var ViewMgr = /** @class */ (function () {
@@ -56,7 +59,7 @@ var Game;
         /** 注册UI界面 */
         ViewMgr.prototype.registerView = function (ViewId, ViewCls) {
             if (!ViewId || !ViewCls) {
-                console.log("[ViewMgr] registerView : ViewId or ViewCls is null");
+                console.log("[ViewMgr] registerView : ViewId or ViewCls is null", ViewId, ViewCls);
                 return;
             }
             if (this._viewCls[ViewId] != null) {
@@ -67,7 +70,7 @@ var Game;
         };
         /** UI界面统一注册 */
         ViewMgr.prototype.initRegisterView = function () {
-            this.registerView(Global.ViewId.LOADING_VIEW, Game.LoadingView);
+            this.registerView(Global.ViewId.LOADING_VIEW, LoadingView_1.default);
         };
         return ViewMgr;
     }());

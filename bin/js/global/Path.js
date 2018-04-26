@@ -26,8 +26,8 @@ var Global;
         Path.PLIST_MUSHROOM_PATH = "particles/mushroom.plist";
         Path.PLIST_EAT_PATH = "particles/eat.plist";
         // 游戏图集
-        Path.PNG_TEXTURE_PATH = "graphics/small_images.png";
-        Path.PLIST_TEXTURE_PATH = "graphics/small_images.plist";
+        Path.PNG_TEXTURE_PATH = "res/atlas/graphics/small_images.png";
+        Path.PLIST_TEXTURE_PATH = "res/atlas/graphics/small_images.atlas";
         // 游戏资源图路径
         Path.SML_IMG_PATH = "small_images/";
         return Path;

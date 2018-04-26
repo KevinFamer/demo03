@@ -27,8 +27,8 @@ module Global {
 
 
         // 游戏图集
-        public static PNG_TEXTURE_PATH:string = "graphics/small_images.png";
-        public static PLIST_TEXTURE_PATH:string = "graphics/small_images.plist";
+        public static PNG_TEXTURE_PATH:string = "res/atlas/graphics/small_images.png";
+        public static PLIST_TEXTURE_PATH:string = "res/atlas/graphics/small_images.atlas";
 
         // 游戏资源图路径
         public static SML_IMG_PATH:string = "small_images/";

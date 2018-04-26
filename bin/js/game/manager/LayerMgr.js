@@ -28,8 +28,7 @@ var Game;
             var node;
             this._layerIdx.forEach(function (element) {
                 node = new Node();
-                Laya.stage.addChild(node);
-                // Laya.stage.addChildAt(node, element);
+                Laya.stage.addChildAt(node, element);
                 _this._layerNode[element] = node;
             });
         };
