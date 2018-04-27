@@ -31,7 +31,7 @@ function onCompleteHandler1():void
         Laya.loader.off(Laya.Event.ERROR, this, onLoadError, true);
         Laya.loader.maxLoader = 5;
         Game.main.run();
-
+        
         // 资源预加载开始
     let bmpFont:BitmapFont = new BitmapFont();
 	bmpFont.loadFont(Global.Path.FNT_BMPFONT_PATH, new Handler(this, onLoadFont, [bmpFont]));
@@ -60,6 +60,8 @@ function onCompleteHandler1():void
     Laya.loader.once(Laya.Event.ERROR, this, onLoadError);
 }
 
+import ViewMgr from "./game/manager/ViewMgr";
+
 function onCompleteHandler():void 
 {
     let loadPath:Array<any> = [];
@@ -75,8 +77,9 @@ function onCompleteHandler():void
 
     function onLoaded(PTexture:Texture):void {
         //console.log("加载完成" + PTexture.source);
+        
     }
-
+    
     function onLoading(Progress:number):void {
         console.log("加载完成" + Progress);
     }
@@ -86,5 +89,5 @@ function onCompleteHandler():void
     // view.onShow({Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
     // Laya.stage.addChild(view);
 
-    // Game.viewMgr.showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
+    ViewMgr.getInstance().showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
 }

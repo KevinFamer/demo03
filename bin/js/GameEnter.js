@@ -1,6 +1,7 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
 var BitmapFont = Laya.BitmapFont;
 var Handler = Laya.Handler;
-var Texture = Laya.Texture;
 //初始化微信小游戏
 Laya.MiniAdpter.init();
 //程序入口
@@ -50,6 +51,7 @@ function onCompleteHandler1() {
     Laya.loader.load(loadPath, Handler.create(this, onLoaded), Handler.create(this, onLoading, null, false));
     Laya.loader.once(Laya.Event.ERROR, this, onLoadError);
 }
+var ViewMgr_1 = require("./game/manager/ViewMgr");
 function onCompleteHandler() {
     var loadPath = [];
     loadPath.push({ "url": Global.Path.PLIST_TEXTURE_PATH, "type": Laya.Loader.ATLAS });
@@ -71,6 +73,6 @@ function onCompleteHandler() {
     // view.onInit();
     // view.onShow({Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
     // Laya.stage.addChild(view);
-    // Game.viewMgr.showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
+    ViewMgr_1.default.getInstance().showView(Global.ViewId.LOADING_VIEW, { Url: loadPath, LoadedFunc: onLoaded, LoadingFunc: onLoading });
 }
 //# sourceMappingURL=GameEnter.js.map

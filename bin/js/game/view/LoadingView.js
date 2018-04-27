@@ -13,6 +13,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
 * loading界面
 */
+var Handler = Laya.Handler;
 var LoadingView = /** @class */ (function (_super) {
     __extends(LoadingView, _super);
     function LoadingView() {

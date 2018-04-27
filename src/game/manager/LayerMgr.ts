@@ -1,4 +1,6 @@
-module Game {
+import {Singleton} from "../../base/Singleton";
+
+// module Game {
     import Node = Laya.Node;
     import Sprite = Laya.Sprite;
 
@@ -11,16 +13,20 @@ module Game {
         Guide = 4,
     }
 
-    class LayerMgr
+    export default class LayerMgr extends Singleton
     {
         private _layerIdx:Array<number>;
         private _layerNode:Array<Node>;
-        
-        constructor()
+
+        protected onCreate():void 
         {
             this._layerNode = [];
             this._layerIdx = [UI_LAYER.Scene, UI_LAYER.Dialog, UI_LAYER.Tip, UI_LAYER.Guide];
             this.initLayerNode();
+        }
+
+        protected onDestroy():void 
+        {
         }
 
         /** 把显示对象添加到场景层 */
@@ -71,7 +77,10 @@ module Game {
             Child.y = PosY || 0;
             layer.addChild(Child);
         }
+
+        public static getInstance():LayerMgr
+        {
+            return Singleton.getInstanceOrCreate(LayerMgr);
+        }
     }
-    
-    export let layerMgr:LayerMgr = new LayerMgr();
-}
+// }

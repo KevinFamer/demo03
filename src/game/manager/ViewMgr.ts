@@ -1,16 +1,16 @@
-
+import {Singleton} from "../../base/Singleton";
 import LoadingView from "../view/LoadingView";
+import LayerMgr from "../manager/LayerMgr";
 
-module Game {
-    
-    class ViewMgr 
+// module Game {
+    export default class ViewMgr extends Singleton
     {
         // 游戏界面类集
         private _viewCls:Array<any>;
         // 缓存游戏已打开的ui界面
-        private _uiViews:Array<BaseView>;
+        private _uiViews:Array<View>;
 
-        constructor()
+        protected onCreate():void 
         {
             this._viewCls = [];
             this._uiViews = [];
@@ -18,7 +18,7 @@ module Game {
         }
 
         /** 根据界面唯一ID，显示ui界面 */
-        showView(ViewId:number, Param?:any):BaseView 
+        showView(ViewId:number, Param?:any):View 
         {
             let viewCls = this._viewCls[ViewId];
             if (viewCls == null) {
@@ -29,13 +29,12 @@ module Game {
             let view = this._uiViews[ViewId];
             if (view == null) {
                 view = new viewCls();
-                view.onInit(Param);
+                // view.onInit(Param);
                 this._uiViews[ViewId] = view;
             }
 
-            view.onShow(Param);
-            
-            layerMgr.addChildToDialog(view);
+            // view.onShow(Param);
+            LayerMgr.getInstance().addChildToDialog(view);
             return view;
         }
         
@@ -44,8 +43,8 @@ module Game {
         {
             let view = this._uiViews[ViewId];
             if (view != null) {
-                view.onHide();
-                view.onDestroy();
+                // view.onHide();
+                // view.onDestroy();
                 view.removeSelf();
                 this._uiViews[ViewId] = null;
             }
@@ -65,7 +64,7 @@ module Game {
         }
 
         /** 根据ID，获取已打开的界面 */
-        getView(ViewId:number):BaseView
+        getView(ViewId:number):View
         {
             let view = this._uiViews[ViewId];
             return view;
@@ -97,7 +96,12 @@ module Game {
         {
             this.registerView(Global.ViewId.LOADING_VIEW, LoadingView);
         }
+
+        public static getInstance():ViewMgr
+        {
+            return Singleton.getInstanceOrCreate(ViewMgr);
+        }
     }
 
-    export let viewMgr:ViewMgr = new ViewMgr();
-}
+    
+// }

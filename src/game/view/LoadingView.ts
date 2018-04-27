@@ -1,6 +1,9 @@
 /**
 * loading界面 
 */
+import Handler = Laya.Handler;
+import Texture = Laya.Texture;
+
 export default class LoadingView extends ui.ui_loadingUI
 {
 	// 加载资源路径
