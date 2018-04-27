@@ -10,7 +10,7 @@ var __extends = (this && this.__extends) || (function () {
     };
 })();
 Object.defineProperty(exports, "__esModule", { value: true });
-var Singleton_1 = require("../../base/Singleton");
+var Singleton = require("../../base/Singleton");
 // module Game {
 var Node = Laya.Node;
 var LayerMgr = /** @class */ (function (_super) {
@@ -67,10 +67,10 @@ var LayerMgr = /** @class */ (function (_super) {
         layer.addChild(Child);
     };
     LayerMgr.getInstance = function () {
-        return Singleton_1.Singleton.getInstanceOrCreate(LayerMgr);
+        return Singleton.getInstanceOrCreate(LayerMgr);
     };
     return LayerMgr;
-}(Singleton_1.Singleton));
+}(Singleton));
 exports.default = LayerMgr;
 // }
 //# sourceMappingURL=LayerMgr.js.map

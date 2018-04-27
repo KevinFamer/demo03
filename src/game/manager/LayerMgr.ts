@@ -1,4 +1,4 @@
-import {Singleton} from "../../base/Singleton";
+import Singleton = require("../../base/Singleton");
 
 // module Game {
     import Node = Laya.Node;

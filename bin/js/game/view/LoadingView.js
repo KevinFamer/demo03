@@ -13,7 +13,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 /**
 * loading界面
 */
-var Handler = Laya.Handler;
 var LoadingView = /** @class */ (function (_super) {
     __extends(LoadingView, _super);
     function LoadingView() {
@@ -45,7 +44,7 @@ var LoadingView = /** @class */ (function (_super) {
         Laya.loader.maxLoader = 1;
         // 无加载失败重试
         Laya.loader.retryNum = 0;
-        Laya.loader.load(ResUrl, Handler.create(this, this.onLoaded), Handler.create(this, this.onLoading, null, false));
+        Laya.loader.load(ResUrl, Laya.Handler.create(this, this.onLoaded), Laya.Handler.create(this, this.onLoading, null, false));
         Laya.loader.once(Laya.Event.ERROR, this, this.onLoadError);
     };
     LoadingView.prototype.onLoaded = function (Txture) {

@@ -1,9 +1,6 @@
 /**
 * loading界面 
 */
-import Handler = Laya.Handler;
-import Texture = Laya.Texture;
-
 export default class LoadingView extends ui.ui_loadingUI
 {
 	// 加载资源路径
@@ -48,11 +45,11 @@ export default class LoadingView extends ui.ui_loadingUI
 		Laya.loader.maxLoader = 1;
 		// 无加载失败重试
 		Laya.loader.retryNum = 0;
-		Laya.loader.load(ResUrl, Handler.create(this, this.onLoaded), Handler.create(this, this.onLoading, null, false));
+		Laya.loader.load(ResUrl, Laya.Handler.create(this, this.onLoaded), Laya.Handler.create(this, this.onLoading, null, false));
 		Laya.loader.once(Laya.Event.ERROR, this, this.onLoadError);
 	}
 
-	private onLoaded(Txture:Texture):void 
+	private onLoaded(Txture:Laya.Texture):void 
 	{
 			console.log("加载完成" + Txture.source);
 			Laya.loader.off(Laya.Event.ERROR, this, this.onLoadError, true);

@@ -1,8 +1,9 @@
-import {Singleton} from "../../base/Singleton";
+
+import Singleton from "../../base/Validation";
 import LoadingView from "../view/LoadingView";
 import LayerMgr from "../manager/LayerMgr";
 
-// module Game {
+module Validation {
     export default class ViewMgr extends Singleton
     {
         // 游戏界面类集
@@ -104,4 +105,4 @@ import LayerMgr from "../manager/LayerMgr";
     }
 
     
-// }
+}
