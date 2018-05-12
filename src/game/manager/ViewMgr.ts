@@ -1,10 +1,5 @@
-
-import Singleton from "../../base/Validation";
-import LoadingView from "../view/LoadingView";
-import LayerMgr from "../manager/LayerMgr";
-
-module Validation {
-    export default class ViewMgr extends Singleton
+module Game {
+    export class ViewMgr extends Core.Singleton
     {
         // 游戏界面类集
         private _viewCls:Array<any>;
@@ -30,11 +25,9 @@ module Validation {
             let view = this._uiViews[ViewId];
             if (view == null) {
                 view = new viewCls();
-                // view.onInit(Param);
                 this._uiViews[ViewId] = view;
             }
 
-            // view.onShow(Param);
             LayerMgr.getInstance().addChildToDialog(view);
             return view;
         }
@@ -44,8 +37,6 @@ module Validation {
         {
             let view = this._uiViews[ViewId];
             if (view != null) {
-                // view.onHide();
-                // view.onDestroy();
                 view.removeSelf();
                 this._uiViews[ViewId] = null;
             }
@@ -100,9 +91,7 @@ module Validation {
 
         public static getInstance():ViewMgr
         {
-            return Singleton.getInstanceOrCreate(ViewMgr);
+            return Core.Singleton.getInstanceOrCreate(ViewMgr);
         }
     }
-
-    
 }

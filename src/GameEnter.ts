@@ -60,8 +60,6 @@ function onCompleteHandler1():void
     Laya.loader.once(Laya.Event.ERROR, this, onLoadError);
 }
 
-import ViewMgr from "./game/manager/ViewMgr";
-
 function onCompleteHandler():void 
 {
     let loadPath:Array<any> = [];
@@ -89,5 +87,5 @@ function onCompleteHandler():void
     // view.onShow({Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
     // Laya.stage.addChild(view);
 
-    ViewMgr.getInstance().showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
+    Game.ViewMgr.getInstance().showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
 }

@@ -1,7 +1,7 @@
 var Data;
 (function (Data) {
-    var UserData = /** @class */ (function () {
-        function UserData() {
+    class UserData {
+        constructor() {
             this.lives = Global.Const.HERO_LIVES;
             this.score = 0;
             this.distance = 0;
@@ -10,8 +10,7 @@ var Data;
             this.mushroom = 0;
             this.hitObstacle = 0;
         }
-        return UserData;
-    }());
+    }
     Data.UserData = UserData;
 })(Data || (Data = {}));
 //# sourceMappingURL=UserData.js.map

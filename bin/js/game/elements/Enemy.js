@@ -1,40 +1,28 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Game;
 (function (Game) {
     var Animation = Laya.Animation;
     var Sprite = Laya.Sprite;
     var Loader = Laya.Loader;
     // Laya.Pool.getItemByClass("Enemy", Enemy);
-    var Enemy = /** @class */ (function (_super) {
-        __extends(Enemy, _super);
-        function Enemy() {
-            var _this = _super.call(this) || this;
-            _this.m_type = 0;
-            _this.m_speed = 0;
-            _this.m_distance = 0;
-            _this.m_showLookout = true;
-            _this.m_alreadyHit = false;
-            _this.m_position = null;
-            _this.m_lookoutAnimation = null;
-            _this.m_lookoutAction = null;
-            _this.m_animation = null;
-            return _this;
+    class Enemy extends Sprite {
+        constructor() {
+            super();
+            this.m_type = 0;
+            this.m_speed = 0;
+            this.m_distance = 0;
+            this.m_showLookout = true;
+            this.m_alreadyHit = false;
+            this.m_position = null;
+            this.m_lookoutAnimation = null;
+            this.m_lookoutAction = null;
+            this.m_animation = null;
         }
-        Enemy.prototype.hideLookout = function () {
+        hideLookout() {
             if (this.m_lookoutAnimation) {
                 this.m_lookoutAnimation.visible = false;
             }
-        };
-        Enemy.prototype.reuse = function (PType, PShowLookOut, PPos, PSpeed, PDis) {
+        }
+        reuse(PType, PShowLookOut, PPos, PSpeed, PDis) {
             if (PType == Global.Const.ENEMY_TYPE_4) {
                 this.f_showImage("obstacle4_0001.png");
                 if (!this.m_animation) {
@@ -76,27 +64,26 @@ var Game;
                 this.m_lookoutAnimation.x = -this.m_lookoutAnimation.width;
                 this.m_lookoutAnimation.y = this.m_lookoutAnimation.height * 0.5;
             }
-        };
-        Enemy.prototype.unuse = function () {
+        }
+        unuse() {
             this.m_animation.stop();
             this.m_lookoutAction.stop();
             this.hideLookout();
             Laya.Pool.recover("Enemy", this);
             this.removeSelf();
-        };
-        Enemy.prototype.crash = function () {
+        }
+        crash() {
             this.m_animation.stop();
             this.m_lookoutAction.stop();
             this.f_showImage("obstacle" + this.m_type + "_crash.png");
-        };
-        Enemy.prototype.f_showImage = function (PPath) {
+        }
+        f_showImage(PPath) {
             var imgUrl = PPath;
             var texture = Loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);
-        };
-        return Enemy;
-    }(Sprite));
+        }
+    }
     Game.Enemy = Enemy;
 })(Game || (Game = {}));
 //# sourceMappingURL=Enemy.js.map

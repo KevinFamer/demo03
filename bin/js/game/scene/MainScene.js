@@ -1,13 +1,3 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Game;
 (function (Game) {
     var userData = Data.user;
@@ -18,36 +8,34 @@ var Game;
     var Loader = Laya.Loader;
     var Particle2D = Laya.Particle2D;
     var Keyboard = Laya.Keyboard;
-    var MainScene = /** @class */ (function (_super) {
-        __extends(MainScene, _super);
-        function MainScene() {
-            var _this = _super.call(this) || this;
+    class MainScene extends Sprite {
+        constructor() {
+            super();
             var layer = new Sprite();
-            _this.addChild(layer);
-            _this.m_background = new Game.Background();
-            layer.addChild(_this.m_background);
-            _this.m_hero = new Game.Hero();
-            _this.addChild(_this.m_hero);
-            _this.m_itemBatchLayer = new Sprite();
-            _this.m_itemBatchLayer.loadImage(Global.Path.PNG_TEXTURE_PATH);
-            _this.addChild(_this.m_itemBatchLayer);
-            _this.m_ui = new Game.GameSceneUI();
-            _this.addChild(_this.m_ui);
-            _this.m_ui.update();
+            this.addChild(layer);
+            this.m_background = new Game.Background();
+            layer.addChild(this.m_background);
+            this.m_hero = new Game.Hero();
+            this.addChild(this.m_hero);
+            this.m_itemBatchLayer = new Sprite();
+            this.m_itemBatchLayer.loadImage(Global.Path.PNG_TEXTURE_PATH);
+            this.addChild(this.m_itemBatchLayer);
+            this.m_ui = new Game.GameSceneUI();
+            this.addChild(this.m_ui);
+            this.m_ui.update();
             // if("touches" in cc.sys.capabilities)
             //     cc.eventManager.addListener({event: cc.EventListener.TOUCH_ALL_AT_ONCE, onTouchesMoved: this._onTouchMoved.bind(this)}, this);
             // else
             //     cc.eventManager.addListener({event: cc.EventListener.MOUSE, onMouseMove: this._onMouseMove.bind(this)}, this);
             // cc.eventManager.addListener({event: cc.EventListener.KEYBOARD, onKeyReleased: this._back}, this);
-            Laya.stage.on(Laya.Event.MOUSE_MOVE, _this, _this._onMouseMove);
+            Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this._onMouseMove);
             // 键盘事件监听
-            Laya.stage.on(Laya.Event.KEY_UP, _this, _this._back);
-            Game.GameMgr.initFoodMgr(_this);
-            Game.GameMgr.initEnemyMgr(_this);
-            _this.init();
-            return _this;
+            Laya.stage.on(Laya.Event.KEY_UP, this, this._back);
+            Game.GameMgr.initFoodMgr(this);
+            Game.GameMgr.initEnemyMgr(this);
+            this.init();
         }
-        MainScene.prototype.init = function () {
+        init() {
             Game.GameMgr.sound.stop();
             Game.GameMgr.sound.playGameBgMusic();
             if (this.m_gameOverUI)
@@ -67,21 +55,21 @@ var Game;
             this.stopWindEffect();
             this.stopMushroomEffect();
             Timer.frameLoop(2, this, this.update);
-        };
+        }
         // _onTouchMoved(PTouches, PEvent):void {
         //     if(Data.gameState != Global.Const.GAME_STATE_OVER)
         //         this.m_touchY = touches[0].getLocation().y;
         // }
-        MainScene.prototype._onMouseMove = function (PEvent) {
+        _onMouseMove(PEvent) {
             if (Data.gameState != Global.Const.GAME_STATE_OVER)
                 this.m_touchY = PEvent.stageY;
-        };
-        MainScene.prototype._back = function (PEvent) {
+        }
+        _back(PEvent) {
             var keyCode = PEvent["keyCode"];
             if (keyCode == Keyboard.BACKSPACE)
                 Game.main.enterLoginScene();
-        };
-        MainScene.prototype._handleHeroPose = function () {
+        }
+        _handleHeroPose() {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             // Rotate this.m_hero based on mouse position.
@@ -96,8 +84,8 @@ var Game;
                 this.m_hero.y = winHeight - this.m_hero.height * 0.5;
                 this.m_hero.setRotation(0);
             }
-        };
-        MainScene.prototype._shakeAnimation = function () {
+        }
+        _shakeAnimation() {
             // Animate quake effect, shaking the camera a little to the sides and up and down.
             if (this.m_cameraShake > 0) {
                 this.m_cameraShake -= 0.1;
@@ -109,9 +97,8 @@ var Game;
                 this.x = 0;
                 this.y = 0;
             }
-        };
-        MainScene.prototype.showWindEffect = function (PPS) {
-            if (PPS === void 0) { PPS = null; }
+        }
+        showWindEffect(PPS = null) {
             if (this.m_windEffect)
                 return;
             if (!PPS) {
@@ -125,16 +112,15 @@ var Game;
             this.addChild(this.m_windEffect);
             this.m_windEffect.emitter.start();
             this.m_windEffect.play();
-        };
-        MainScene.prototype.stopWindEffect = function () {
+        }
+        stopWindEffect() {
             if (this.m_windEffect) {
                 this.m_windEffect.stopSystem();
                 this.removeChild(this.m_windEffect);
                 this.m_windEffect = null;
             }
-        };
-        MainScene.prototype.showCoffeeEffect = function (PPS) {
-            if (PPS === void 0) { PPS = null; }
+        }
+        showCoffeeEffect(PPS = null) {
             if (this.m_coffeeEffect)
                 return;
             if (!PPS) {
@@ -147,16 +133,15 @@ var Game;
             this.m_coffeeEffect.y = this.m_hero.y;
             this.m_coffeeEffect.emitter.start();
             this.m_coffeeEffect.play();
-        };
-        MainScene.prototype.stopCoffeeEffect = function () {
+        }
+        stopCoffeeEffect() {
             if (this.m_coffeeEffect) {
                 this.m_coffeeEffect.stopSystem();
                 this.removeChild(this.m_coffeeEffect);
                 this.m_coffeeEffect = null;
             }
-        };
-        MainScene.prototype.showMushroomEffect = function (PPS) {
-            if (PPS === void 0) { PPS = null; }
+        }
+        showMushroomEffect(PPS = null) {
             if (this.m_mushroomEffect)
                 return;
             if (!PPS) {
@@ -169,46 +154,46 @@ var Game;
             this.m_mushroomEffect.y = this.m_hero.y;
             this.m_mushroomEffect.emitter.start();
             this.m_mushroomEffect.play();
-        };
-        MainScene.prototype.stopMushroomEffect = function () {
+        }
+        stopMushroomEffect() {
             if (this.m_mushroomEffect) {
                 this.m_mushroomEffect.stopSystem();
                 this.removeChild(this.m_mushroomEffect);
                 this.m_mushroomEffect = null;
             }
-        };
-        MainScene.prototype.showEatEffect = function (itemX, itemY) {
+        }
+        showEatEffect(itemX, itemY) {
             Laya.loader.load(Global.Path.PLIST_EAT_PATH, Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
-        };
-        MainScene.prototype.f_playEffect = function (PPS, PX, PY) {
+        }
+        f_playEffect(PPS, PX, PY) {
             var effect = new Particle2D(PPS);
             effect.emitter.start();
             effect.play();
             effect.x = PX;
             effect.y = PY;
             this.addChild(effect);
-        };
+        }
         /**
          * hero被碰撞N次后，结束游戏；结束之前，先播放hero掉落的动画
          */
-        MainScene.prototype.endGame = function () {
+        endGame() {
             this.x = 0;
             this.y = 0;
             Data.gameState = Global.Const.GAME_STATE_OVER;
-        };
-        MainScene.prototype._gameOver = function () {
+        }
+        _gameOver() {
             if (!this.m_gameOverUI) {
                 this.m_gameOverUI = new Game.GameOverUI(this);
                 this.addChild(this.m_gameOverUI);
             }
             this.m_gameOverUI.setVisible(true);
             this.m_gameOverUI.init();
-        };
+        }
         /**
          *
          * @param elapsed 秒
          */
-        MainScene.prototype.update = function (elapsed) {
+        update(elapsed) {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             switch (Data.gameState) {
@@ -330,9 +315,8 @@ var Game;
                 this.m_coffeeEffect.x = this.m_hero.x + this.m_hero.width / 4;
                 this.m_coffeeEffect.y = this.m_hero.y;
             }
-        };
-        return MainScene;
-    }(Sprite));
+        }
+    }
     Game.MainScene = MainScene;
 })(Game || (Game = {}));
 //# sourceMappingURL=MainScene.js.map

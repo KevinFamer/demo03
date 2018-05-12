@@ -1,39 +1,27 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Game;
 (function (Game) {
     var Sprite = Laya.Sprite;
     var Timer = Laya.timer;
     var Browser = Laya.Browser;
-    var Background = /** @class */ (function (_super) {
-        __extends(Background, _super);
-        function Background() {
-            var _this = _super.call(this) || this;
-            _this.m_speed = 5;
+    class Background extends Sprite {
+        constructor() {
+            super();
+            this.m_speed = 5;
             //sky
-            _this.m_bg1 = _this.f_createBackground(Global.Path.JPG_BGMAP_PATH);
-            _this.addChild(_this.m_bg1);
+            this.m_bg1 = this.f_createBackground(Global.Path.JPG_BGMAP_PATH);
+            this.addChild(this.m_bg1);
             //hill
-            _this.m_bg2 = _this.f_createBackground("bgLayer2.png");
-            _this.addChild(_this.m_bg2);
+            this.m_bg2 = this.f_createBackground("bgLayer2.png");
+            this.addChild(this.m_bg2);
             //buildings
-            _this.m_bg3 = _this.f_createBackground("bgLayer3.png");
-            _this.addChild(_this.m_bg3);
+            this.m_bg3 = this.f_createBackground("bgLayer3.png");
+            this.addChild(this.m_bg3);
             //trees
-            _this.m_bg4 = _this.f_createBackground("bgLayer4.png");
-            _this.addChild(_this.m_bg4);
-            Timer.frameLoop(2, _this, _this.f_update);
-            return _this;
+            this.m_bg4 = this.f_createBackground("bgLayer4.png");
+            this.addChild(this.m_bg4);
+            Timer.frameLoop(2, this, this.f_update);
         }
-        Background.prototype.f_createBackground = function (PImgPath) {
+        f_createBackground(PImgPath) {
             var layer = new Sprite();
             var bg1 = new Sprite();
             bg1.loadImage(PImgPath);
@@ -45,8 +33,8 @@ var Game;
             bg2.y = bg2.height / 2;
             layer.addChild(bg2);
             return layer;
-        };
-        Background.prototype.f_update = function () {
+        }
+        f_update() {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             this.m_bg1.x -= Math.ceil(this.m_speed * 0.02);
@@ -65,9 +53,8 @@ var Game;
             if (this.m_bg4.x < -winWidth) {
                 this.m_bg4.x = 0;
             }
-        };
-        return Background;
-    }(Sprite));
+        }
+    }
     Game.Background = Background;
 })(Game || (Game = {}));
 //# sourceMappingURL=Background.js.map

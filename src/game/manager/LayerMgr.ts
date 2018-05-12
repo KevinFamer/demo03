@@ -1,6 +1,4 @@
-import Singleton = require("../../base/Singleton");
-
-// module Game {
+module Game {
     import Node = Laya.Node;
     import Sprite = Laya.Sprite;
 
@@ -13,7 +11,7 @@ import Singleton = require("../../base/Singleton");
         Guide = 4,
     }
 
-    export default class LayerMgr extends Singleton
+    export class LayerMgr extends Core.Singleton
     {
         private _layerIdx:Array<number>;
         private _layerNode:Array<Node>;
@@ -80,7 +78,7 @@ import Singleton = require("../../base/Singleton");
 
         public static getInstance():LayerMgr
         {
-            return Singleton.getInstanceOrCreate(LayerMgr);
+            return Core.Singleton.getInstanceOrCreate(LayerMgr);
         }
     }
-// }
+}

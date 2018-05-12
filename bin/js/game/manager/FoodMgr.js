@@ -3,8 +3,8 @@ var Game;
     var userData = Data.user;
     var Browser = Laya.Browser;
     var Pool = Laya.Pool;
-    var FoodMgr = /** @class */ (function () {
-        function FoodMgr(PGameScene) {
+    class FoodMgr {
+        constructor(PGameScene) {
             /** Current pattern of food items - 0 = horizontal, 1 = vertical, 2 = zigzag, 3 = random, 4 = special item. */
             this.m_pattern = 0;
             //物品Y坐标
@@ -29,7 +29,7 @@ var Game;
             this.m_gameScene = PGameScene;
             this.m_itemsToAnimate = new Array();
         }
-        FoodMgr.prototype.init = function () {
+        init() {
             this.removeAll();
             this.m_pattern = 1;
             this.m_patternPosY = Laya.Browser.height - Global.Const.GAME_AREA_TOP_BOTTOM;
@@ -41,10 +41,10 @@ var Game;
             this.m_patternLength = 50;
             this.m_patternOnce = true;
             userData.coffee = userData.mushroom = 0;
-        };
-        FoodMgr.prototype.removeAll = function () {
+        }
+        removeAll() {
             if (this.m_itemsToAnimate.length > 0) {
-                var len = this.m_itemsToAnimate.length - 1;
+                let len = this.m_itemsToAnimate.length - 1;
                 var item = null;
                 for (var i = len; i >= 0; i--) {
                     item = this.m_itemsToAnimate[i];
@@ -52,13 +52,13 @@ var Game;
                     item.unuse();
                 }
             }
-        };
-        FoodMgr.prototype.update = function (PHero, PElapsed) {
+        }
+        update(PHero, PElapsed) {
             this.f_setFoodPattern(PElapsed);
             this.f_createFoodPattern(PElapsed);
             this.f_animateFoodItems(PHero, PElapsed);
-        };
-        FoodMgr.prototype.f_setFoodPattern = function (PElapsed) {
+        }
+        f_setFoodPattern(PElapsed) {
             // If hero has not travelled the required distance, don't change the pattern.
             if (this.m_patternChangeDistance > 0) {
                 this.m_patternChangeDistance -= userData.heroSpeed * PElapsed;
@@ -101,8 +101,8 @@ var Game;
                     this.m_patternChangeDistance = 0;
                 }
             }
-        };
-        FoodMgr.prototype.f_createFoodPattern = function (PElapsed) {
+        }
+        f_createFoodPattern(PElapsed) {
             // Create a food item after we pass some distance (patternGap).
             if (this.m_patternGapCount < this.m_patternGap) {
                 this.m_patternGapCount += userData.heroSpeed * PElapsed;
@@ -214,8 +214,8 @@ var Game;
                         break;
                 }
             }
-        };
-        FoodMgr.prototype.f_animateFoodItems = function (PHero, PElapsed) {
+        }
+        f_animateFoodItems(PHero, PElapsed) {
             var item;
             for (var i = this.m_itemsToAnimate.length - 1; i >= 0; i--) {
                 item = this.m_itemsToAnimate[i];
@@ -273,9 +273,8 @@ var Game;
                     }
                 }
             }
-        };
-        return FoodMgr;
-    }());
+        }
+    }
     Game.FoodMgr = FoodMgr;
 })(Game || (Game = {}));
 //# sourceMappingURL=FoodMgr.js.map

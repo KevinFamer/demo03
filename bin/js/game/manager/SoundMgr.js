@@ -1,55 +1,55 @@
 var Game;
 (function (Game) {
     var Sound = Laya.SoundManager;
-    var SoundMgr = /** @class */ (function () {
-        function SoundMgr() {
+    class SoundMgr {
+        constructor() {
             this.m_silence = false;
         }
-        SoundMgr.prototype.playMenuBgMusic = function () {
+        playMenuBgMusic() {
             if (!this.m_silence) {
                 Sound.playMusic(Global.Path.MP3_WELCOME_PATH, 0);
             }
-        };
-        SoundMgr.prototype.playGameBgMusic = function () {
+        }
+        playGameBgMusic() {
             if (!this.m_silence) {
                 Sound.playMusic(Global.Path.MP3_BG_PATH, 0);
             }
-        };
-        SoundMgr.prototype.playEat = function () {
+        }
+        playEat() {
             if (!this.m_silence) {
                 Sound.stopAllSound();
                 Sound.playSound(Global.Path.MP3_EAT_PATH, 1);
             }
-        };
-        SoundMgr.prototype.playCoffee = function () {
+        }
+        playCoffee() {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_COFFEE_PATH, 1);
             }
-        };
-        SoundMgr.prototype.playMushroom = function () {
+        }
+        playMushroom() {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_MUSHROOM_PATH, 1);
             }
-        };
-        SoundMgr.prototype.playHit = function () {
+        }
+        playHit() {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_HIT_PATH, 1);
             }
-        };
-        SoundMgr.prototype.playHurt = function () {
+        }
+        playHurt() {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_HURT_PATH, 1);
             }
-        };
-        SoundMgr.prototype.playLose = function () {
+        }
+        playLose() {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_LOSE_PATH, 1);
             }
-        };
-        SoundMgr.prototype.stop = function () {
+        }
+        stop() {
             Sound.stopAll();
-        };
-        SoundMgr.prototype.toggleOnOff = function () {
+        }
+        toggleOnOff() {
             if (this.m_silence) {
                 this.m_silence = false;
                 Sound.setMusicVolume(1);
@@ -60,9 +60,8 @@ var Game;
                 Sound.setMusicVolume(0);
                 Sound.setSoundVolume(0);
             }
-        };
-        return SoundMgr;
-    }());
+        }
+    }
     Game.SoundMgr = SoundMgr;
 })(Game || (Game = {}));
 //# sourceMappingURL=SoundMgr.js.map

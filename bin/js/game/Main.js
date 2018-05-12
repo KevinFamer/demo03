@@ -1,22 +1,22 @@
 var Game;
 (function (Game) {
-    var SceneName;
+    let SceneName;
     (function (SceneName) {
         SceneName[SceneName["LoginScene"] = 0] = "LoginScene";
         SceneName[SceneName["AboutScene"] = 1] = "AboutScene";
         SceneName[SceneName["MainScene"] = 2] = "MainScene";
     })(SceneName || (SceneName = {}));
-    var Main = /** @class */ (function () {
-        function Main() {
+    class Main {
+        constructor() {
             this.init();
         }
-        Main.prototype.init = function () {
-        };
+        init() {
+        }
         // 执行
-        Main.prototype.run = function () {
+        run() {
             this.enterLoginScene();
-        };
-        Main.prototype.enterLoginScene = function () {
+        }
+        enterLoginScene() {
             if (this.curSceneName == SceneName.LoginScene) {
                 return;
             }
@@ -24,8 +24,8 @@ var Game;
             this.m_loginScene = new Game.LoginScene();
             this.m_loginScene.name = SceneName.LoginScene.toString();
             Laya.stage.addChild(this.m_loginScene);
-        };
-        Main.prototype.enterAboutScene = function () {
+        }
+        enterAboutScene() {
             if (this.curSceneName == SceneName.AboutScene) {
                 return;
             }
@@ -33,8 +33,8 @@ var Game;
             this.m_aboutScene = new Game.AboutScene();
             this.m_aboutScene.name = SceneName.AboutScene.toString();
             Laya.stage.addChild(this.m_aboutScene);
-        };
-        Main.prototype.enterMainScene = function () {
+        }
+        enterMainScene() {
             if (this.curSceneName == SceneName.MainScene) {
                 return;
             }
@@ -42,9 +42,8 @@ var Game;
             this.m_mainScene = new Game.MainScene();
             this.m_mainScene.name = SceneName.MainScene.toString();
             Laya.stage.addChild(this.m_mainScene);
-        };
-        Main.prototype.outScene = function (PSceneName) {
-            if (PSceneName === void 0) { PSceneName = null; }
+        }
+        outScene(PSceneName = null) {
             if (PSceneName) {
                 Laya.stage.removeChildByName(PSceneName.toString());
             }
@@ -52,9 +51,8 @@ var Game;
                 Laya.stage.removeChildByName(this.curSceneName.toString());
                 this.curSceneName = null;
             }
-        };
-        return Main;
-    }());
+        }
+    }
     Game.main = new Main();
 })(Game || (Game = {}));
 //# sourceMappingURL=Main.js.map

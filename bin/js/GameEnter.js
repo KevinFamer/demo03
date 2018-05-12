@@ -1,7 +1,6 @@
-"use strict";
-Object.defineProperty(exports, "__esModule", { value: true });
 var BitmapFont = Laya.BitmapFont;
 var Handler = Laya.Handler;
+var Texture = Laya.Texture;
 //初始化微信小游戏
 Laya.MiniAdpter.init();
 //程序入口
@@ -28,7 +27,7 @@ function onCompleteHandler1() {
         Laya.loader.maxLoader = 5;
         Game.main.run();
         // 资源预加载开始
-        var bmpFont = new BitmapFont();
+        let bmpFont = new BitmapFont();
         bmpFont.loadFont(Global.Path.FNT_BMPFONT_PATH, new Handler(this, onLoadFont, [bmpFont]));
     }
     // 加载中回调
@@ -42,7 +41,7 @@ function onCompleteHandler1() {
     // 资源预加载开始
     // let bmpFont:BitmapFont = new BitmapFont();
     // bmpFont.loadFont(Global.Path.FNT_BMPFONT_PATH, new Handler(this, onLoadFont, [bmpFont]));
-    var loadPath = [];
+    let loadPath = [];
     loadPath.push({ url: Global.Path.PLIST_TEXTURE_PATH, type: Laya.Loader.ATLAS });
     // 关闭并发加载，改成单一序列加载
     Laya.loader.maxLoader = 1;
@@ -51,9 +50,8 @@ function onCompleteHandler1() {
     Laya.loader.load(loadPath, Handler.create(this, onLoaded), Handler.create(this, onLoading, null, false));
     Laya.loader.once(Laya.Event.ERROR, this, onLoadError);
 }
-var ViewMgr_1 = require("./game/manager/ViewMgr");
 function onCompleteHandler() {
-    var loadPath = [];
+    let loadPath = [];
     loadPath.push({ "url": Global.Path.PLIST_TEXTURE_PATH, "type": Laya.Loader.ATLAS });
     loadPath.push({ "url": Global.Path.MP3_WELCOME_PATH, "type": Laya.Loader.SOUND });
     loadPath.push({ "url": Global.Path.MP3_BG_PATH, "type": Laya.Loader.SOUND });
@@ -73,6 +71,6 @@ function onCompleteHandler() {
     // view.onInit();
     // view.onShow({Url:loadPath, LoadedFunc:onLoaded, LoadingFunc:onLoading});
     // Laya.stage.addChild(view);
-    ViewMgr_1.default.getInstance().showView(Global.ViewId.LOADING_VIEW, { Url: loadPath, LoadedFunc: onLoaded, LoadingFunc: onLoading });
+    Game.ViewMgr.getInstance().showView(Global.ViewId.LOADING_VIEW, { Url: loadPath, LoadedFunc: onLoaded, LoadingFunc: onLoading });
 }
 //# sourceMappingURL=GameEnter.js.map

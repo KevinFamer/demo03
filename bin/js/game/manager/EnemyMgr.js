@@ -2,17 +2,17 @@ var Game;
 (function (Game) {
     var userData = Data.user;
     var Browser = Laya.Browser;
-    var EnemyMgr = /** @class */ (function () {
-        function EnemyMgr(PGameScene) {
+    class EnemyMgr {
+        constructor(PGameScene) {
             this.m_container = PGameScene.itemBatchLayer;
             this.m_gameScene = PGameScene;
             this.m_obstaclesToAnimate = new Array();
         }
-        EnemyMgr.prototype.init = function () {
+        init() {
             this.removeAll();
             userData.hitObstacle = 0;
-        };
-        EnemyMgr.prototype.removeAll = function () {
+        }
+        removeAll() {
             if (this.m_obstaclesToAnimate.length > 0) {
                 for (var i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
                     var item = this.m_obstaclesToAnimate[i];
@@ -20,8 +20,8 @@ var Game;
                     item.unuse();
                 }
             }
-        };
-        EnemyMgr.prototype.update = function (PHero, PElapsed) {
+        }
+        update(PHero, PElapsed) {
             // Create an obstacle after hero travels some distance (obstacleGap).
             if (this.m_obstacleGapCount < Global.Const.ENEMY_GAP) {
                 this.m_obstacleGapCount += userData.heroSpeed * PElapsed;
@@ -32,8 +32,8 @@ var Game;
                 this.f_createObstacle(Math.ceil(Math.random() * 4), Math.random() * 1000 + 1000);
             }
             this.f_animateObstacles(PHero, PElapsed);
-        };
-        EnemyMgr.prototype.f_createObstacle = function (PType, PDistance) {
+        }
+        f_createObstacle(PType, PDistance) {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var x = winWidth;
@@ -60,8 +60,8 @@ var Game;
             obstacle.y = y;
             this.m_obstaclesToAnimate.push(obstacle);
             this.m_container.addChild(obstacle);
-        };
-        EnemyMgr.prototype.f_animateObstacles = function (PHero, PElapsed) {
+        }
+        f_animateObstacles(PHero, PElapsed) {
             var obstacle;
             for (var i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
                 obstacle = this.m_obstaclesToAnimate[i];
@@ -121,9 +121,8 @@ var Game;
                     }
                 }
             }
-        };
-        return EnemyMgr;
-    }());
+        }
+    }
     Game.EnemyMgr = EnemyMgr;
 })(Game || (Game = {}));
 //# sourceMappingURL=EnemyMgr.js.map

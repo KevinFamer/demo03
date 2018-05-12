@@ -1,25 +1,14 @@
-var __extends = (this && this.__extends) || (function () {
-    var extendStatics = Object.setPrototypeOf ||
-        ({ __proto__: [] } instanceof Array && function (d, b) { d.__proto__ = b; }) ||
-        function (d, b) { for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p]; };
-    return function (d, b) {
-        extendStatics(d, b);
-        function __() { this.constructor = d; }
-        d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
-    };
-})();
 var Game;
 (function (Game) {
     var Sprite = Laya.Sprite;
     var Browser = Laya.Browser;
     var Label = Laya.Label;
     var Button = Laya.Button;
-    var AboutScene = /** @class */ (function (_super) {
-        __extends(AboutScene, _super);
-        function AboutScene() {
-            var _this = _super.call(this) || this;
+    class AboutScene extends Sprite {
+        constructor() {
+            super();
             var layer = new Sprite();
-            _this.addChild(layer);
+            this.addChild(layer);
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var bgWelcome = new Sprite();
@@ -47,15 +36,13 @@ var Game;
             backButton.x = 150;
             backButton.y = -70;
             layer.addChild(backButton);
-            backButton.on(Laya.Event.CLICK, _this, _this.f_back);
-            return _this;
+            backButton.on(Laya.Event.CLICK, this, this.f_back);
         }
-        AboutScene.prototype.f_back = function () {
+        f_back() {
             Game.GameMgr.sound.playCoffee();
             Game.main.enterLoginScene();
-        };
-        return AboutScene;
-    }(Sprite));
+        }
+    }
     Game.AboutScene = AboutScene;
 })(Game || (Game = {}));
 //# sourceMappingURL=AboutScene.js.map
