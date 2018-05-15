@@ -34,32 +34,32 @@ var Game;
             this.m_playBtn = new Button("welcome_playButton.png");
             this.m_playBtn.x = 700;
             this.m_playBtn.y = 350;
-            this.m_playBtn.on(Laya.Event.CLICK, this, this.f_play);
+            this.m_playBtn.on(Laya.Event.CLICK, this, this.play);
             layer.addChild(this.m_playBtn);
             this.m_aboutBtn = new Button("welcome_aboutButton.png");
             this.m_aboutBtn.x = 500;
             this.m_aboutBtn.y = 250;
-            this.m_aboutBtn.on(Laya.Event.CLICK, this, this.f_about);
+            this.m_aboutBtn.on(Laya.Event.CLICK, this, this.about);
             layer.addChild(this.m_aboutBtn);
             var soundButton = new CheckBox("soundOn0002.png");
             soundButton.x = 45;
             soundButton.y = winHeight - 45;
-            soundButton.on("change", this, this.f_toggleSound);
+            soundButton.on("change", this, this.toggleSound);
             Game.GameMgr.sound.playMenuBgMusic();
-            Laya.timer.frameLoop(2, this, this.f_update);
+            Laya.timer.frameLoop(2, this, this.update);
         }
-        f_toggleSound() {
+        toggleSound() {
             Game.GameMgr.sound.toggleOnOff();
         }
-        f_play() {
+        play() {
             Game.GameMgr.sound.playCoffee();
             Game.main.enterMainScene();
         }
-        f_about() {
+        about() {
             Game.GameMgr.sound.playMushroom();
             Game.main.enterAboutScene();
         }
-        f_update() {
+        update() {
             var currentDate = new Date();
             this.m_hero.y = 400 + (Math.cos(currentDate.getTime() * 0.002)) * 25;
             this.m_playBtn.y = 350 + (Math.cos(currentDate.getTime() * 0.002)) * 10;

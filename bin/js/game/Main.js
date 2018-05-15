@@ -43,7 +43,7 @@ var Game;
             this.m_mainScene.name = SceneName.MainScene.toString();
             Laya.stage.addChild(this.m_mainScene);
         }
-        outScene(PSceneName = null) {
+        outScene(PSceneName) {
             if (PSceneName) {
                 Laya.stage.removeChildByName(PSceneName.toString());
             }

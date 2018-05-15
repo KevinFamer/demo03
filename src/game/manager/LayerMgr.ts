@@ -1,20 +1,19 @@
 module Game {
-    import Node = Laya.Node;
     import Sprite = Laya.Sprite;
 
     /** 游戏层级 */
     const enum UI_LAYER 
     {
-        Scene = 1,
-        Dialog = 2,
-        Tip = 3,
-        Guide = 4,
+        Scene = 0,
+        Dialog = 1,
+        Tip = 2,
+        Guide = 3,
     }
 
     export class LayerMgr extends Core.Singleton
     {
         private _layerIdx:Array<number>;
-        private _layerNode:Array<Node>;
+        private _layerNode:Array<Sprite>;
 
         protected onCreate():void 
         {
@@ -50,9 +49,9 @@ module Game {
 
         private initLayerNode():void 
         {
-            let node:Node;
+            let node:Sprite;
             this._layerIdx.forEach(element => {
-                node = new Node();
+                node = new Sprite();
                 Laya.stage.addChildAt(node, element);
                 this._layerNode[element] = node;
             });

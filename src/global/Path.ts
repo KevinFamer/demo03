@@ -1,7 +1,7 @@
 module Global {
     export class Path {
         // 位图字体资源路径
-        public static FNT_BMPFONT_PATH:string = "fonts/arial16.fnt";
+        public static FNT_BMPFONT_PATH:string = "res/fonts/arial16.fnt";
         public static JPG_BGMAP_PATH:string = "graphics/bgLayer.jpg";
         public static JPG_WELCOME_PATH:string = "graphics/bgWelcome.jpg";
 

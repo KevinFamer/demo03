@@ -13,6 +13,10 @@ module Game {
             this.initRegisterView();
         }
 
+        protected onDestroy():void
+        {
+        }
+
         /** 根据界面唯一ID，显示ui界面 */
         showView(ViewId:number, Param?:any):View 
         {
@@ -26,8 +30,15 @@ module Game {
             if (view == null) {
                 view = new viewCls();
                 this._uiViews[ViewId] = view;
+
+                if (view["onInit"]) {
+                    view["onInit"]();
+                }
             }
 
+            if (view["onShow"]) {
+                view["onShow"](Param);
+            }
             LayerMgr.getInstance().addChildToDialog(view);
             return view;
         }
@@ -37,6 +48,12 @@ module Game {
         {
             let view = this._uiViews[ViewId];
             if (view != null) {
+                if (view["onHide"]) {
+                    view["onHide"]();
+                }
+                if (view["onDestroy"]) {
+                    view["onDestroy"]();
+                }
                 view.removeSelf();
                 this._uiViews[ViewId] = null;
             }

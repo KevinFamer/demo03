@@ -54,7 +54,7 @@ module Game {
 			Laya.stage.addChild(this.m_mainScene);
 		}
 
-		outScene(PSceneName:number = null):void {
+		outScene(PSceneName?:number):void {
 			if (PSceneName) {
 				Laya.stage.removeChildByName(PSceneName.toString());
 			} else if (this.curSceneName) {

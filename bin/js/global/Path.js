@@ -3,7 +3,7 @@ var Global;
     class Path {
     }
     // 位图字体资源路径
-    Path.FNT_BMPFONT_PATH = "fonts/arial16.fnt";
+    Path.FNT_BMPFONT_PATH = "res/fonts/arial16.fnt";
     Path.JPG_BGMAP_PATH = "graphics/bgLayer.jpg";
     Path.JPG_WELCOME_PATH = "graphics/bgWelcome.jpg";
     /**

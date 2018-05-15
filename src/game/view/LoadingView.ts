@@ -11,6 +11,11 @@ module Game {
 		// 加载过程中回调函数
 		private _onLoading:Function;
 		
+		constructor()
+		{
+			super();
+		}
+
 		onShow(Param?:any):void 
 		{
 			let url = Param.Url;
@@ -19,7 +24,7 @@ module Game {
 			this.load(url, loadedFunc, loadingFunc);
 		}
 
-		onInit(Param?:any):void 
+		onInit():void 
 		{
 			this._onLoaded = null;
 			this._onLoading = null;
@@ -33,7 +38,6 @@ module Game {
 
 		onDestroy():void
 		{
-
 		}
 
 		load(ResUrl:Array<any>, LoadedFunc:Function = null, LoadingFunc:Function = null):void 
@@ -46,17 +50,17 @@ module Game {
 			Laya.loader.maxLoader = 1;
 			// 无加载失败重试
 			Laya.loader.retryNum = 0;
-			Laya.loader.load(ResUrl, Laya.Handler.create(this, this.onLoaded), Laya.Handler.create(this, this.onLoading, null, false));
+			Laya.loader.load(ResUrl, null, Laya.Handler.create(this, this.onLoading, null, false));
 			Laya.loader.once(Laya.Event.ERROR, this, this.onLoadError);
 		}
 
-		private onLoaded(Txture:Laya.Texture):void 
+		private onLoaded():void 
 		{
-				console.log("加载完成" + Txture.source);
-				Laya.loader.off(Laya.Event.ERROR, this, this.onLoadError, true);
-				Laya.loader.maxLoader = 5;
-				// this.doOnLoadedCallback();
-				Laya.timer.once(1000, this, this.doOnLoadedCallback);
+			console.log("加载完成");
+			Laya.loader.off(Laya.Event.ERROR, this, this.onLoadError, true);
+			Laya.loader.maxLoader = 5;
+			// this.doOnLoadedCallback();
+			Laya.timer.once(1000, this, this.doOnLoadedCallback);
 		}
 
 		private onLoading(Progress:number):void 
@@ -65,9 +69,9 @@ module Game {
 			this.txtProgress.text = (Progress * 100) + "%";
 			this.doOnLoadingCallback();
 
-			// if (Progress == 1) {
-			// 	Laya.timer.once(1000, this, this.onLoaded);
-			// }
+			if (Progress == 1) {
+				this.onLoaded();
+			}
 		}
 
 		private onLoadError(Str:String):void 

@@ -6,6 +6,8 @@ var Game;
             this._uiViews = [];
             this.initRegisterView();
         }
+        onDestroy() {
+        }
         /** 根据界面唯一ID，显示ui界面 */
         showView(ViewId, Param) {
             let viewCls = this._viewCls[ViewId];
@@ -16,10 +18,14 @@ var Game;
             let view = this._uiViews[ViewId];
             if (view == null) {
                 view = new viewCls();
-                // view.onInit(Param);
                 this._uiViews[ViewId] = view;
+                if (view["onInit"]) {
+                    view["onInit"]();
+                }
             }
-            // view.onShow(Param);
+            if (view["onShow"]) {
+                view["onShow"](Param);
+            }
             Game.LayerMgr.getInstance().addChildToDialog(view);
             return view;
         }
@@ -27,8 +33,12 @@ var Game;
         hideView(ViewId) {
             let view = this._uiViews[ViewId];
             if (view != null) {
-                // view.onHide();
-                // view.onDestroy();
+                if (view["onHide"]) {
+                    view["onHide"]();
+                }
+                if (view["onDestroy"]) {
+                    view["onDestroy"]();
+                }
                 view.removeSelf();
                 this._uiViews[ViewId] = null;
             }

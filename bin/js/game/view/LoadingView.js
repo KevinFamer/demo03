@@ -4,13 +4,16 @@
 var Game;
 (function (Game) {
     class LoadingView extends ui.ui_loadingUI {
+        constructor() {
+            super();
+        }
         onShow(Param) {
             let url = Param.Url;
             let loadedFunc = Param.LoadedFunc;
             let loadingFunc = Param.LoadingFunc;
             this.load(url, loadedFunc, loadingFunc);
         }
-        onInit(Param) {
+        onInit() {
             this._onLoaded = null;
             this._onLoading = null;
             this.txtProgress.text = "0%";
@@ -28,11 +31,11 @@ var Game;
             Laya.loader.maxLoader = 1;
             // 无加载失败重试
             Laya.loader.retryNum = 0;
-            Laya.loader.load(ResUrl, Laya.Handler.create(this, this.onLoaded), Laya.Handler.create(this, this.onLoading, null, false));
+            Laya.loader.load(ResUrl, null, Laya.Handler.create(this, this.onLoading, null, false));
             Laya.loader.once(Laya.Event.ERROR, this, this.onLoadError);
         }
-        onLoaded(Txture) {
-            console.log("加载完成" + Txture.source);
+        onLoaded() {
+            console.log("加载完成");
             Laya.loader.off(Laya.Event.ERROR, this, this.onLoadError, true);
             Laya.loader.maxLoader = 5;
             // this.doOnLoadedCallback();
@@ -42,9 +45,9 @@ var Game;
             console.log("加载进度:" + Progress);
             this.txtProgress.text = (Progress * 100) + "%";
             this.doOnLoadingCallback();
-            // if (Progress == 1) {
-            // 	Laya.timer.once(1000, this, this.onLoaded);
-            // }
+            if (Progress == 1) {
+                this.onLoaded();
+            }
         }
         onLoadError(Str) {
             console.log("加载失败:" + Str);
