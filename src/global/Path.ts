@@ -31,6 +31,6 @@ module Global {
         public static PLIST_TEXTURE_PATH:string = "res/atlas/graphics/small_images.atlas";
 
         // 游戏资源图路径
-        public static SML_IMG_PATH:string = "small_images/";
+        public static SML_IMG_PATH:string = "graphics/small_images/";
     }
 }

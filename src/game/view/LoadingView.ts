@@ -56,16 +56,14 @@ module Game {
 
 		private onLoaded():void 
 		{
-			console.log("加载完成");
 			Laya.loader.off(Laya.Event.ERROR, this, this.onLoadError, true);
 			Laya.loader.maxLoader = 5;
 			// this.doOnLoadedCallback();
-			Laya.timer.once(1000, this, this.doOnLoadedCallback);
+			Laya.timer.once(500, this, this.doOnLoadedCallback);
 		}
 
 		private onLoading(Progress:number):void 
 		{
-			console.log("加载进度:" + Progress);
 			this.txtProgress.text = (Progress * 100) + "%";
 			this.doOnLoadingCallback();
 

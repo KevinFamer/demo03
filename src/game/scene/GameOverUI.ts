@@ -73,11 +73,11 @@ module Game {
         }
 
         f_about():void {
-            main.enterAboutScene();
+            // SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
         }
 
         f_return():void {
-            main.enterLoginScene();
+            SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
         }
     }
 }

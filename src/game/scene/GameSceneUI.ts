@@ -56,7 +56,7 @@ module Game {
         }
 
         f_toggleOnOff():void {
-            GameMgr.sound.toggleOnOff();
+            SoundMgr.getInstance().toggleOnOff();
         }
 
         f_createText(PStr, PX, PY):LayaText {

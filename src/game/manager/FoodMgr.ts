@@ -1,9 +1,15 @@
 module Game {
-    import userData = Data.user;
     import Browser = Laya.Browser;
     import Pool = Laya.Pool;
     
-    export class FoodMgr {
+    export class FoodMgr extends Core.Singleton 
+    {
+        /** 获取单例实例 */
+        public static getInstance():FoodMgr
+        {
+            return Core.Singleton.getInstanceOrCreate(FoodMgr);
+        }
+
         private m_container;
         private m_gameScene;
         private m_itemsToAnimate:Array<Item>;
@@ -28,14 +34,20 @@ module Game {
         private m_patternOnce:boolean = false;
         /** Y position for the entire pattern - Used for vertical pattern only. */
         private m_patternPosYstart:number = 0;
-
-        constructor(PGameScene) {
-            this.m_container = PGameScene;
-            this.m_gameScene = PGameScene;
+        
+        protected onCreate():void 
+        {
+            this.m_container = SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
             this.m_itemsToAnimate = new Array();
         }
 
-        init():void {
+        protected onDestroy():void 
+        {
+        }
+
+        init():void 
+        {
             this.removeAll();
             this.m_pattern = 1;
             this.m_patternPosY = Laya.Browser.height - Global.Const.GAME_AREA_TOP_BOTTOM;
@@ -46,10 +58,11 @@ module Game {
             this.m_patternChangeDistance = 100;
             this.m_patternLength = 50;
             this.m_patternOnce = true;
-            userData.coffee = userData.mushroom = 0;
+            Data.user.coffee = Data.user.mushroom = 0;
         }
 
-        removeAll():void {
+        removeAll():void 
+        {
             if (this.m_itemsToAnimate.length > 0) {
                 let len = this.m_itemsToAnimate.length - 1;
                 var item:Item = null;
@@ -61,16 +74,18 @@ module Game {
             }
         }
 
-        update(PHero, PElapsed):void {
+        update(PHero, PElapsed):void 
+        {
             this.f_setFoodPattern(PElapsed);
             this.f_createFoodPattern(PElapsed);
             this.f_animateFoodItems(PHero, PElapsed);
         }
 
-        f_setFoodPattern(PElapsed):void {
+        f_setFoodPattern(PElapsed):void 
+        {
             // If hero has not travelled the required distance, don't change the pattern.
             if (this.m_patternChangeDistance > 0) {
-                this.m_patternChangeDistance -= userData.heroSpeed * PElapsed;
+                this.m_patternChangeDistance -= Data.user.heroSpeed * PElapsed;
             }
             else {
                 // If hero has travelled the required distance, change the pattern.
@@ -116,7 +131,7 @@ module Game {
         f_createFoodPattern(PElapsed):void {
             // Create a food item after we pass some distance (patternGap).
             if (this.m_patternGapCount < this.m_patternGap) {
-                this.m_patternGapCount += userData.heroSpeed * PElapsed;
+                this.m_patternGapCount += Data.user.heroSpeed * PElapsed;
             }
             else if (this.m_pattern != 0) {
                 // If there is a pattern already set.
@@ -251,7 +266,7 @@ module Game {
 
                 if (item) {
                     // If hero has eaten a mushroom, make all the items move towards him.
-                    if (userData.mushroom > 0 && item.type <= Global.Const.ITEM_TYPE_5) {
+                    if (Data.user.mushroom > 0 && item.type <= Global.Const.ITEM_TYPE_5) {
                         // Move the item towards the player.
                         item.x -= (item.x - PHero.x) * 0.2;
                         item.y -= (item.y - PHero.y) * 0.2;
@@ -259,7 +274,7 @@ module Game {
                     else {
                         // If hero hasn't eaten a mushroom,
                         // Move the items normally towards the left.
-                        item.x -= userData.heroSpeed * PElapsed;
+                        item.x -= Data.user.heroSpeed * PElapsed;
                     }
 
                     // If the item passes outside the screen on the left, remove it (check-in).
@@ -278,26 +293,26 @@ module Game {
                         if (heroItem_sqDist < 5000) {
                             // If hero eats an item, add up the score.
                             if (item.type <= Global.Const.ITEM_TYPE_5) {
-                                userData.score += item.type;
-                                GameMgr.sound.playEat();
+                                Data.user.score += item.type;
+                                SoundMgr.getInstance().playEat();
                             }
                             else if (item.type == Global.Const.ITEM_TYPE_COFFEE) {
                                 // If hero drinks coffee, add up the score.
-                                userData.score += 1;
+                                Data.user.score += 1;
 
                                 // How long does coffee power last? (in seconds)
-                                userData.coffee = 5;
+                                Data.user.coffee = 5;
                                 this.m_gameScene.showCoffeeEffect();
-                                GameMgr.sound.playCoffee();
+                                SoundMgr.getInstance().playCoffee();
                             }
                             else if (item.type == Global.Const.ITEM_TYPE_MUSHROOM) {
                                 // If hero eats a mushroom, add up the score.
-                                userData.score += 1;
+                                Data.user.score += 1;
 
                                 // How long does mushroom power last? (in seconds)
-                                userData.mushroom = 4;
+                                Data.user.mushroom = 4;
                                 this.m_gameScene.showMushroomEffect();
-                                GameMgr.sound.playMushroom();
+                                SoundMgr.getInstance().playMushroom();
                             }
 
                             // Create an eat particle at the position of the food item that was eaten.

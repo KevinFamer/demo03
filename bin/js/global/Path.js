@@ -28,7 +28,7 @@ var Global;
     Path.PNG_TEXTURE_PATH = "res/atlas/graphics/small_images.png";
     Path.PLIST_TEXTURE_PATH = "res/atlas/graphics/small_images.atlas";
     // 游戏资源图路径
-    Path.SML_IMG_PATH = "small_images/";
+    Path.SML_IMG_PATH = "graphics/small_images/";
     Global.Path = Path;
 })(Global || (Global = {}));
 //# sourceMappingURL=Path.js.map

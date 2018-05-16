@@ -2,6 +2,10 @@ var Game;
 (function (Game) {
     var Sprite = Laya.Sprite;
     class LayerMgr extends Core.Singleton {
+        /** 获取单例实例 */
+        static getInstance() {
+            return Core.Singleton.getInstanceOrCreate(LayerMgr);
+        }
         onCreate() {
             this._layerNode = [];
             this._layerIdx = [0 /* Scene */, 1 /* Dialog */, 2 /* Tip */, 3 /* Guide */];
@@ -35,22 +39,19 @@ var Game;
         }
         /** 添加显示对象到对应的层级 */
         addChildToLayer(LayerIdx, Child, PosX, PosY) {
-            if (!LayerIdx || !Child) {
-                console.log("[ViewMgr] addChildToLayer : LayerIdx is null or Child is null");
+            if (!Child) {
+                console.log("[LayerMgr] addChildToLayer : Child is null");
                 return;
             }
             let layer = this._layerNode[LayerIdx];
             if (layer == null) {
-                console.log("[ViewMgr] addChildToLayer : LayerNode(${LayerIdx}) is not exist");
+                console.log("[LayerMgr] addChildToLayer : LayerNode(${LayerIdx}) is not exist");
                 return;
             }
             Child.removeSelf();
             Child.x = PosX || 0;
             Child.y = PosY || 0;
             layer.addChild(Child);
-        }
-        static getInstance() {
-            return Core.Singleton.getInstanceOrCreate(LayerMgr);
         }
     }
     Game.LayerMgr = LayerMgr;

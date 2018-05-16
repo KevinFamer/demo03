@@ -39,8 +39,8 @@ var Game;
             backButton.on(Laya.Event.CLICK, this, this.f_back);
         }
         f_back() {
-            Game.GameMgr.sound.playCoffee();
-            Game.main.enterLoginScene();
+            Game.SoundMgr.getInstance().playCoffee();
+            Game.SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
         }
     }
     Game.AboutScene = AboutScene;

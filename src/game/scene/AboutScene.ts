@@ -46,8 +46,8 @@ module Game {
         }
 
         f_back():void {
-            GameMgr.sound.playCoffee();
-            main.enterLoginScene();
+            SoundMgr.getInstance().playCoffee();
+            SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
         }
     }
 }

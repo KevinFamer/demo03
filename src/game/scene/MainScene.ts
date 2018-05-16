@@ -9,8 +9,7 @@ module Game {
     import ParticleSetting = Laya.ParticleSetting;
     import Keyboard = Laya.Keyboard;
 
-    export class MainScene extends Sprite {
-
+    export class MainScene extends BaseScene {
         private m_ui;
         private m_gameOverUI;
         private m_background;
@@ -26,14 +25,26 @@ module Game {
         private m_touchY:number;
         private m_cameraShake;
 
-        constructor() {
-            super();
+        onInit():void 
+        {
+            this.sceneId = Global.SceneId.MAIN;
+        }
 
-            var layer = new Sprite();
-            this.addChild(layer);
+        onShow():void
+        {
+            super.onShow();
+            this.initUI();
+        }
 
+        onDestroy():void
+        {
+            super.onDestroy();
+        }
+
+        initUI():void
+        {
             this.m_background = new Background();
-            layer.addChild(this.m_background);
+            this.addChild(this.m_background);
 
             this.m_hero = new Hero();
             this.addChild(this.m_hero);
@@ -55,15 +66,12 @@ module Game {
             // 键盘事件监听
             Laya.stage.on(Laya.Event.KEY_UP, this, this._back);
 
-            GameMgr.initFoodMgr(this);
-            GameMgr.initEnemyMgr(this);
-
             this.init();
         }
 
         init():void {
-            GameMgr.sound.stop();
-            GameMgr.sound.playGameBgMusic();
+            SoundMgr.getInstance().stop();
+            SoundMgr.getInstance().playGameBgMusic();
             if(this.m_gameOverUI)
                 this.m_gameOverUI.setVisible(false);
 
@@ -79,7 +87,7 @@ module Game {
             this.m_hero.x = -winWidth/2;
             this.m_hero.y = winHeight/2;
 
-            GameMgr.food.init();
+            FoodMgr.getInstance().init();
 
             this.stopCoffeeEffect();
             this.stopWindEffect();
@@ -100,8 +108,9 @@ module Game {
 
         _back(PEvent):void {
             var keyCode = PEvent["keyCode"]
-            if (keyCode == Keyboard.BACKSPACE)
-                main.enterLoginScene();
+            if (keyCode == Keyboard.BACKSPACE) {
+                SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
+            }
         }
 
         _handleHeroPose():void {
@@ -332,7 +341,7 @@ module Game {
                     userData.heroSpeed -= (userData.heroSpeed - Global.Const.HERO_MIN_SPEED) * 0.01;
 
                     // Create food items.
-                    GameMgr.food.update(this.m_hero, elapsed);
+                    FoodMgr.getInstance().update(this.m_hero, elapsed);
                     // Create obstacles.
 
     //                // Store the hero's current x and y positions (needed for animations below).
@@ -355,7 +364,7 @@ module Game {
                     break;
 
                 case Global.Const.GAME_STATE_OVER:
-                    GameMgr.food.removeAll();
+                    FoodMgr.getInstance().removeAll();
         // Dispose the eat particle temporarily.
         // Dispose the wind particle temporarily.
 

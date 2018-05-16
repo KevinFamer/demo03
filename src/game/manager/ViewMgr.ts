@@ -1,6 +1,12 @@
 module Game {
     export class ViewMgr extends Core.Singleton
     {
+        /** 获取单例实例 */
+        public static getInstance():ViewMgr
+        {
+            return Core.Singleton.getInstanceOrCreate(ViewMgr);
+        }
+
         // 游戏界面类集
         private _viewCls:Array<any>;
         // 缓存游戏已打开的ui界面
@@ -100,15 +106,10 @@ module Game {
             this._viewCls[ViewId] = ViewCls;
         }
 
-        /** UI界面统一注册 */
+        /** UI界面统一注册函数，游戏UI界面初始化前均要先注册 */
         private initRegisterView():void 
         {
             this.registerView(Global.ViewId.LOADING_VIEW, LoadingView);
-        }
-
-        public static getInstance():ViewMgr
-        {
-            return Core.Singleton.getInstanceOrCreate(ViewMgr);
         }
     }
 }

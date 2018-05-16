@@ -8,9 +8,10 @@ var Game;
         }
         // 执行
         run() {
+            Game.ViewMgr.getInstance().hideView(Global.ViewId.LOADING_VIEW);
             Game.SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
         }
     }
     Game.main = new Main();
 })(Game || (Game = {}));
-//# sourceMappingURL=Main.js.map
+//# sourceMappingURL=GameMain.js.map

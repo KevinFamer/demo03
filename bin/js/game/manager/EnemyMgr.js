@@ -1,16 +1,21 @@
 var Game;
 (function (Game) {
-    var userData = Data.user;
     var Browser = Laya.Browser;
-    class EnemyMgr {
-        constructor(PGameScene) {
-            this.m_container = PGameScene.itemBatchLayer;
-            this.m_gameScene = PGameScene;
+    class EnemyMgr extends Core.Singleton {
+        /** 获取单例实例 */
+        static getInstance() {
+            return Core.Singleton.getInstanceOrCreate(EnemyMgr);
+        }
+        onCreate() {
+            this.m_gameScene = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_obstaclesToAnimate = new Array();
+        }
+        onDestroy() {
         }
         init() {
             this.removeAll();
-            userData.hitObstacle = 0;
+            Data.user.hitObstacle = 0;
         }
         removeAll() {
             if (this.m_obstaclesToAnimate.length > 0) {
@@ -24,7 +29,7 @@ var Game;
         update(PHero, PElapsed) {
             // Create an obstacle after hero travels some distance (obstacleGap).
             if (this.m_obstacleGapCount < Global.Const.ENEMY_GAP) {
-                this.m_obstacleGapCount += userData.heroSpeed * PElapsed;
+                this.m_obstacleGapCount += Data.user.heroSpeed * PElapsed;
             }
             else if (this.m_obstacleGapCount != 0) {
                 this.m_obstacleGapCount = 0;
@@ -67,14 +72,14 @@ var Game;
                 obstacle = this.m_obstaclesToAnimate[i];
                 // If the distance is still more than 0, keep reducing its value, without moving the obstacle.
                 if (obstacle.distance > 0) {
-                    obstacle.distance -= userData.heroSpeed * PElapsed;
+                    obstacle.distance -= Data.user.heroSpeed * PElapsed;
                 }
                 else {
                     // Otherwise, move the obstacle based on hero's speed, and check if he hits it. 
                     // Remove the look out sign.
                     obstacle.hideLookout();
                     // Move the obstacle based on hero's speed.
-                    obstacle.x -= (userData.heroSpeed + obstacle.speed) * PElapsed;
+                    obstacle.x -= (Data.user.heroSpeed + obstacle.speed) * PElapsed;
                 }
                 // If the obstacle passes beyond the screen, remove it.
                 if (obstacle.x < -obstacle.width || Data.gameState == Global.Const.GAME_STATE_OVER) {
@@ -89,17 +94,17 @@ var Game;
                 if (heroObstacle_sqDist < 5000 && !obstacle.alreadyHit) {
                     obstacle.alreadyHit = true;
                     obstacle.crash();
-                    Game.GameMgr.sound.playHit();
-                    if (userData.coffee > 0) {
+                    Game.SoundMgr.getInstance().playHit();
+                    if (Data.user.coffee > 0) {
                         // If hero has a coffee item, break through the obstacle.
                         if (obstacle.position == "bottom")
                             obstacle.setRotation(100);
                         else
                             obstacle.setRotation(-100);
                         // Set hit obstacle value.
-                        userData.hitObstacle = 30;
+                        Data.user.hitObstacle = 30;
                         // Reduce hero's speed
-                        userData.heroSpeed *= 0.8;
+                        Data.user.heroSpeed *= 0.8;
                     }
                     else {
                         if (obstacle.position == "bottom")
@@ -107,15 +112,15 @@ var Game;
                         else
                             obstacle.setRotation(-70);
                         // Otherwise, if hero doesn't have a coffee item, set hit obstacle value.
-                        userData.hitObstacle = 30;
+                        Data.user.hitObstacle = 30;
                         // Reduce hero's speed.
-                        userData.heroSpeed *= 0.5;
+                        Data.user.heroSpeed *= 0.5;
                         // Play hurt sound.
-                        Game.GameMgr.sound.playHurt();
+                        Game.SoundMgr.getInstance().playHurt();
                         // Update lives.
-                        userData.lives--;
-                        if (userData.lives <= 0) {
-                            userData.lives = 0;
+                        Data.user.lives--;
+                        if (Data.user.lives <= 0) {
+                            Data.user.lives = 0;
                             this.m_gameScene.endGame();
                         }
                     }

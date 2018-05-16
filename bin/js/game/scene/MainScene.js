@@ -8,13 +8,20 @@ var Game;
     var Loader = Laya.Loader;
     var Particle2D = Laya.Particle2D;
     var Keyboard = Laya.Keyboard;
-    class MainScene extends Sprite {
-        constructor() {
-            super();
-            var layer = new Sprite();
-            this.addChild(layer);
+    class MainScene extends Game.BaseScene {
+        onInit() {
+            this.sceneId = Global.SceneId.MAIN;
+        }
+        onShow() {
+            super.onShow();
+            this.initUI();
+        }
+        onDestroy() {
+            super.onDestroy();
+        }
+        initUI() {
             this.m_background = new Game.Background();
-            layer.addChild(this.m_background);
+            this.addChild(this.m_background);
             this.m_hero = new Game.Hero();
             this.addChild(this.m_hero);
             this.m_itemBatchLayer = new Sprite();
@@ -31,13 +38,11 @@ var Game;
             Laya.stage.on(Laya.Event.MOUSE_MOVE, this, this._onMouseMove);
             // 键盘事件监听
             Laya.stage.on(Laya.Event.KEY_UP, this, this._back);
-            Game.GameMgr.initFoodMgr(this);
-            Game.GameMgr.initEnemyMgr(this);
             this.init();
         }
         init() {
-            Game.GameMgr.sound.stop();
-            Game.GameMgr.sound.playGameBgMusic();
+            Game.SoundMgr.getInstance().stop();
+            Game.SoundMgr.getInstance().playGameBgMusic();
             if (this.m_gameOverUI)
                 this.m_gameOverUI.setVisible(false);
             var winWidth = Browser.width;
@@ -50,7 +55,7 @@ var Game;
             this.m_touchY = winHeight / 2;
             this.m_hero.x = -winWidth / 2;
             this.m_hero.y = winHeight / 2;
-            Game.GameMgr.food.init();
+            Game.FoodMgr.getInstance().init();
             this.stopCoffeeEffect();
             this.stopWindEffect();
             this.stopMushroomEffect();
@@ -66,8 +71,9 @@ var Game;
         }
         _back(PEvent) {
             var keyCode = PEvent["keyCode"];
-            if (keyCode == Keyboard.BACKSPACE)
-                Game.main.enterLoginScene();
+            if (keyCode == Keyboard.BACKSPACE) {
+                Game.SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
+            }
         }
         _handleHeroPose() {
             var winWidth = Browser.width;
@@ -265,7 +271,7 @@ var Game;
                         userData.coffee -= elapsed;
                     userData.heroSpeed -= (userData.heroSpeed - Global.Const.HERO_MIN_SPEED) * 0.01;
                     // Create food items.
-                    Game.GameMgr.food.update(this.m_hero, elapsed);
+                    Game.FoodMgr.getInstance().update(this.m_hero, elapsed);
                     // Create obstacles.
                     //                // Store the hero's current x and y positions (needed for animations below).
                     //                heroX = hero.x;
@@ -283,7 +289,7 @@ var Game;
                     this.m_ui.update();
                     break;
                 case Global.Const.GAME_STATE_OVER:
-                    Game.GameMgr.food.removeAll();
+                    Game.FoodMgr.getInstance().removeAll();
                     // Dispose the eat particle temporarily.
                     // Dispose the wind particle temporarily.
                     // Spin the hero.

@@ -1,9 +1,15 @@
 var Game;
 (function (Game) {
     var Sound = Laya.SoundManager;
-    class SoundMgr {
-        constructor() {
+    class SoundMgr extends Core.Singleton {
+        /** 获取单例实例 */
+        static getInstance() {
+            return Core.Singleton.getInstanceOrCreate(SoundMgr);
+        }
+        onCreate() {
             this.m_silence = false;
+        }
+        onDestroy() {
         }
         playMenuBgMusic() {
             if (!this.m_silence) {

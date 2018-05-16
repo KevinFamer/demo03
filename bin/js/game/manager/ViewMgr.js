@@ -1,6 +1,10 @@
 var Game;
 (function (Game) {
     class ViewMgr extends Core.Singleton {
+        /** 获取单例实例 */
+        static getInstance() {
+            return Core.Singleton.getInstanceOrCreate(ViewMgr);
+        }
         onCreate() {
             this._viewCls = [];
             this._uiViews = [];
@@ -75,12 +79,9 @@ var Game;
             }
             this._viewCls[ViewId] = ViewCls;
         }
-        /** UI界面统一注册 */
+        /** UI界面统一注册函数，游戏UI界面初始化前均要先注册 */
         initRegisterView() {
             this.registerView(Global.ViewId.LOADING_VIEW, Game.LoadingView);
-        }
-        static getInstance() {
-            return Core.Singleton.getInstanceOrCreate(ViewMgr);
         }
     }
     Game.ViewMgr = ViewMgr;

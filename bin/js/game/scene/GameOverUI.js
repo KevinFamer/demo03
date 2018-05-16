@@ -56,10 +56,10 @@ var Game;
             this.m_gameScene.init();
         }
         f_about() {
-            Game.main.enterAboutScene();
+            // SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
         }
         f_return() {
-            Game.main.enterLoginScene();
+            Game.SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
         }
     }
     Game.GameOverUI = GameOverUI;

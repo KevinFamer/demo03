@@ -1,10 +1,10 @@
 var Game;
 (function (Game) {
-    var userData = Data.user;
     var Browser = Laya.Browser;
     var Pool = Laya.Pool;
-    class FoodMgr {
-        constructor(PGameScene) {
+    class FoodMgr extends Core.Singleton {
+        constructor() {
+            super(...arguments);
             /** Current pattern of food items - 0 = horizontal, 1 = vertical, 2 = zigzag, 3 = random, 4 = special item. */
             this.m_pattern = 0;
             //物品Y坐标
@@ -25,9 +25,17 @@ var Game;
             this.m_patternOnce = false;
             /** Y position for the entire pattern - Used for vertical pattern only. */
             this.m_patternPosYstart = 0;
-            this.m_container = PGameScene;
-            this.m_gameScene = PGameScene;
+        }
+        /** 获取单例实例 */
+        static getInstance() {
+            return Core.Singleton.getInstanceOrCreate(FoodMgr);
+        }
+        onCreate() {
+            this.m_container = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
             this.m_itemsToAnimate = new Array();
+        }
+        onDestroy() {
         }
         init() {
             this.removeAll();
@@ -40,7 +48,7 @@ var Game;
             this.m_patternChangeDistance = 100;
             this.m_patternLength = 50;
             this.m_patternOnce = true;
-            userData.coffee = userData.mushroom = 0;
+            Data.user.coffee = Data.user.mushroom = 0;
         }
         removeAll() {
             if (this.m_itemsToAnimate.length > 0) {
@@ -61,7 +69,7 @@ var Game;
         f_setFoodPattern(PElapsed) {
             // If hero has not travelled the required distance, don't change the pattern.
             if (this.m_patternChangeDistance > 0) {
-                this.m_patternChangeDistance -= userData.heroSpeed * PElapsed;
+                this.m_patternChangeDistance -= Data.user.heroSpeed * PElapsed;
             }
             else {
                 // If hero has travelled the required distance, change the pattern.
@@ -105,7 +113,7 @@ var Game;
         f_createFoodPattern(PElapsed) {
             // Create a food item after we pass some distance (patternGap).
             if (this.m_patternGapCount < this.m_patternGap) {
-                this.m_patternGapCount += userData.heroSpeed * PElapsed;
+                this.m_patternGapCount += Data.user.heroSpeed * PElapsed;
             }
             else if (this.m_pattern != 0) {
                 // If there is a pattern already set.
@@ -221,7 +229,7 @@ var Game;
                 item = this.m_itemsToAnimate[i];
                 if (item) {
                     // If hero has eaten a mushroom, make all the items move towards him.
-                    if (userData.mushroom > 0 && item.type <= Global.Const.ITEM_TYPE_5) {
+                    if (Data.user.mushroom > 0 && item.type <= Global.Const.ITEM_TYPE_5) {
                         // Move the item towards the player.
                         item.x -= (item.x - PHero.x) * 0.2;
                         item.y -= (item.y - PHero.y) * 0.2;
@@ -229,7 +237,7 @@ var Game;
                     else {
                         // If hero hasn't eaten a mushroom,
                         // Move the items normally towards the left.
-                        item.x -= userData.heroSpeed * PElapsed;
+                        item.x -= Data.user.heroSpeed * PElapsed;
                     }
                     // If the item passes outside the screen on the left, remove it (check-in).
                     if (item.x < -80 || Data.gameState == Global.Const.GAME_STATE_OVER) {
@@ -245,24 +253,24 @@ var Game;
                         if (heroItem_sqDist < 5000) {
                             // If hero eats an item, add up the score.
                             if (item.type <= Global.Const.ITEM_TYPE_5) {
-                                userData.score += item.type;
-                                Game.GameMgr.sound.playEat();
+                                Data.user.score += item.type;
+                                Game.SoundMgr.getInstance().playEat();
                             }
                             else if (item.type == Global.Const.ITEM_TYPE_COFFEE) {
                                 // If hero drinks coffee, add up the score.
-                                userData.score += 1;
+                                Data.user.score += 1;
                                 // How long does coffee power last? (in seconds)
-                                userData.coffee = 5;
+                                Data.user.coffee = 5;
                                 this.m_gameScene.showCoffeeEffect();
-                                Game.GameMgr.sound.playCoffee();
+                                Game.SoundMgr.getInstance().playCoffee();
                             }
                             else if (item.type == Global.Const.ITEM_TYPE_MUSHROOM) {
                                 // If hero eats a mushroom, add up the score.
-                                userData.score += 1;
+                                Data.user.score += 1;
                                 // How long does mushroom power last? (in seconds)
-                                userData.mushroom = 4;
+                                Data.user.mushroom = 4;
                                 this.m_gameScene.showMushroomEffect();
-                                Game.GameMgr.sound.playMushroom();
+                                Game.SoundMgr.getInstance().playMushroom();
                             }
                             // Create an eat particle at the position of the food item that was eaten.
                             this.m_gameScene.showEatEffect(item.x, item.y);

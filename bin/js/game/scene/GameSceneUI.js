@@ -40,7 +40,7 @@ var Game;
             //     cc.director.pause();
         }
         f_toggleOnOff() {
-            Game.GameMgr.sound.toggleOnOff();
+            Game.SoundMgr.getInstance().toggleOnOff();
         }
         f_createText(PStr, PX, PY) {
             var txt = new LayaText();
