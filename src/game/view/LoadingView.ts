@@ -10,11 +10,6 @@ module Game {
 		private _onLoaded:Function;
 		// 加载过程中回调函数
 		private _onLoading:Function;
-		
-		constructor()
-		{
-			super();
-		}
 
 		onShow(Param?:any):void 
 		{

@@ -1,11 +1,10 @@
 var Game;
 (function (Game) {
     var Sprite = Laya.Sprite;
-    var Loader = Laya.Loader;
     // Laya.Pool.getItemByClass("Item", Item);
     class Item extends Sprite {
-        constructor(PType) {
-            super();
+        constructor() {
+            super(...arguments);
             this.m_type = 0;
         }
         get type() {
@@ -13,15 +12,15 @@ var Game;
         }
         reuse(PType) {
             this.m_type = PType;
-            this.f_changeIcon(PType);
+            this.changeIcon(PType);
         }
         unuse() {
             Laya.Pool.recover("Item", this);
             this.removeSelf();
         }
-        f_changeIcon(PType) {
+        changeIcon(PType) {
             var imgUrl = "item" + PType + ".png";
-            var texture = Loader.getRes(imgUrl);
+            var texture = Laya.loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);
         }

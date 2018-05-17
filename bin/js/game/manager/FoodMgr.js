@@ -62,11 +62,11 @@ var Game;
             }
         }
         update(PHero, PElapsed) {
-            this.f_setFoodPattern(PElapsed);
-            this.f_createFoodPattern(PElapsed);
-            this.f_animateFoodItems(PHero, PElapsed);
+            this.setFoodPattern(PElapsed);
+            this.createFoodPattern(PElapsed);
+            this.animateFoodItems(PHero, PElapsed);
         }
-        f_setFoodPattern(PElapsed) {
+        setFoodPattern(PElapsed) {
             // If hero has not travelled the required distance, don't change the pattern.
             if (this.m_patternChangeDistance > 0) {
                 this.m_patternChangeDistance -= Data.user.heroSpeed * PElapsed;
@@ -110,7 +110,7 @@ var Game;
                 }
             }
         }
-        f_createFoodPattern(PElapsed) {
+        createFoodPattern(PElapsed) {
             // Create a food item after we pass some distance (patternGap).
             if (this.m_patternGapCount < this.m_patternGap) {
                 this.m_patternGapCount += Data.user.heroSpeed * PElapsed;
@@ -223,7 +223,7 @@ var Game;
                 }
             }
         }
-        f_animateFoodItems(PHero, PElapsed) {
+        animateFoodItems(PHero, PElapsed) {
             var item;
             for (var i = this.m_itemsToAnimate.length - 1; i >= 0; i--) {
                 item = this.m_itemsToAnimate[i];

@@ -76,12 +76,12 @@ module Game {
 
         update(PHero, PElapsed):void 
         {
-            this.f_setFoodPattern(PElapsed);
-            this.f_createFoodPattern(PElapsed);
-            this.f_animateFoodItems(PHero, PElapsed);
+            this.setFoodPattern(PElapsed);
+            this.createFoodPattern(PElapsed);
+            this.animateFoodItems(PHero, PElapsed);
         }
 
-        f_setFoodPattern(PElapsed):void 
+        private setFoodPattern(PElapsed):void 
         {
             // If hero has not travelled the required distance, don't change the pattern.
             if (this.m_patternChangeDistance > 0) {
@@ -128,7 +128,8 @@ module Game {
             }
         }
 
-        f_createFoodPattern(PElapsed):void {
+        private createFoodPattern(PElapsed):void 
+        {
             // Create a food item after we pass some distance (patternGap).
             if (this.m_patternGapCount < this.m_patternGap) {
                 this.m_patternGapCount += Data.user.heroSpeed * PElapsed;
@@ -259,7 +260,8 @@ module Game {
             }
         }
 
-        f_animateFoodItems(PHero, PElapsed):void {
+        private animateFoodItems(PHero, PElapsed):void 
+        {
             var item;
             for (var i = this.m_itemsToAnimate.length - 1; i >= 0; i--) {
                 item = this.m_itemsToAnimate[i];

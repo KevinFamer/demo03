@@ -5,10 +5,10 @@ var Game;
     class Hero extends Sprite {
         constructor() {
             super();
+            this.state = 0;
             this.m_animation = null;
             this.m_fast = false;
-            this.m_state = 0;
-            this.loadImage("fly_0001.png");
+            this.loadImage(Global.Path.SML_IMG_PATH + "fly_0001.png");
             this.m_animation = new Animation();
             var imgPaths = [];
             for (var i = 1; i < 20; i++) {

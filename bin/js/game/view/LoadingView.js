@@ -4,9 +4,6 @@
 var Game;
 (function (Game) {
     class LoadingView extends ui.ui_loadingUI {
-        constructor() {
-            super();
-        }
         onShow(Param) {
             let url = Param.Url;
             let loadedFunc = Param.LoadedFunc;

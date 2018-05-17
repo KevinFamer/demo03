@@ -110,6 +110,7 @@ module Game {
         private initRegisterView():void 
         {
             this.registerView(Global.ViewId.LOADING_VIEW, LoadingView);
+            this.registerView(Global.ViewId.GAMEOVER_VIEW, GameOverView);
         }
     }
 }

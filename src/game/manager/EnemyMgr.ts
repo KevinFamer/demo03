@@ -55,12 +55,13 @@ module Game {
                 this.m_obstacleGapCount = 0;
 
                 // Create any one of the obstacles.
-                this.f_createObstacle(Math.ceil(Math.random() * 4), Math.random() * 1000 + 1000);
+                this.createObstacle(Math.ceil(Math.random() * 4), Math.random() * 1000 + 1000);
             }
-            this.f_animateObstacles(PHero, PElapsed);
+            this.animateObstacles(PHero, PElapsed);
         }
 
-        f_createObstacle(PType, PDistance):void {
+        private createObstacle(PType, PDistance):void 
+        {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var x = winWidth;
@@ -90,7 +91,8 @@ module Game {
             this.m_container.addChild(obstacle);
         }
 
-        f_animateObstacles(PHero, PElapsed):void {
+        private animateObstacles(PHero, PElapsed):void 
+        {
             var obstacle;
             for (var i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
                 obstacle = this.m_obstaclesToAnimate[i];

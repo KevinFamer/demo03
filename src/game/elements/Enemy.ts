@@ -5,7 +5,8 @@ module Game {
     import Texture = Laya.Texture;
     
     // Laya.Pool.getItemByClass("Enemy", Enemy);
-    export class Enemy extends Sprite {
+    export class Enemy extends Sprite 
+    {
         private m_type:number = 0;
 
         private m_speed:number = 0;
@@ -24,23 +25,21 @@ module Game {
 
         private m_animation:Animation = null;
 
-        constructor() {
-            super();
-        }
-
-        hideLookout():void {
+        hideLookout():void 
+        {
             if (this.m_lookoutAnimation) {
                 this.m_lookoutAnimation.visible = false;
             }
         }
 
-        reuse(PType, PShowLookOut, PPos, PSpeed, PDis):void {
+        reuse(PType, PShowLookOut, PPos, PSpeed, PDis):void 
+        {
             if (PType == Global.Const.ENEMY_TYPE_4) {
-                this.f_showImage("obstacle4_0001.png")
+                this.showImage("obstacle4_0001.png")
 
                 if (!this.m_animation) {
                     var ani:Animation = new Animation()
-                    ani.loadImages(["obstacle4_0001.png", "obstacle4_0002.png"]);
+                    ani.loadImages([Global.Path.SML_IMG_PATH + "obstacle4_0001.png", Global.Path.SML_IMG_PATH + "obstacle4_0002.png"]);
                     ani.interval = 100;
                     this.m_animation = ani;
                     this.addChild(ani);
@@ -48,7 +47,7 @@ module Game {
                 
                 this.m_animation.play();
             } else {
-                this.f_showImage("obstacle" + PType + ".png");
+                this.showImage("obstacle" + PType + ".png");
             }
 
             this.m_showLookout = PShowLookOut;
@@ -61,13 +60,18 @@ module Game {
             if (PShowLookOut) {
                 if (!this.m_lookoutAnimation) {
                     this.m_lookoutAnimation = new Sprite();
-                    this.m_lookoutAnimation.loadImage("#watchOut_0001.png");
+                    this.m_lookoutAnimation.loadImage(Global.Path.SML_IMG_PATH + "watchOut_0001.png");
                     this.addChild(this.m_lookoutAnimation);
                 } else {
                     this.m_lookoutAnimation.visible = true;
                 }
                 if (!this.m_lookoutAction) {
-                    var path = ["watchOut_0001.png","watchOut_0002.png","watchOut_0003.png","watchOut_0004.png","watchOut_0005.png"];
+                    var path = [
+                        Global.Path.SML_IMG_PATH + "watchOut_0001.png",
+                        Global.Path.SML_IMG_PATH + "watchOut_0002.png",
+                        Global.Path.SML_IMG_PATH + "watchOut_0003.png",
+                        Global.Path.SML_IMG_PATH + "watchOut_0004.png",
+                        Global.Path.SML_IMG_PATH + "watchOut_0005.png"];
                     var ani1 = new Animation();
                     ani1.loadImages(path);
                     ani1.interval = 100;
@@ -81,7 +85,8 @@ module Game {
             }
         }
 
-        unuse():void {
+        unuse():void 
+        {
             this.m_animation.stop();
             this.m_lookoutAction.stop();
             this.hideLookout();
@@ -89,14 +94,16 @@ module Game {
             this.removeSelf();
         }
 
-        crash():void {
+        crash():void 
+        {
             this.m_animation.stop();
             this.m_lookoutAction.stop();
-            this.f_showImage("obstacle" + this.m_type + "_crash.png");
+            this.showImage("obstacle" + this.m_type + "_crash.png");
         }
 
-        f_showImage(PPath:string):void {
-            var imgUrl:string = PPath;
+        private showImage(Path:string):void 
+        {
+            var imgUrl:string = Global.Path.SML_IMG_PATH + Path;
             var texture:Texture = Loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);

@@ -2,16 +2,18 @@ module Game {
     import Animation = Laya.Animation;
     import Sprite = Laya.Sprite;
 
-    export class Hero extends Sprite {
+    export class Hero extends Sprite 
+    {
+        state:number = 0;
+
         private m_animation:Animation = null;
 
         private m_fast:boolean = false;
 
-        private m_state:number = 0;
-
-        constructor() {
+        constructor() 
+        {
             super();
-            this.loadImage("fly_0001.png");
+            this.loadImage(Global.Path.SML_IMG_PATH + "fly_0001.png");
 
             this.m_animation = new Animation();
             var imgPaths:Array<string> = [];
@@ -25,7 +27,8 @@ module Game {
             this.m_fast = false;
         }
 
-        toggleSpeed(PFast):void {
+        toggleSpeed(PFast):void 
+        {
             if (PFast == this.m_fast) {
                 return;
             }
@@ -41,7 +44,8 @@ module Game {
             this.m_animation.play();
         }
 
-        onExit():void {
+        onExit():void 
+        {
             this.m_animation.destroy();
         }
     }

@@ -82,6 +82,7 @@ var Game;
         /** UI界面统一注册函数，游戏UI界面初始化前均要先注册 */
         initRegisterView() {
             this.registerView(Global.ViewId.LOADING_VIEW, Game.LoadingView);
+            this.registerView(Global.ViewId.GAMEOVER_VIEW, Game.GameOverView);
         }
     }
     Game.ViewMgr = ViewMgr;

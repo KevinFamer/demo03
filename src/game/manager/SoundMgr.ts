@@ -20,60 +20,70 @@ module Game {
         {
         }
 
-        playMenuBgMusic():void {
+        playMenuBgMusic():void 
+        {
             if (!this.m_silence) {
                 Sound.playMusic(Global.Path.MP3_WELCOME_PATH, 0);
             }
         }
 
-        playGameBgMusic():void {
+        playGameBgMusic():void 
+        {
             if (!this.m_silence) {
                 Sound.playMusic(Global.Path.MP3_BG_PATH, 0);
             }
         }
 
-        playEat():void {
+        playEat():void 
+        {
             if (!this.m_silence) {
                 Sound.stopAllSound();
                 Sound.playSound(Global.Path.MP3_EAT_PATH, 1);
             }
         }
 
-        playCoffee():void {
+        playCoffee():void 
+        {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_COFFEE_PATH, 1);
             }
         }
 
-        playMushroom():void {
+        playMushroom():void 
+        {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_MUSHROOM_PATH, 1);
             }
         }
 
-        playHit():void {
+        playHit():void 
+        {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_HIT_PATH, 1);
             }
         }
 
-        playHurt():void {
+        playHurt():void 
+        {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_HURT_PATH, 1);
             }
         }
 
-        playLose():void {
+        playLose():void 
+        {
             if (!this.m_silence) {
                 Sound.playSound(Global.Path.MP3_LOSE_PATH, 1);
             }
         }
 
-        stop():void {
+        stop():void 
+        {
             Sound.stopAll();
         }
 
-        toggleOnOff():void {
+        toggleOnOff():void 
+        {
             if (this.m_silence) {
                 this.m_silence = false;
                 Sound.setMusicVolume(1);

@@ -34,11 +34,11 @@ var Game;
             else if (this.m_obstacleGapCount != 0) {
                 this.m_obstacleGapCount = 0;
                 // Create any one of the obstacles.
-                this.f_createObstacle(Math.ceil(Math.random() * 4), Math.random() * 1000 + 1000);
+                this.createObstacle(Math.ceil(Math.random() * 4), Math.random() * 1000 + 1000);
             }
-            this.f_animateObstacles(PHero, PElapsed);
+            this.animateObstacles(PHero, PElapsed);
         }
-        f_createObstacle(PType, PDistance) {
+        createObstacle(PType, PDistance) {
             var winWidth = Browser.width;
             var winHeight = Browser.height;
             var x = winWidth;
@@ -66,7 +66,7 @@ var Game;
             this.m_obstaclesToAnimate.push(obstacle);
             this.m_container.addChild(obstacle);
         }
-        f_animateObstacles(PHero, PElapsed) {
+        animateObstacles(PHero, PElapsed) {
             var obstacle;
             for (var i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
                 obstacle = this.m_obstaclesToAnimate[i];

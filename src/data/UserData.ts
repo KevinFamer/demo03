@@ -1,5 +1,6 @@
 module Data {
-    export class UserData {
+    export class UserData 
+    {
         lives:number = Global.Const.HERO_LIVES;
         score:number = 0;
         distance:number = 0;
