@@ -51,9 +51,7 @@ var Game;
         }
         onClickPlay() {
             Game.SoundMgr.getInstance().playCoffee();
-            // SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
-            let a = new Game.BackgroundUI();
-            this.addChild(a);
+            Game.SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
         }
         onUpdate() {
             var currentDate = new Date();

@@ -59,7 +59,7 @@ module Game {
 
 		private onLoading(Progress:number):void 
 		{
-			this.txtProgress.text = (Progress * 100) + "%";
+			this.txtProgress.text = Math.floor(Progress * 100) + "%";
 			this.doOnLoadingCallback();
 
 			if (Progress == 1) {

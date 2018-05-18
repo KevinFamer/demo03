@@ -10,16 +10,16 @@ var Game;
         get type() {
             return this.m_type;
         }
-        reuse(PType) {
-            this.m_type = PType;
-            this.changeIcon(PType);
+        reuse(Type) {
+            this.m_type = Type;
+            this.changeIcon(Type);
         }
         unuse() {
             Laya.Pool.recover("Item", this);
             this.removeSelf();
         }
-        changeIcon(PType) {
-            var imgUrl = "item" + PType + ".png";
+        changeIcon(Type) {
+            var imgUrl = Global.Path.SML_IMG_PATH + "item" + Type + ".png";
             var texture = Laya.loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);

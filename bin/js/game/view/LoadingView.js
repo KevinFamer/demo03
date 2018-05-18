@@ -38,7 +38,7 @@ var Game;
             Laya.timer.once(500, this, this.doOnLoadedCallback);
         }
         onLoading(Progress) {
-            this.txtProgress.text = (Progress * 100) + "%";
+            this.txtProgress.text = Math.floor(Progress * 100) + "%";
             this.doOnLoadingCallback();
             if (Progress == 1) {
                 this.onLoaded();

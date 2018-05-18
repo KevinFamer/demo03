@@ -72,9 +72,7 @@ module Game {
         onClickPlay():void 
         {
             SoundMgr.getInstance().playCoffee();
-            // SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
-            let a = new BackgroundUI();
-            this.addChild(a);
+            SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
         }
 
         onUpdate():void 

@@ -7,10 +7,17 @@ Laya.ResourceVersion.enable("version.json?"+Math.random(), Laya.Handler.create(t
 
 function onCompleteHandler():void 
 {
+    // 设置适配模式
+    Laya.stage.scaleMode = Laya.Stage.SCALE_SHOWALL;
+    // 设置居中对齐
     Laya.stage.alignV = Laya.Stage.ALIGN_MIDDLE;
     Laya.stage.alignH = Laya.Stage.ALIGN_CENTER;
-    Laya.stage.scaleMode = "showall";
-    Laya.stage.bgColor = "#232323"
+    // 设置横竖屏
+    Laya.stage.screenMode = Laya.Stage.SCREEN_HORIZONTAL;
+    // 设置背影颜色
+    Laya.stage.bgColor = "#232323";
+    // 显示FPS
+    Laya.Stat.show(0, 0);
 
     // 位图字体预加载
     // function onLoadFont(BmpFont:Laya.BitmapFont) {

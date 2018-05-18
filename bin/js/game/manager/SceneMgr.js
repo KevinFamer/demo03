@@ -29,15 +29,13 @@ var Game;
                 this._curScene = undefined;
             }
             let scene = new sceneCls();
+            this._curScene = scene;
             scene.onInit();
             scene.onShow();
-            this._curScene = scene;
         }
         /** 根据场景ID，获取当前场景实例 */
-        getScene(SceneId) {
-            if (this._curScene && SceneId == this._curScene.sceneId) {
-                return this._curScene;
-            }
+        getCurScene() {
+            return this._curScene;
         }
         /** 注册场景 */
         registerScene(SceneId, SceneCls) {

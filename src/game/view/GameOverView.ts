@@ -4,14 +4,14 @@
 module Game {
     import Sprite = Laya.Sprite;
     import Browser = Laya.Browser;
-    import LayaText = Laya.Text;
+    import Text = Laya.Text;
     import Button = Laya.Button;
 
     export class GameOverView extends Sprite 
     {
-        private m_distanceText;
-        private m_scoreText;
-        private m_gameScene;
+        private m_distanceText:Text;
+        private m_scoreText:Text;
+        private m_gameScene:MainScene;
 
         onShow(Param?:any):void 
 		{
@@ -22,7 +22,7 @@ module Game {
             bg.graphics.drawRect(50, 50, winWidth-100, winHeight-100, "0x000000", "0xffffff", 4);
             this.addChild(bg);
 
-            var title = new LayaText();
+            var title = new Text();
             this.addChild(title);
             title.font = Global.Const.BMP_FONT_NAME;
             title.fontSize = 20;
@@ -31,7 +31,7 @@ module Game {
             title.pivot(0.5, 0.5);
             title.pos(winWidth/2, winHeight/2 - 200);
 
-            this.m_distanceText = new LayaText();
+            this.m_distanceText = new Text();
             this.addChild(this.m_distanceText);
             this.m_distanceText.font = Global.Const.BMP_FONT_NAME;
             this.m_distanceText.fontSize = 20;
@@ -40,7 +40,7 @@ module Game {
             this.m_distanceText.x = winWidth/2;
             this.m_distanceText.y = winHeight/2;
 
-            this.m_scoreText = new LayaText();
+            this.m_scoreText = new Text();
             this.addChild(this.m_scoreText);
             this.m_scoreText.font = Global.Const.BMP_FONT_NAME;
             this.m_scoreText.fontSize = 20;
@@ -64,7 +64,7 @@ module Game {
 
 		onInit():void 
 		{
-            this.m_gameScene = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = SceneMgr.getInstance().getCurScene() as MainScene;
 		}
 
 		onHide():void 

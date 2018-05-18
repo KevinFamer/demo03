@@ -12,10 +12,10 @@ module Game {
             return this.m_type;
         }
 
-        reuse(PType):void 
+        reuse(Type:number):void 
         {
-            this.m_type = PType;
-            this.changeIcon(PType);
+            this.m_type = Type;
+            this.changeIcon(Type);
         }
 
         unuse():void 
@@ -24,9 +24,9 @@ module Game {
             this.removeSelf();
         }
 
-        private changeIcon(PType):void 
+        private changeIcon(Type:number):void 
         {
-            var imgUrl:string = "item" + PType + ".png";
+            var imgUrl:string = Global.Path.SML_IMG_PATH + "item" + Type + ".png";
             var texture:Texture = Laya.loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);

@@ -7,7 +7,7 @@ var Game;
             return Core.Singleton.getInstanceOrCreate(EnemyMgr);
         }
         onCreate() {
-            this.m_gameScene = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = Game.SceneMgr.getInstance().getCurScene();
             this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_obstaclesToAnimate = new Array();
         }

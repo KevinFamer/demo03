@@ -45,17 +45,15 @@ module Game {
             }
 
             let scene:BaseScene = new sceneCls();
+            this._curScene = scene;
             scene.onInit();
             scene.onShow();
-            this._curScene = scene;
         }
 
         /** 根据场景ID，获取当前场景实例 */
-        getScene(SceneId:number):BaseScene
+        getCurScene():BaseScene
         {
-            if (this._curScene && SceneId == this._curScene.sceneId) {
-                return this._curScene
-            }
+            return this._curScene
         }
 
         /** 注册场景 */

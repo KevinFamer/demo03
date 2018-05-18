@@ -1,50 +1,37 @@
 module Game {
     import Sprite = Laya.Sprite;
-    import Browser = Laya.Browser;
     import Button = Laya.Button;
     import LayaText = Laya.Text;
 
     export class GameMainUI extends Sprite 
     {
-        private m_lifeText;
-        private m_distanceText;
-        private m_scoreText;
+        private _lifeTxt;
+        private _distanceTxt;
+        private _scoreTxt;
 
         constructor() 
         {
             super();
 
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+            this._lifeTxt = this.createText("生命：0", 300, 30);
+            this.addChild(this._lifeTxt);
 
-            var lifeLabel = this.createText("L I V E S", 360, winHeight - 25);
-            this.addChild(lifeLabel);
+            this._distanceTxt = this.createText("距离：50", 600, 30);
+            this.addChild(this._distanceTxt);
 
-            this.m_lifeText = this.createText("0", 360, winHeight - 60);
-            this.addChild(this.m_lifeText);
+            this._scoreTxt = this.createText("积分：100", 900, 30);
+            this.addChild(this._scoreTxt);
 
-            var distanceLabel = this.createText("D I S T A N C E", 680, winHeight - 25);
-            this.addChild(distanceLabel);
-
-            this.m_distanceText = this.createText("50", 680, winHeight - 60);
-            this.addChild(this.m_distanceText);
-
-            var scoreLabel = this.createText("S C O R E", 915, winHeight - 25);
-            this.addChild(scoreLabel);
-
-            this.m_scoreText = this.createText("100", 915, winHeight - 60);
-            this.addChild(this.m_scoreText);
-
-            var pauseButton = new Button(Global.Path.SML_IMG_PATH + "pauseButton.png");
+            let pauseButton = new Button(Global.Path.SML_IMG_PATH + "pauseButton.png");
             pauseButton.on(Laya.Event.CLICK, this, this.pauseResume);
             pauseButton.x = 80;
-            pauseButton.y = winHeight - 45;
+            pauseButton.y = 45;
             this.addChild(pauseButton);
 
-            var soundButton = new Button(Global.Path.SML_IMG_PATH + "soundOn0002.png");
+            let soundButton = new Button(Global.Path.SML_IMG_PATH + "soundOn0002.png");
             soundButton.on(Laya.Event.CLICK, this, this.toggleOnOff);
             soundButton.x = 80;
-            soundButton.y = winHeight - 100;
+            soundButton.y = 100;
             this.addChild(soundButton);
         }
 
@@ -61,23 +48,24 @@ module Game {
             SoundMgr.getInstance().toggleOnOff();
         }
 
-        private createText(PStr, PX, PY):LayaText 
+        private createText(Str, PosX, PosY):LayaText 
         {
             var txt = new LayaText();
             txt.font = Global.Const.BMP_FONT_NAME;
             txt.fontSize = 20;
-            txt.color = "#ff00ff";
-            txt.text = PStr
-            txt.x = PX;
-            txt.y = PY;
+            txt.bold = true;
+            txt.color = "#ff0000";
+            txt.text = Str
+            txt.x = PosX;
+            txt.y = PosY;
             return txt;
         }
 
         update():void 
         {
-            this.m_lifeText.text = Data.user.lives;
-            this.m_distanceText.text = Data.user.distance;
-            this.m_scoreText.text = Data.user.score;
+            this._lifeTxt.text = "生命：" + Data.user.lives;
+            this._distanceTxt.text = "距离：" + Data.user.distance;
+            this._scoreTxt.text = "积分：" + Data.user.score;
         }
     }
 }

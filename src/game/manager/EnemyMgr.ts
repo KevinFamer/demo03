@@ -1,5 +1,6 @@
 module Game {
     import Browser = Laya.Browser;
+    import Sprite = Laya.Sprite;
     
     export class EnemyMgr extends Core.Singleton
     {
@@ -9,8 +10,8 @@ module Game {
             return Core.Singleton.getInstanceOrCreate(EnemyMgr);
         }
 
-        private m_container;
-        private m_gameScene;
+        private m_container:Sprite;
+        private m_gameScene:MainScene;
         private m_obstaclesToAnimate:Array<Enemy>;
 
         /** Obstacle count - to track the frequency of obstacles. */
@@ -18,7 +19,7 @@ module Game {
 
         protected onCreate():void
         {
-            this.m_gameScene = SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = SceneMgr.getInstance().getCurScene() as MainScene;
             this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_obstaclesToAnimate = new Array();
         }

@@ -1,7 +1,6 @@
 var Game;
 (function (Game) {
     var Sprite = Laya.Sprite;
-    var Browser = Laya.Browser;
     var Handler = Laya.Handler;
     var Loader = Laya.Loader;
     var Particle2D = Laya.Particle2D;
@@ -22,9 +21,8 @@ var Game;
             this.addChild(this._backgroundUI);
             this._hero = new Game.Hero();
             this.addChild(this._hero);
-            this.m_itemBatchLayer = new Sprite();
-            this.m_itemBatchLayer.loadImage(Global.Path.PNG_TEXTURE_PATH);
-            this.addChild(this.m_itemBatchLayer);
+            this.itemBatchLayer = new Sprite();
+            this.addChild(this.itemBatchLayer);
             this._mainUI = new Game.GameMainUI();
             this.addChild(this._mainUI);
             this._mainUI.update();
@@ -42,8 +40,8 @@ var Game;
             Game.SoundMgr.getInstance().stop();
             Game.SoundMgr.getInstance().playGameBgMusic();
             Game.ViewMgr.getInstance().hideView(Global.ViewId.GAMEOVER_VIEW);
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+            var winWidth = Laya.stage.width;
+            var winHeight = Laya.stage.height;
             this._mainUI.visible = true;
             Data.user.lives = Global.Const.HERO_LIVES;
             Data.user.score = Data.user.distance = 0;
@@ -73,8 +71,8 @@ var Game;
             }
         }
         _handleHeroPose() {
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+            var winWidth = Laya.stage.width;
+            var winHeight = Laya.stage.height;
             // Rotate this.m_hero based on mouse position.
             if (Math.abs(-(this._hero.y - this.m_touchY) * 0.2) < 30)
                 this._hero.rotation = (this._hero.y - this.m_touchY) * 0.2;
@@ -109,8 +107,8 @@ var Game;
                 return;
             }
             this.m_windEffect = new Particle2D(PPS);
-            this.m_windEffect.x = Browser.width;
-            this.m_windEffect.y = Browser.height / 2;
+            this.m_windEffect.x = Laya.stage.width;
+            this.m_windEffect.y = Laya.stage.height / 2;
             this.m_windEffect.setScaleX(100);
             this.addChild(this.m_windEffect);
             this.m_windEffect.emitter.start();
@@ -188,9 +186,10 @@ var Game;
          *
          * @param elapsed 秒
          */
-        update(elapsed) {
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+        update() {
+            let elapsed = 2;
+            var winWidth = Laya.stage.width;
+            var winHeight = Laya.stage.height;
             switch (Data.gameState) {
                 case Global.Const.GAME_STATE_IDLE:
                     // Take off.

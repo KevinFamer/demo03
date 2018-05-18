@@ -1,6 +1,5 @@
 module Game {
     import Sprite = Laya.Sprite;
-    import Browser = Laya.Browser;
     import Handler = Laya.Handler;
     import Loader = Laya.Loader;
     import Particle2D = Laya.Particle2D;
@@ -9,10 +8,12 @@ module Game {
 
     export class MainScene extends BaseScene 
     {
+        itemBatchLayer:Sprite;
+
         private _mainUI:GameMainUI;
         private _backgroundUI:BackgroundUI;
         private _hero:Hero;
-        private m_itemBatchLayer:Sprite;
+        
         private m_coffeeEffect;
         private m_mushroomEffect;
         private m_windEffect;
@@ -44,9 +45,8 @@ module Game {
             this._hero = new Hero();
             this.addChild(this._hero);
 
-            this.m_itemBatchLayer = new Sprite();
-            this.m_itemBatchLayer.loadImage(Global.Path.PNG_TEXTURE_PATH);
-            this.addChild(this.m_itemBatchLayer);
+            this.itemBatchLayer = new Sprite();
+            this.addChild(this.itemBatchLayer);
 
             this._mainUI = new GameMainUI();
             this.addChild(this._mainUI);
@@ -69,8 +69,8 @@ module Game {
             SoundMgr.getInstance().playGameBgMusic();
             ViewMgr.getInstance().hideView(Global.ViewId.GAMEOVER_VIEW);
 
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+            var winWidth = Laya.stage.width;
+            var winHeight = Laya.stage.height;
             this._mainUI.visible = true;
             Data.user.lives = Global.Const.HERO_LIVES;
             Data.user.score = Data.user.distance = 0;
@@ -111,8 +111,8 @@ module Game {
 
         private _handleHeroPose():void 
         {
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+            var winWidth = Laya.stage.width;
+            var winHeight = Laya.stage.height;
             // Rotate this.m_hero based on mouse position.
             if (Math.abs(-(this._hero.y - this.m_touchY) * 0.2) < 30)
                 this._hero.rotation = (this._hero.y - this.m_touchY) * 0.2;
@@ -144,7 +144,8 @@ module Game {
             }
         }
 
-        showWindEffect(PPS:ParticleSetting = null):void {
+        showWindEffect(PPS:ParticleSetting = null):void 
+        {
             if(this.m_windEffect)
                 return;
 
@@ -154,15 +155,16 @@ module Game {
             }
 
             this.m_windEffect = new Particle2D(PPS);
-            this.m_windEffect.x = Browser.width;
-            this.m_windEffect.y = Browser.height/2;
+            this.m_windEffect.x = Laya.stage.width;
+            this.m_windEffect.y = Laya.stage.height/2;
             this.m_windEffect.setScaleX(100);
             this.addChild(this.m_windEffect);
             this.m_windEffect.emitter.start();
             this.m_windEffect.play();
         }
 
-        stopWindEffect():void {
+        stopWindEffect():void 
+        {
             if(this.m_windEffect){
                 this.m_windEffect.stopSystem();
                 this.removeChild(this.m_windEffect);
@@ -170,7 +172,8 @@ module Game {
             }
         }
 
-        showCoffeeEffect(PPS:ParticleSetting = null):void {
+        showCoffeeEffect(PPS:ParticleSetting = null):void 
+        {
             if(this.m_coffeeEffect)
                 return;
 
@@ -187,7 +190,8 @@ module Game {
             this.m_coffeeEffect.play();
         }
 
-        stopCoffeeEffect():void {
+        stopCoffeeEffect():void 
+        {
             if(this.m_coffeeEffect){
                 this.m_coffeeEffect.stopSystem();
                 this.removeChild(this.m_coffeeEffect);
@@ -195,7 +199,8 @@ module Game {
             }
         }
 
-        showMushroomEffect(PPS:ParticleSetting = null):void {
+        showMushroomEffect(PPS:ParticleSetting = null):void 
+        {
             if(this.m_mushroomEffect)
                 return;
             
@@ -212,15 +217,17 @@ module Game {
             this.m_mushroomEffect.play();
         }
 
-        stopMushroomEffect():void {
-            if(this.m_mushroomEffect){
+        stopMushroomEffect():void 
+        {
+            if (this.m_mushroomEffect) {
                 this.m_mushroomEffect.stopSystem();
                 this.removeChild(this.m_mushroomEffect);
                 this.m_mushroomEffect = null;
             }
         }
 
-        showEatEffect(itemX, itemY):void {
+        showEatEffect(itemX, itemY):void 
+        {
             Laya.loader.load(Global.Path.PLIST_EAT_PATH, Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
         }
 
@@ -237,7 +244,8 @@ module Game {
         /**
          * hero被碰撞N次后，结束游戏；结束之前，先播放hero掉落的动画
          */
-        endGame():void {
+        endGame():void 
+        {
             this.x = 0;
             this.y = 0;
             Data.gameState = Global.Const.GAME_STATE_OVER;
@@ -247,9 +255,11 @@ module Game {
          *
          * @param elapsed 秒
          */
-        update(elapsed):void {
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
+        update():void 
+        {
+            let elapsed = 2;
+            var winWidth = Laya.stage.width;
+            var winHeight = Laya.stage.height;
             switch(Data.gameState){
                 case Global.Const.GAME_STATE_IDLE:
                     // Take off.

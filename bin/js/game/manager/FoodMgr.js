@@ -1,6 +1,5 @@
 var Game;
 (function (Game) {
-    var Browser = Laya.Browser;
     var Pool = Laya.Pool;
     class FoodMgr extends Core.Singleton {
         constructor() {
@@ -31,8 +30,8 @@ var Game;
             return Core.Singleton.getInstanceOrCreate(FoodMgr);
         }
         onCreate() {
-            this.m_container = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
-            this.m_gameScene = Game.SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = Game.SceneMgr.getInstance().getCurScene();
+            this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_itemsToAnimate = new Array();
         }
         onDestroy() {
@@ -118,8 +117,8 @@ var Game;
             else if (this.m_pattern != 0) {
                 // If there is a pattern already set.
                 this.m_patternGapCount = 0;
-                var winWidth = Browser.width;
-                var winHeight = Browser.height;
+                var winWidth = Laya.stage.width;
+                var winHeight = Laya.stage.height;
                 var item = null; //Item
                 switch (this.m_pattern) {
                     case 1:
@@ -136,7 +135,7 @@ var Game;
                         item.y = this.m_patternPosY;
                         // Mark the item for animation.
                         this.m_itemsToAnimate.push(item);
-                        this.m_container.addChild(item, 1);
+                        this.m_container.addChild(item);
                         break;
                     case 2:
                         // Vertical, creates a line of food items that could be the height of the entire screen or just a small part of it.
@@ -156,7 +155,7 @@ var Game;
                             item.x = winWidth + item.width;
                             item.y = this.m_patternPosYstart;
                             this.m_itemsToAnimate.push(item);
-                            this.m_container.addChild(item, 1);
+                            this.m_container.addChild(item);
                             // Increase the position of the next item based on patternStep.
                             this.m_patternPosYstart += this.m_patternStep;
                         }
@@ -178,7 +177,7 @@ var Game;
                             item.x = winWidth + item.width;
                             item.y = this.m_patternPosY;
                             this.m_itemsToAnimate.push(item);
-                            this.m_container.addChild(item, 1);
+                            this.m_container.addChild(item);
                             this.m_patternPosY += this.m_patternStep * this.m_patternDirection;
                         }
                         else {
@@ -195,7 +194,7 @@ var Game;
                             item.x = winWidth + item.width;
                             item.y = this.m_patternPosY;
                             this.m_itemsToAnimate.push(item);
-                            this.m_container.addChild(item, 1);
+                            this.m_container.addChild(item);
                         }
                         break;
                     case 10:
@@ -207,7 +206,7 @@ var Game;
                         item.x = winWidth + item.width;
                         item.y = this.m_patternPosY;
                         this.m_itemsToAnimate.push(item);
-                        this.m_container.addChild(item, 2);
+                        this.m_container.addChild(item); // addChildAt(item, 2)
                         break;
                     case 11:
                         // Mushroom, this item makes all the food items fly towards the hero for a while.
@@ -218,7 +217,7 @@ var Game;
                         item.x = winWidth + item.width;
                         item.y = this.m_patternPosY;
                         this.m_itemsToAnimate.push(item);
-                        this.m_container.addChild(item, 3);
+                        this.m_container.addChild(item); // addChildAt(item, 3)
                         break;
                 }
             }

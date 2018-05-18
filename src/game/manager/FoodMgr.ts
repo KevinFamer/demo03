@@ -1,6 +1,6 @@
 module Game {
-    import Browser = Laya.Browser;
     import Pool = Laya.Pool;
+    import Sprite = Laya.Sprite;
     
     export class FoodMgr extends Core.Singleton 
     {
@@ -10,8 +10,8 @@ module Game {
             return Core.Singleton.getInstanceOrCreate(FoodMgr);
         }
 
-        private m_container;
-        private m_gameScene;
+        private m_container:Sprite;
+        private m_gameScene:MainScene;
         private m_itemsToAnimate:Array<Item>;
 
         /** Current pattern of food items - 0 = horizontal, 1 = vertical, 2 = zigzag, 3 = random, 4 = special item. */
@@ -37,8 +37,8 @@ module Game {
         
         protected onCreate():void 
         {
-            this.m_container = SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
-            this.m_gameScene = SceneMgr.getInstance().getScene(Global.SceneId.MAIN);
+            this.m_gameScene = SceneMgr.getInstance().getCurScene() as MainScene;
+            this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_itemsToAnimate = new Array();
         }
 
@@ -137,8 +137,8 @@ module Game {
             else if (this.m_pattern != 0) {
                 // If there is a pattern already set.
                 this.m_patternGapCount = 0;
-                var winWidth = Browser.width;
-                var winHeight = Browser.height;
+                var winWidth = Laya.stage.width;
+                var winHeight = Laya.stage.height;
                 var item:Item = null;    //Item
 
                 switch (this.m_pattern) {
@@ -159,7 +159,7 @@ module Game {
 
                         // Mark the item for animation.
                         this.m_itemsToAnimate.push(item);
-                        this.m_container.addChild(item, 1);
+                        this.m_container.addChild(item);
                         break;
 
                     case 2:
@@ -182,7 +182,7 @@ module Game {
                             item.x = winWidth + item.width;
                             item.y = this.m_patternPosYstart;
                             this.m_itemsToAnimate.push(item);
-                            this.m_container.addChild(item, 1);
+                            this.m_container.addChild(item);
 
                             // Increase the position of the next item based on patternStep.
                             this.m_patternPosYstart += this.m_patternStep;
@@ -208,7 +208,7 @@ module Game {
                             item.x = winWidth + item.width;
                             item.y = this.m_patternPosY;
                             this.m_itemsToAnimate.push(item);
-                            this.m_container.addChild(item, 1);
+                            this.m_container.addChild(item);
                             this.m_patternPosY += this.m_patternStep * this.m_patternDirection;
                         }
                         else {
@@ -227,7 +227,7 @@ module Game {
                             item.x = winWidth + item.width;
                             item.y = this.m_patternPosY;
                             this.m_itemsToAnimate.push(item);
-                            this.m_container.addChild(item, 1);
+                            this.m_container.addChild(item);
                         }
                         break;
 
@@ -241,7 +241,7 @@ module Game {
                         item.x = winWidth + item.width;
                         item.y = this.m_patternPosY;
                         this.m_itemsToAnimate.push(item);
-                        this.m_container.addChild(item, 2);
+                        this.m_container.addChild(item); // addChildAt(item, 2)
                         break;
 
                     case 11:
@@ -254,7 +254,7 @@ module Game {
                         item.x = winWidth + item.width;
                         item.y = this.m_patternPosY;
                         this.m_itemsToAnimate.push(item);
-                        this.m_container.addChild(item, 3);
+                        this.m_container.addChild(item); // addChildAt(item, 3)
                         break;
                 }
             }
