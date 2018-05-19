@@ -26,8 +26,8 @@ module Game {
 
         private changeIcon(Type:number):void 
         {
-            var imgUrl:string = Global.Path.SML_IMG_PATH + "item" + Type + ".png";
-            var texture:Texture = Laya.loader.getRes(imgUrl);
+            let imgUrl:string = Global.Path.SML_IMG_PATH + "item" + Type + ".png";
+            let texture:Texture = Laya.loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);
         }

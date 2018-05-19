@@ -187,7 +187,7 @@ var Game;
          * @param elapsed 秒
          */
         update() {
-            let elapsed = 2;
+            let elapsed = 0.05;
             var winWidth = Laya.stage.width;
             var winHeight = Laya.stage.height;
             switch (Data.gameState) {

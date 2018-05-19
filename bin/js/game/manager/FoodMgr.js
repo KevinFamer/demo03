@@ -52,8 +52,8 @@ var Game;
         removeAll() {
             if (this.m_itemsToAnimate.length > 0) {
                 let len = this.m_itemsToAnimate.length - 1;
-                var item = null;
-                for (var i = len; i >= 0; i--) {
+                let item = null;
+                for (let i = len; i >= 0; i--) {
                     item = this.m_itemsToAnimate[i];
                     this.m_itemsToAnimate.splice(i, 1);
                     item.unuse();
@@ -117,9 +117,9 @@ var Game;
             else if (this.m_pattern != 0) {
                 // If there is a pattern already set.
                 this.m_patternGapCount = 0;
-                var winWidth = Laya.stage.width;
-                var winHeight = Laya.stage.height;
-                var item = null; //Item
+                let winWidth = Laya.stage.width;
+                let winHeight = Laya.stage.height;
+                let item = null; //Item
                 switch (this.m_pattern) {
                     case 1:
                         // Horizontal, creates a single food item, and changes the position of the pattern randomly.
@@ -223,8 +223,8 @@ var Game;
             }
         }
         animateFoodItems(PHero, PElapsed) {
-            var item;
-            for (var i = this.m_itemsToAnimate.length - 1; i >= 0; i--) {
+            let item;
+            for (let i = this.m_itemsToAnimate.length - 1; i >= 0; i--) {
                 item = this.m_itemsToAnimate[i];
                 if (item) {
                     // If hero has eaten a mushroom, make all the items move towards him.
@@ -246,9 +246,9 @@ var Game;
                     }
                     else {
                         // Collision detection - Check if the hero eats a food item.
-                        var heroItem_xDist = item.x - PHero.x;
-                        var heroItem_yDist = item.y - PHero.y;
-                        var heroItem_sqDist = heroItem_xDist * heroItem_xDist + heroItem_yDist * heroItem_yDist;
+                        let heroItem_xDist = item.x - PHero.x;
+                        let heroItem_yDist = item.y - PHero.y;
+                        let heroItem_sqDist = heroItem_xDist * heroItem_xDist + heroItem_yDist * heroItem_yDist;
                         if (heroItem_sqDist < 5000) {
                             // If hero eats an item, add up the score.
                             if (item.type <= Global.Const.ITEM_TYPE_5) {

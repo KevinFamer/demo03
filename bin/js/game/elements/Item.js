@@ -19,8 +19,8 @@ var Game;
             this.removeSelf();
         }
         changeIcon(Type) {
-            var imgUrl = Global.Path.SML_IMG_PATH + "item" + Type + ".png";
-            var texture = Laya.loader.getRes(imgUrl);
+            let imgUrl = Global.Path.SML_IMG_PATH + "item" + Type + ".png";
+            let texture = Laya.loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);
         }
