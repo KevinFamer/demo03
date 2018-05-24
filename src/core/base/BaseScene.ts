@@ -1,4 +1,7 @@
-module Game {
+module Core {
+    /**
+     * 场景基类接口
+     */
     export interface IBaseScene 
     {
         /** 场景ID */
@@ -14,6 +17,9 @@ module Game {
         onDestroy():void;
     }
 
+    /**
+     * 场景基类
+     */
     export class BaseScene extends Laya.Sprite implements IBaseScene
     {
         sceneId:number;

@@ -5,7 +5,7 @@ module Game {
     import Button = Laya.Button;
     import CheckBox = Laya.CheckBox;
 
-    export class LoginScene extends BaseScene {
+    export class LoginScene extends Core.BaseScene {
         private _hero;
         private _playBtn;
 
@@ -72,7 +72,7 @@ module Game {
         onClickPlay():void 
         {
             SoundMgr.getInstance().playCoffee();
-            SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
+            sceneMgr.enterScene(Global.SceneId.MAIN);
         }
 
         onUpdate():void 

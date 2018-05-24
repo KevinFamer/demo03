@@ -1,5 +1,8 @@
-var Game;
-(function (Game) {
+var Core;
+(function (Core) {
+    /**
+     * UI界面管理器
+     */
     class ViewMgr extends Core.BaseSingleton {
         /** 获取单例实例 */
         static getInstance() {
@@ -8,7 +11,6 @@ var Game;
         onCreate() {
             this._viewCls = [];
             this._uiViews = [];
-            this.initRegisterView();
         }
         onDestroy() {
         }
@@ -16,7 +18,7 @@ var Game;
         showView(ViewId, Param) {
             let viewCls = this._viewCls[ViewId];
             if (viewCls == null) {
-                console.log("[ViewMgr] showView : ViewCls(${ViewId}) is not register!!!");
+                console.log("[ViewMgr] showView : ViewCls is not register!!! ViewId = ", ViewId);
                 return;
             }
             let view = this._uiViews[ViewId];
@@ -74,17 +76,12 @@ var Game;
                 return;
             }
             if (this._viewCls[ViewId] != null) {
-                console.log("[ViewMgr] registerView : ViewCls(${ViewId}) is exist");
+                console.log("[ViewMgr] registerView : ViewCls is exist, ViewId = ", ViewId);
                 return;
             }
             this._viewCls[ViewId] = ViewCls;
         }
-        /** UI界面统一注册函数，游戏UI界面初始化前均要先注册 */
-        initRegisterView() {
-            this.registerView(Global.ViewId.LOADING_VIEW, Game.LoadingView);
-            this.registerView(Global.ViewId.GAMEOVER_VIEW, Game.GameOverView);
-        }
     }
-    Game.ViewMgr = ViewMgr;
-})(Game || (Game = {}));
+    Core.ViewMgr = ViewMgr;
+})(Core || (Core = {}));
 //# sourceMappingURL=ViewMgr.js.map

@@ -1,7 +1,7 @@
 //初始化微信小游戏
 Laya.MiniAdpter.init();
 //程序入口
-Laya.init(1024,768);
+Laya.init(1024,768,Laya.WebGL);
 //激活资源版本控制
 Laya.ResourceVersion.enable("version.json?"+Math.random(), Laya.Handler.create(this, onCompleteHandler), Laya.ResourceVersion.FILENAME_VERSION);
 
@@ -37,22 +37,22 @@ function onCompleteHandler():void
     // let bmpFont:Laya.BitmapFont = new Laya.BitmapFont();
 	// bmpFont.loadFont(Global.Path.FNT_BMPFONT_PATH, new Laya.Handler(this, onLoadFont, [bmpFont]));
 
-    let loadPath:Array<any> = [];
-    loadPath.push({ "url":Global.Path.PLIST_TEXTURE_PATH, "type":Laya.Loader.ATLAS });
-    loadPath.push({ "url":Global.Path.MP3_WELCOME_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_BG_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_EAT_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_COFFEE_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_MUSHROOM_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_HIT_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_HURT_PATH, "type":Laya.Loader.SOUND });
-    loadPath.push({ "url":Global.Path.MP3_LOSE_PATH, "type":Laya.Loader.SOUND });
+    let resUrl:Array<any> = [];
+    resUrl.push({ "url":Global.Path.PLIST_TEXTURE_PATH, "type":Laya.Loader.ATLAS });
+    resUrl.push({ "url":Global.Path.MP3_WELCOME_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_BG_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_EAT_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_COFFEE_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_MUSHROOM_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_HIT_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_HURT_PATH, "type":Laya.Loader.SOUND });
+    resUrl.push({ "url":Global.Path.MP3_LOSE_PATH, "type":Laya.Loader.SOUND });
 
     function onLoaded():void {
         // 加载完成, 进入游戏
         Game.main.run();
     }
 
-    // 资源预加载
-    Game.ViewMgr.getInstance().showView(Global.ViewId.LOADING_VIEW, {Url:loadPath, LoadedFunc:onLoaded});
+    // 资源预加载loading界面
+    (new Game.LoadingView()).onShow(resUrl, onLoaded);
 }

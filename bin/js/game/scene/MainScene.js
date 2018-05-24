@@ -1,11 +1,8 @@
 var Game;
 (function (Game) {
     var Sprite = Laya.Sprite;
-    var Handler = Laya.Handler;
-    var Loader = Laya.Loader;
-    var Particle2D = Laya.Particle2D;
     var Keyboard = Laya.Keyboard;
-    class MainScene extends Game.BaseScene {
+    class MainScene extends Core.BaseScene {
         onInit() {
             this.sceneId = Global.SceneId.MAIN;
         }
@@ -39,7 +36,7 @@ var Game;
         init() {
             Game.SoundMgr.getInstance().stop();
             Game.SoundMgr.getInstance().playGameBgMusic();
-            Game.ViewMgr.getInstance().hideView(Global.ViewId.GAMEOVER_VIEW);
+            Game.viewMgr.hideView(Global.ViewId.GAMEOVER_VIEW);
             var winWidth = Laya.stage.width;
             var winHeight = Laya.stage.height;
             this._mainUI.visible = true;
@@ -51,9 +48,9 @@ var Game;
             this._hero.x = -winWidth / 2;
             this._hero.y = winHeight / 2;
             Game.FoodMgr.getInstance().init();
-            this.stopCoffeeEffect();
-            this.stopWindEffect();
-            this.stopMushroomEffect();
+            // this.stopCoffeeEffect();
+            // this.stopWindEffect();
+            // this.stopMushroomEffect();
             Laya.timer.frameLoop(2, this, this.update);
         }
         // _onTouchMoved(PTouches, PEvent):void {
@@ -67,7 +64,7 @@ var Game;
         _back(PEvent) {
             var keyCode = PEvent["keyCode"];
             if (keyCode == Keyboard.BACKSPACE) {
-                Game.SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
+                Game.sceneMgr.enterScene(Global.SceneId.LOGIN);
             }
         }
         _handleHeroPose() {
@@ -98,81 +95,6 @@ var Game;
                 this.x = 0;
                 this.y = 0;
             }
-        }
-        showWindEffect(PPS = null) {
-            if (this.m_windEffect)
-                return;
-            if (!PPS) {
-                Laya.loader.load(Global.Path.PLIST_WIND_PATH, Handler.create(this, this.showWindEffect), null, Loader.JSON);
-                return;
-            }
-            this.m_windEffect = new Particle2D(PPS);
-            this.m_windEffect.x = Laya.stage.width;
-            this.m_windEffect.y = Laya.stage.height / 2;
-            this.m_windEffect.setScaleX(100);
-            this.addChild(this.m_windEffect);
-            this.m_windEffect.emitter.start();
-            this.m_windEffect.play();
-        }
-        stopWindEffect() {
-            if (this.m_windEffect) {
-                this.m_windEffect.stopSystem();
-                this.removeChild(this.m_windEffect);
-                this.m_windEffect = null;
-            }
-        }
-        showCoffeeEffect(PPS = null) {
-            if (this.m_coffeeEffect)
-                return;
-            if (!PPS) {
-                Laya.loader.load(Global.Path.PLIST_COFFEE_PATH, Handler.create(this, this.showCoffeeEffect), null, Loader.JSON);
-                return;
-            }
-            this.m_coffeeEffect = new Particle2D(PPS);
-            this.addChild(this.m_coffeeEffect);
-            this.m_coffeeEffect.x = this._hero.x + this._hero.width / 4;
-            this.m_coffeeEffect.y = this._hero.y;
-            this.m_coffeeEffect.emitter.start();
-            this.m_coffeeEffect.play();
-        }
-        stopCoffeeEffect() {
-            if (this.m_coffeeEffect) {
-                this.m_coffeeEffect.stopSystem();
-                this.removeChild(this.m_coffeeEffect);
-                this.m_coffeeEffect = null;
-            }
-        }
-        showMushroomEffect(PPS = null) {
-            if (this.m_mushroomEffect)
-                return;
-            if (!PPS) {
-                Laya.loader.load(Global.Path.PLIST_MUSHROOM_PATH, Handler.create(this, this.showMushroomEffect), null, Loader.JSON);
-                return;
-            }
-            this.m_mushroomEffect = new Particle2D(PPS);
-            this.addChild(this.m_mushroomEffect);
-            this.m_mushroomEffect.x = this._hero.x + this._hero.width / 4;
-            this.m_mushroomEffect.y = this._hero.y;
-            this.m_mushroomEffect.emitter.start();
-            this.m_mushroomEffect.play();
-        }
-        stopMushroomEffect() {
-            if (this.m_mushroomEffect) {
-                this.m_mushroomEffect.stopSystem();
-                this.removeChild(this.m_mushroomEffect);
-                this.m_mushroomEffect = null;
-            }
-        }
-        showEatEffect(itemX, itemY) {
-            Laya.loader.load(Global.Path.PLIST_EAT_PATH, Handler.create(this, this.f_playEffect, [itemX, itemY]), null, Loader.JSON);
-        }
-        f_playEffect(PPS, PX, PY) {
-            var effect = new Particle2D(PPS);
-            effect.emitter.start();
-            effect.play();
-            effect.x = PX;
-            effect.y = PY;
-            this.addChild(effect);
         }
         /**
          * hero被碰撞N次后，结束游戏；结束之前，先播放hero掉落的动画
@@ -210,21 +132,21 @@ var Game;
                     // If drank coffee, fly faster for a while.
                     if (Data.user.coffee > 0)
                         Data.user.heroSpeed += (Global.Const.HERO_MAX_SPEED - Data.user.heroSpeed) * 0.2;
-                    else
-                        this.stopCoffeeEffect();
+                    else 
+                    // this.stopCoffeeEffect();
                     // If not hit by obstacle, fly normally.
                     if (Data.user.hitObstacle <= 0) {
                         this._hero.y -= (this._hero.y - this.m_touchY) * 0.1;
                         // If this.m_hero is flying extremely fast, create a wind effect and show force field around this.m_hero.
                         if (Data.user.heroSpeed > Global.Const.HERO_MIN_SPEED + 100) {
-                            this.showWindEffect();
+                            // this.showWindEffect();
                             // Animate this.m_hero faster.
                             this._hero.toggleSpeed(true);
                         }
                         else {
                             // Animate this.m_hero normally.
                             this._hero.toggleSpeed(false);
-                            this.stopWindEffect();
+                            // this.stopWindEffect();
                         }
                         this._handleHeroPose();
                     }
@@ -252,8 +174,7 @@ var Game;
                     // If we have a mushroom, reduce the value of the power.
                     if (Data.user.mushroom > 0)
                         Data.user.mushroom -= elapsed;
-                    else
-                        this.stopMushroomEffect();
+                    // else this.stopMushroomEffect();
                     // If we have a coffee, reduce the value of the power.
                     if (Data.user.coffee > 0)
                         Data.user.coffee -= elapsed;
@@ -295,7 +216,7 @@ var Game;
                         // Stop game tick.
                         Laya.timer.clearAll(this);
                         // Game over.
-                        Game.ViewMgr.getInstance().showView(Global.ViewId.GAMEOVER_VIEW);
+                        Game.viewMgr.showView(Global.ViewId.GAMEOVER_VIEW);
                     }
                     // Set the background's speed based on hero's speed.
                     this._backgroundUI.speed = Data.user.heroSpeed * elapsed;

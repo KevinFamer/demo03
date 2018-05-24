@@ -5,7 +5,7 @@ var Game;
     var Tween = Laya.Tween;
     var Button = Laya.Button;
     var CheckBox = Laya.CheckBox;
-    class LoginScene extends Game.BaseScene {
+    class LoginScene extends Core.BaseScene {
         onInit() {
             this.sceneId = Global.SceneId.LOGIN;
         }
@@ -51,7 +51,7 @@ var Game;
         }
         onClickPlay() {
             Game.SoundMgr.getInstance().playCoffee();
-            Game.SceneMgr.getInstance().enterScene(Global.SceneId.MAIN);
+            Game.sceneMgr.enterScene(Global.SceneId.MAIN);
         }
         onUpdate() {
             var currentDate = new Date();

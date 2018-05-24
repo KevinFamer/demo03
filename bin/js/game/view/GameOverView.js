@@ -49,7 +49,7 @@ var Game;
             this.addChild(mainBtn);
         }
         onInit() {
-            this.m_gameScene = Game.SceneMgr.getInstance().getCurScene();
+            this.m_gameScene = Game.sceneMgr.getCurScene();
         }
         onHide() {
         }
@@ -59,7 +59,7 @@ var Game;
             this.m_gameScene.init();
         }
         backToLogin() {
-            Game.SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
+            Game.sceneMgr.enterScene(Global.SceneId.LOGIN);
         }
     }
     Game.GameOverView = GameOverView;

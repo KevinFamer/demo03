@@ -2,12 +2,12 @@ module Game {
     import Pool = Laya.Pool;
     import Sprite = Laya.Sprite;
     
-    export class FoodMgr extends Core.Singleton 
+    export class FoodMgr extends Core.BaseSingleton 
     {
         /** 获取单例实例 */
         public static getInstance():FoodMgr
         {
-            return Core.Singleton.getInstanceOrCreate(FoodMgr);
+            return Core.BaseSingleton.getInstanceOrCreate(FoodMgr);
         }
 
         private m_container:Sprite;
@@ -37,7 +37,7 @@ module Game {
         
         protected onCreate():void 
         {
-            this.m_gameScene = SceneMgr.getInstance().getCurScene() as MainScene;
+            this.m_gameScene = sceneMgr.getCurScene() as MainScene;
             this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_itemsToAnimate = new Array();
         }
@@ -292,7 +292,7 @@ module Game {
 
                                 // How long does coffee power last? (in seconds)
                                 Data.user.coffee = 5;
-                                this.m_gameScene.showCoffeeEffect();
+                                // this.m_gameScene.showCoffeeEffect();
                                 SoundMgr.getInstance().playCoffee();
                             } else if (item.type == Global.Const.ITEM_TYPE_MUSHROOM) {
                                 // If hero eats a mushroom, add up the score.
@@ -300,12 +300,12 @@ module Game {
 
                                 // How long does mushroom power last? (in seconds)
                                 Data.user.mushroom = 4;
-                                this.m_gameScene.showMushroomEffect();
+                                // this.m_gameScene.showMushroomEffect();
                                 SoundMgr.getInstance().playMushroom();
                             }
 
                             // Create an eat particle at the position of the food item that was eaten.
-                            this.m_gameScene.showEatEffect(item.x, item.y);
+                            // this.m_gameScene.showEatEffect(item.x, item.y);
 
                             // Dispose the food item.
                             this.m_itemsToAnimate.splice(i, 1);

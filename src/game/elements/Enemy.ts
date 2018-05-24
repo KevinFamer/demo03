@@ -38,7 +38,7 @@ module Game {
                 this.showImage("obstacle4_0001.png")
 
                 if (!this.m_animation) {
-                    var ani:Animation = new Animation()
+                    let ani:Animation = new Animation()
                     ani.loadImages([Global.Path.SML_IMG_PATH + "obstacle4_0001.png", Global.Path.SML_IMG_PATH + "obstacle4_0002.png"]);
                     ani.interval = 100;
                     this.m_animation = ani;
@@ -66,13 +66,13 @@ module Game {
                     this.m_lookoutAnimation.visible = true;
                 }
                 if (!this.m_lookoutAction) {
-                    var path = [
+                    let path = [
                         Global.Path.SML_IMG_PATH + "watchOut_0001.png",
                         Global.Path.SML_IMG_PATH + "watchOut_0002.png",
                         Global.Path.SML_IMG_PATH + "watchOut_0003.png",
                         Global.Path.SML_IMG_PATH + "watchOut_0004.png",
                         Global.Path.SML_IMG_PATH + "watchOut_0005.png"];
-                    var ani1 = new Animation();
+                    let ani1 = new Animation();
                     ani1.loadImages(path);
                     ani1.interval = 100;
                     this.m_lookoutAnimation.addChild(ani1);
@@ -103,8 +103,8 @@ module Game {
 
         private showImage(Path:string):void 
         {
-            var imgUrl:string = Global.Path.SML_IMG_PATH + Path;
-            var texture:Texture = Loader.getRes(imgUrl);
+            let imgUrl:string = Global.Path.SML_IMG_PATH + Path;
+            let texture:Texture = Loader.getRes(imgUrl);
             this.graphics.clear();
             this.graphics.drawTexture(texture);
         }

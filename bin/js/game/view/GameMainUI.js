@@ -45,7 +45,7 @@ var Game;
         }
         update() {
             this._lifeTxt.text = "生命：" + Data.user.lives;
-            this._distanceTxt.text = "距离：" + Data.user.distance;
+            this._distanceTxt.text = "距离：" + Math.floor(Data.user.distance);
             this._scoreTxt.text = "积分：" + Data.user.score;
         }
     }

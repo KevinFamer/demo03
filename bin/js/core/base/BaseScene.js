@@ -1,18 +1,21 @@
-var Game;
-(function (Game) {
+var Core;
+(function (Core) {
+    /**
+     * 场景基类
+     */
     class BaseScene extends Laya.Sprite {
         /** 场景初始化 */
         onInit() { }
         /** 场景显示 */
         onShow() {
             this.pivot(0, 0);
-            LayerMgr.getInstance().addChildToScene(this);
+            Core.LayerMgr.getInstance().addChildToScene(this);
         }
         /** 场景销毁 */
         onDestroy() {
             this.removeSelf();
         }
     }
-    Game.BaseScene = BaseScene;
-})(Game || (Game = {}));
+    Core.BaseScene = BaseScene;
+})(Core || (Core = {}));
 //# sourceMappingURL=BaseScene.js.map

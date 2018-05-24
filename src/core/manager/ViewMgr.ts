@@ -1,10 +1,13 @@
-module Game {
-    export class ViewMgr extends Core.Singleton
+module Core {
+    /**
+     * UI界面管理器
+     */
+    export class ViewMgr extends BaseSingleton
     {
         /** 获取单例实例 */
         public static getInstance():ViewMgr
         {
-            return Core.Singleton.getInstanceOrCreate(ViewMgr);
+            return BaseSingleton.getInstanceOrCreate(ViewMgr);
         }
 
         // 游戏界面类集
@@ -16,7 +19,6 @@ module Game {
         {
             this._viewCls = [];
             this._uiViews = [];
-            this.initRegisterView();
         }
 
         protected onDestroy():void
@@ -28,7 +30,7 @@ module Game {
         {
             let viewCls = this._viewCls[ViewId];
             if (viewCls == null) {
-                console.log("[ViewMgr] showView : ViewCls(${ViewId}) is not register!!!");
+                console.log("[ViewMgr] showView : ViewCls is not register!!! ViewId = ", ViewId);
                 return;
             }
 
@@ -100,17 +102,10 @@ module Game {
                 return;
             }
             if (this._viewCls[ViewId] != null) {
-                console.log("[ViewMgr] registerView : ViewCls(${ViewId}) is exist");
+                console.log("[ViewMgr] registerView : ViewCls is exist, ViewId = ", ViewId);
                 return;
             }
             this._viewCls[ViewId] = ViewCls;
-        }
-
-        /** UI界面统一注册函数，游戏UI界面初始化前均要先注册 */
-        private initRegisterView():void 
-        {
-            this.registerView(Global.ViewId.LOADING_VIEW, LoadingView);
-            this.registerView(Global.ViewId.GAMEOVER_VIEW, GameOverView);
         }
     }
 }

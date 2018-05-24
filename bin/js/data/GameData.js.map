@@ -1,1 +1,1 @@
-{"version":3,"file":"GameData.js","sourceRoot":"","sources":["../../../src/data/GameData.ts"],"names":[],"mappings":"AAAA,IAAO,IAAI,CAGV;AAHD,WAAO,IAAI;IAEI,SAAI,GAAY,IAAI,KAAA,QAAQ,EAAE,CAAC;AAC9C,CAAC,EAHM,IAAI,KAAJ,IAAI,QAGV"}
+{"version":3,"file":"GameData.js","sourceRoot":"","sources":["../../../src/data/GameData.ts"],"names":[],"mappings":"AAAA,IAAO,IAAI,CAGV;AAHD,WAAO,IAAI;IAEI,SAAI,GAAG,IAAI,KAAA,QAAQ,EAAE,CAAC;AACrC,CAAC,EAHM,IAAI,KAAJ,IAAI,QAGV"}

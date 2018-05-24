@@ -1,7 +1,9 @@
-module Game {
+module Core {
     import Sprite = Laya.Sprite;
 
-    /** 游戏层级 */
+    /** 
+     * 游戏层级
+     */
     const enum UI_LAYER 
     {
         Scene = 0,
@@ -10,12 +12,15 @@ module Game {
         Guide = 3,
     }
 
-    export class LayerMgr extends Core.Singleton
+    /**
+     * 层级管理器
+     */
+    export class LayerMgr extends BaseSingleton
     {
         /** 获取单例实例 */
         public static getInstance():LayerMgr
         {
-            return Core.Singleton.getInstanceOrCreate(LayerMgr);
+            return BaseSingleton.getInstanceOrCreate(LayerMgr);
         }
 
         private _layerIdx:Array<number>;

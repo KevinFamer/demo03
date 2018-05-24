@@ -1,12 +1,12 @@
 module Game {
     import Sound = Laya.SoundManager;
 
-    export class SoundMgr extends Core.Singleton
+    export class SoundMgr extends Core.BaseSingleton
     {
         /** 获取单例实例 */
         public static getInstance():SoundMgr
         {
-            return Core.Singleton.getInstanceOrCreate(SoundMgr);
+            return Core.BaseSingleton.getInstanceOrCreate(SoundMgr);
         }
 
         private m_silence:boolean;

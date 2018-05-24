@@ -1,13 +1,12 @@
 var Game;
 (function (Game) {
-    var Browser = Laya.Browser;
-    class EnemyMgr extends Core.Singleton {
+    class EnemyMgr extends Core.BaseSingleton {
         /** 获取单例实例 */
         static getInstance() {
-            return Core.Singleton.getInstanceOrCreate(EnemyMgr);
+            return Core.BaseSingleton.getInstanceOrCreate(EnemyMgr);
         }
         onCreate() {
-            this.m_gameScene = Game.SceneMgr.getInstance().getCurScene();
+            this.m_gameScene = Game.sceneMgr.getCurScene();
             this.m_container = this.m_gameScene.itemBatchLayer;
             this.m_obstaclesToAnimate = new Array();
         }
@@ -19,8 +18,8 @@ var Game;
         }
         removeAll() {
             if (this.m_obstaclesToAnimate.length > 0) {
-                for (var i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
-                    var item = this.m_obstaclesToAnimate[i];
+                for (let i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
+                    let item = this.m_obstaclesToAnimate[i];
                     this.m_obstaclesToAnimate.splice(i, 1);
                     item.unuse();
                 }
@@ -39,11 +38,11 @@ var Game;
             this.animateObstacles(PHero, PElapsed);
         }
         createObstacle(PType, PDistance) {
-            var winWidth = Browser.width;
-            var winHeight = Browser.height;
-            var x = winWidth;
-            var y = 0;
-            var position = null;
+            let winWidth = Laya.stage.width;
+            let winHeight = Laya.stage.height;
+            let x = winWidth;
+            let y = 0;
+            let position = null;
             // For only one of the obstacles, make it appear in either the top or bottom of the screen.
             if (PType <= Global.Const.ENEMY_TYPE_3) {
                 if (Math.random() > 0.5) {
@@ -59,7 +58,7 @@ var Game;
                 y = Math.floor(Math.random() * (winHeight - 2 * Global.Const.GAME_AREA_TOP_BOTTOM)) + Global.Const.GAME_AREA_TOP_BOTTOM;
                 position = "middle";
             }
-            var obstacle = Laya.Pool.getItemByClass("Enemy", Game.Enemy);
+            let obstacle = Laya.Pool.getItemByClass("Enemy", Game.Enemy);
             obstacle.reuse(PType, true, position, Global.Const.ENEMY_SPEED, PDistance);
             obstacle.x = x + obstacle.width / 2;
             obstacle.y = y;
@@ -67,8 +66,8 @@ var Game;
             this.m_container.addChild(obstacle);
         }
         animateObstacles(PHero, PElapsed) {
-            var obstacle;
-            for (var i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
+            let obstacle;
+            for (let i = this.m_obstaclesToAnimate.length - 1; i >= 0; i--) {
                 obstacle = this.m_obstaclesToAnimate[i];
                 // If the distance is still more than 0, keep reducing its value, without moving the obstacle.
                 if (obstacle.distance > 0) {
@@ -88,9 +87,9 @@ var Game;
                     continue;
                 }
                 // Collision detection - Check if hero collides with any obstacle.
-                var heroObstacle_xDist = obstacle.x - PHero.x;
-                var heroObstacle_yDist = obstacle.y - PHero.y;
-                var heroObstacle_sqDist = heroObstacle_xDist * heroObstacle_xDist + heroObstacle_yDist * heroObstacle_yDist;
+                let heroObstacle_xDist = obstacle.x - PHero.x;
+                let heroObstacle_yDist = obstacle.y - PHero.y;
+                let heroObstacle_sqDist = heroObstacle_xDist * heroObstacle_xDist + heroObstacle_yDist * heroObstacle_yDist;
                 if (heroObstacle_sqDist < 5000 && !obstacle.alreadyHit) {
                     obstacle.alreadyHit = true;
                     obstacle.crash();

@@ -1,10 +1,10 @@
 var Game;
 (function (Game) {
     var Sound = Laya.SoundManager;
-    class SoundMgr extends Core.Singleton {
+    class SoundMgr extends Core.BaseSingleton {
         /** 获取单例实例 */
         static getInstance() {
-            return Core.Singleton.getInstanceOrCreate(SoundMgr);
+            return Core.BaseSingleton.getInstanceOrCreate(SoundMgr);
         }
         onCreate() {
             this.m_silence = false;

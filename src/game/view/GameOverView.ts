@@ -64,7 +64,7 @@ module Game {
 
 		onInit():void 
 		{
-            this.m_gameScene = SceneMgr.getInstance().getCurScene() as MainScene;
+            this.m_gameScene = sceneMgr.getCurScene() as MainScene;
 		}
 
 		onHide():void 
@@ -82,7 +82,7 @@ module Game {
 
         private backToLogin():void 
         {
-            SceneMgr.getInstance().enterScene(Global.SceneId.LOGIN);
+            sceneMgr.enterScene(Global.SceneId.LOGIN);
         }
     }
 }
